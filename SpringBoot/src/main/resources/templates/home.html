@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
+        .container {
+            border: 1px solid #dee2e6; /* Border around the container */
+            border-radius: 12px; /* Larger rounded corners */
+            padding: 30px; /* Larger padding inside the container */
+            background-color: #ffffff; /* White background for the container */
+            max-width: 600px; /* Maximum width of the container */
+            text-align: center; /* Center text inside the container */
+        }
+        .btn-primary {
+            border-radius: 50px; /* Rounded buttons */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Larger shadow */
+            font-size: 1rem; /* Larger font size */
+            padding: 12px 24px; /* Larger padding for buttons */
+        }
+        .btn-primary:hover {
+            background-color: #004494; /* Darker blue on hover */
+            border-color: #003366; /* Match border color with background on hover */
+        }
+        a {
+            font-weight: bold; /* Bold text for <a> tags */
+            text-decoration: none; /* Remove underline from links */
+        }
+        .mt-4 {
+            margin-top: 2rem; /* Larger margin adjustment */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="mt-4">
+        <a href="/savestudentform" class="btn btn-primary">Add Student</a>
+    </div>
+    <div class="mt-4">
+        <a href="/showAllStudent" class="btn btn-primary">Show Student</a>
+    </div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

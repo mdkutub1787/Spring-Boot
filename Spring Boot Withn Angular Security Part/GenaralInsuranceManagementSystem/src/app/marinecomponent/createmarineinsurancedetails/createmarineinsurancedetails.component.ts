@@ -32,16 +32,16 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
       }
     });
 
-    // Fetch exchange rate
+  
     this.marinedetailsService.getExchangeRate().subscribe({
       next: (data) => {
-        this.exchangeRate = data.rates.BDT || 1; // Default to 1 if rate not available
+        this.exchangeRate = data.rates.BDT || 1; 
         console.log('Exchange rate fetched:', this.exchangeRate);
       },
       error: (err) => {
         console.error('Error fetching exchange rate:', err);
         this.errorMessage = 'Could not fetch exchange rate. Defaulting to 1.';
-        this.exchangeRate = 1; // Default to 1 on error
+        this.exchangeRate = 1; 
       }
     });
   }
@@ -50,7 +50,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
     this.marineinsurancedetails.date = formattedDate;
-    this.marineinsurancedetails.coverage = 'Lorry Risk Only'; // Assuming default coverage
+    this.marineinsurancedetails.coverage = 'Lorry Risk Only'; 
   }
 
   getDetails(id: number) {
@@ -73,7 +73,10 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
 
     if (this.isEditMode) {
       // Update existing record
-      this.marinedetailsService.updateMarineList(this.marineinsurancedetails.id, this.marineinsurancedetails).subscribe({
+      this.marinedetailsService.updateMarineList(
+        this.marineinsurancedetails.id,
+         this.marineinsurancedetails)
+         .subscribe({
         next: (data) => {
           console.log('Marine insurance updated successfully', data);
           this.router.navigate(['/viewmarinelist']);

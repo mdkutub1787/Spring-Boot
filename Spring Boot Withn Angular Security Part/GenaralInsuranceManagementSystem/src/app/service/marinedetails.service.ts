@@ -36,12 +36,12 @@ export class MarinedetailsService {
   }
 
   // Update a policy by ID
-  updatePolicy(id: number, policy: MarineDetailsModel): Observable<any> {
+  updateMarineDetails(id: number, policy: MarineDetailsModel): Observable<any> {
     return this.http.put(this.baseUrl + "update/" + id, policy);
   }
 
-  // Get a policy by ID
-  getByPolicyId(id: number): Observable<any> {
+  // Get a MarineDetails by ID
+  getByMarineDetailsId(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}${id}`);
   }
 

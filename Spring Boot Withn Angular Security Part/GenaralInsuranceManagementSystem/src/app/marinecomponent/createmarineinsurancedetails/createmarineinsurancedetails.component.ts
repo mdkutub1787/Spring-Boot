@@ -38,14 +38,14 @@ export class CreatemarineinsurancedetailsComponent implements OnInit{
     });
   }
 
-  createMarineDetails() {
+  createMarineList() {
     this.marineinsurancedetails.sumInsured *= this.exchangeRate;
 
     this.marinedetailsService.createMarinedetails(this.marineinsurancedetails)
       .subscribe({
         next: (data) => {
           console.log('Marine insurance created successfully', data);
-          this.router.navigate(['/viewmarinedeails']);
+          this.router.navigate(['/viewmarinelist']);
         },
         error: (err) => {
           console.error('Error occurred while creating marine details', err);

@@ -48,7 +48,7 @@ public class MarineInsuranceDetails {
 
 
     @Column(nullable = false)
-    private String cov;
+    private String coverage;
 
     @JsonIgnore
     @OneToMany(mappedBy = "marineDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

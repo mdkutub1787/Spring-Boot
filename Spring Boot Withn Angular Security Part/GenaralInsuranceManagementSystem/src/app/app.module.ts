@@ -33,6 +33,7 @@ import { TokenInterceptor } from './guard/TokenInterceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MarineinsurancedetailsComponent } from './marinecomponent/marineinsurancedetails/marineinsurancedetails.component';
 import { CreatemarineinsurancedetailsComponent } from './marinecomponent/createmarineinsurancedetails/createmarineinsurancedetails.component';
+import { MarineinsurancelistComponent } from './marinecomponent/marineinsurancelist/marineinsurancelist.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { CreatemarineinsurancedetailsComponent } from './marinecomponent/createm
     NavbarComponent,
     MarineinsurancedetailsComponent,
     CreatemarineinsurancedetailsComponent,
+    MarineinsurancelistComponent,
 
     
     

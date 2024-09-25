@@ -1,47 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MarineDetailsModel } from '../../model/MarineDetailsModel';
 import { MarinedetailsService } from '../../service/marinedetails.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-marineinsurancedetails',
   templateUrl: './marineinsurancedetails.component.html',
   styleUrl: './marineinsurancedetails.component.css'
 })
-export class MarineinsurancedetailsComponent {
-
-
-            
-  marinedetails!: MarineDetailsModel[]; 
-  
+export class MarineinsurancedetailsComponent implements OnInit{
+        
+  id!: number;
+  marineDeatails!: MarineDetailsModel;
 
   constructor(
     private marinedetailsService: MarinedetailsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-    this.loadMarineDetails(); 
-  }
-
-  loadMarineDetails() {
-    this.marinedetailsService.getMarinedetails().subscribe((data: MarineDetailsModel[]) => {
-      this.marinedetails = data;             
-      this.marinedetails = [...this.marinedetails]; 
-    });
-  }
-
-  
-  deleteMarineDetails(id: number) {
-    this.marinedetailsService.deleteMarineDetails(id).subscribe({
-      next: res => {
-        console.log(res);
-        this.loadMarineDetails()
-        this.router.navigate(['/viewmarinedeails']);
+  ngOnInit(): void {
+    this.marineDeatails = new MarineDetailsModel();
+    this.id = this.route.snapshot.params['id'];
+    this.marinedetailsService.getByMarineDetailsId(this.id).subscribe({
+      next: (data) => {
+        console.log('Marine details data retrieved:', data);
+        this.marineDeatails = data;
       },
-      error: error => {
-        console.log(error);
+      error: (err) => {
+        console.error('Error fetching Marine details data:', err);
       }
     });
   }
+
+  goBack(): void {
+    this.router.navigate(['viewmarinelist']);
+  }
+
 }

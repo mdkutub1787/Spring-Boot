@@ -34,6 +34,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MarineinsurancedetailsComponent } from './marinecomponent/marineinsurancedetails/marineinsurancedetails.component';
 import { CreatemarineinsurancedetailsComponent } from './marinecomponent/createmarineinsurancedetails/createmarineinsurancedetails.component';
 import { MarineinsurancelistComponent } from './marinecomponent/marineinsurancelist/marineinsurancelist.component';
+import { UpdatemarineinsurancelistComponent } from './marinecomponent/updatemarineinsurancelist/updatemarineinsurancelist.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { MarineinsurancelistComponent } from './marinecomponent/marineinsurancel
     MarineinsurancedetailsComponent,
     CreatemarineinsurancedetailsComponent,
     MarineinsurancelistComponent,
+    UpdatemarineinsurancelistComponent,
 
     
     

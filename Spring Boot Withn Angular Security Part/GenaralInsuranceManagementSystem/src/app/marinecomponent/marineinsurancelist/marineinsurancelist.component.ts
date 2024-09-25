@@ -46,4 +46,14 @@ export class MarineinsurancelistComponent implements OnInit{
   detailsMarineInsurance(id: number) {
     this.router.navigate(['marinedetails', id]);
   }
+
+   // Navigate to the create policy page
+   navigateToAddMarineList() {
+    this.router.navigateByUrl('/createmarinelist');
+  }
+
+  // Navigate to the create bill page
+  navigateToAddMarineBill() {
+    this.router.navigateByUrl('/createmarinebill');
+  }
 }

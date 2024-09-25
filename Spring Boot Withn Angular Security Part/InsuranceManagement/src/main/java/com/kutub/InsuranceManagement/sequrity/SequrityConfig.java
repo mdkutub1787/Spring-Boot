@@ -35,13 +35,7 @@ public class SequrityConfig {
 
                                 req ->
                                         req.requestMatchers("/login", "/register", "/register/admin", "/activate/**",
-                                                "api/policy/**",
-                                                "api/bill/**",
-                                                "api/receipt/**",
-                                                "api/moneyreceipt/**",
-                                                "api/policy/search/policyholder/{policyholder}",
-                                                "api/marine/**",
-                                                "api/marinebill/**"
+                                                        "api/**"
                                                  )
                                                  .permitAll()
                                                  .requestMatchers("api/medicine/save", "api/medicinegeneric/save")

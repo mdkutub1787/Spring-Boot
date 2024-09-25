@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './createmarineinsurancedetails.component.html',
   styleUrl: './createmarineinsurancedetails.component.css'
 })
+
 export class CreatemarineinsurancedetailsComponent implements OnInit{
 
   marineinsurancedetails: MarineDetailsModel = new MarineDetailsModel();

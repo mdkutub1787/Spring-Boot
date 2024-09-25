@@ -10,6 +10,8 @@ export class MarinedetailsService {
 
   baseUrl: string = "http://localhost:8080/api/marine/";
 
+  private exchangeRateApiUrl = 'https://api.exchangerate-api.com/v4/latest/USD'; 
+
   private newpolicy: MarineDetailsModel[] = []; 
 
   constructor(private http: HttpClient) { }
@@ -17,6 +19,10 @@ export class MarinedetailsService {
   
   getMarinedetails(): Observable<any> {
     return this.http.get(this.baseUrl);
+  }
+
+  getExchangeRate(): Observable<any> {
+    return this.http.get(this.exchangeRateApiUrl);
   }
 
   // Create a new policy

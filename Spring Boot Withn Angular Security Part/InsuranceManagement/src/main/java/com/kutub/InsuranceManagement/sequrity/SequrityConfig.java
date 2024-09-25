@@ -34,44 +34,43 @@ public class SequrityConfig {
                         .authorizeHttpRequests(
 
                                 req ->
-                                        req.requestMatchers("/login", "/register", "/register/admin","/activate/**",
-                                                        "api/policy/","api/policy/save","api/policy/delete/{id}","api/policy/update/{id}","api/policy/{id}",
-                                                        "api/bill/","api/bill/save","api/bill/delete/{id}","api/bill/update/{id}","api/bill/{id}",
-                                                        "api/receipt/","api/receipt/save","api/receipt/delete/{id}","api/receipt/{id}",
-                                                        "api/moneyreceipt/","api/moneyreceipt/save","api/moneyreceipt/delete/{id}","api/moneyreceipt/update/{id}","api/moneyreceipt/{id}",
-                                                        "api/policy/search/policyholder/{policyholder}"
-                                                )
-                                                .permitAll()
-                                                .requestMatchers("api/medicine/save", "api/medicinegeneric/save")
-                                                .hasAuthority("ADMIN")
-                                                .requestMatchers( "api/medicine/{id}","api/pharmacist/all/**", "api/location/")
-                                                .hasAnyAuthority("ADMIN", "PHARMACIST")
-                                                .requestMatchers("api/user/**")
-                                                .hasAuthority("USER")
-                                                .requestMatchers("/images/**").permitAll()
+                                        req.requestMatchers("/login", "/register", "/register/admin", "/activate/**",
+                                                "api/policy/**",
+                                                "api/bill/**",
+                                                "api/receipt/**",
+                                                "api/moneyreceipt/**",
+                                                "api/policy/search/policyholder/{policyholder}",
+                                                "api/marine/**"
+                                                 )
+                                                 .permitAll()
+                                                 .requestMatchers("api/medicine/save", "api/medicinegeneric/save")
+                                                 .hasAuthority("ADMIN")
+                                                 .requestMatchers( "api/medicine/{id}","api/pharmacist/all/**", "api/location/")
+                                                 .hasAnyAuthority("ADMIN", "PHARMACIST")
+                                                 .requestMatchers("api/user/**")
+                                                 .hasAuthority("USER")
+                                                 .requestMatchers("/images/**").permitAll()
 
-                        )
-                        .userDetailsService(userService)
-                        .sessionManagement(
-                                session ->
-                                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                        )
-                        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                        .build();
-
-
-    }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
+                                                 )
+                                                 .userDetailsService(userService)
+                                                 .sessionManagement(
+                                                 session ->
+                                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                                                 )
+                                                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                                                 .build();
 
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
+                                                 }
+
+                                                 @Bean public PasswordEncoder encoder() {
+                                                 return new BCryptPasswordEncoder();
+                                                 }
 
 
-}
+                                                 @Bean public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+                                                 return configuration.getAuthenticationManager();
+                                                 }
+
+
+                                                 }

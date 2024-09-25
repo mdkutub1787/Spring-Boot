@@ -1,5 +1,6 @@
 package com.kutub.InsuranceManagement.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,17 +17,17 @@ public class MarineInsuranceBill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column( name = "marine_rate_% ",nullable = false)
     private double marineRate;
 
 
-    @Column(nullable = false)
+    @Column( name = "warSrcc_rate_% ",nullable = false)
     private double warSrccRate;
 
     @Column(nullable = false)
     private double netPremium;
 
-    @Column(nullable = false)
+    @Column( name = "tax_rate_% ",nullable = false)
     private double tax;
 
 

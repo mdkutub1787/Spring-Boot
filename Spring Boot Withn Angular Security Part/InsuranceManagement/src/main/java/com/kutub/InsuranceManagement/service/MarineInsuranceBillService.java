@@ -7,6 +7,7 @@ import com.kutub.InsuranceManagement.entity.MarineInsuranceDetails;
 import com.kutub.InsuranceManagement.entity.Policy;
 import com.kutub.InsuranceManagement.repository.MarineInsuranceBillRepo;
 import com.kutub.InsuranceManagement.repository.MarineInsuranceDetailsRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,16 @@ public class MarineInsuranceBillService {
         return marineInsuranceBillRepo.findAll();
     }
 
+//    @Transactional
+//    public void saveMarineInsuranceData(MarineInsuranceDetails details, List<MarineInsuranceBill> bills) {
+//        for (MarineInsuranceBill bill : bills) {
+//            bill.setMarineDetails(details);
+//        }
+//
+//        details.setMarineInsuranceBills(bills);
+//        marineInsuranceDetailsRepo.save(details);
+//    }
+
 
     public MarineInsuranceBill getMarineInsuranceBillById(long id) {
         return marineInsuranceBillRepo.findById(id)
@@ -40,12 +51,6 @@ public class MarineInsuranceBillService {
     public void deleteMarineInsuranceBill(long id) {
         marineInsuranceBillRepo.deleteById(id);
     }
-
-
-
-
-
-
 
 
 }

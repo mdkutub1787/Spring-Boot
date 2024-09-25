@@ -50,8 +50,8 @@ public class MarineInsuranceDetails {
     @Column(nullable = false)
     private String riskCovered;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "marineDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MarineInsuranceBill> marineInsuranceBills;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "marineDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<MarineInsuranceBill> marineInsuranceBills;
 
 }

@@ -31,6 +31,8 @@ import { CreatemoneyreceiptComponent } from './component/createmoneyreceipt/crea
 import { PrintmoneyreceiptComponent } from './component/printmoneyreceipt/printmoneyreceipt.component';
 import { TokenInterceptor } from './guard/TokenInterceptor';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MarineinsurancedetailsComponent } from './marinecomponent/marineinsurancedetails/marineinsurancedetails.component';
+import { CreatemarineinsurancedetailsComponent } from './marinecomponent/createmarineinsurancedetails/createmarineinsurancedetails.component';
 
 
 @NgModule({
@@ -55,6 +57,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     CreatemoneyreceiptComponent,
     PrintmoneyreceiptComponent,
     NavbarComponent,
+    MarineinsurancedetailsComponent,
+    CreatemarineinsurancedetailsComponent,
+
     
     
  

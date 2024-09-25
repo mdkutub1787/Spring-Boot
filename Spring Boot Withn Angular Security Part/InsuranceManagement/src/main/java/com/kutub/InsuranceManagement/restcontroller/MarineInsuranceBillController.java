@@ -5,6 +5,7 @@ package com.kutub.InsuranceManagement.restcontroller;
 import com.kutub.InsuranceManagement.entity.Bill;
 import com.kutub.InsuranceManagement.entity.MarineInsuranceBill;
 import com.kutub.InsuranceManagement.entity.MarineInsuranceDetails;
+import com.kutub.InsuranceManagement.entity.Policy;
 import com.kutub.InsuranceManagement.service.MarineInsuranceBillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,10 @@ public class MarineInsuranceBillController {
         return marineInsuranceBillService.getAllMarineInsuranceBills();
     }
 
-//    @PostMapping("/save")
-//    public ResponseEntity<String> saveMarineInsurance(@RequestBody MarineInsuranceDetails details,
-//                                                      @RequestBody List<MarineInsuranceBill> bills) {
-//        marineInsuranceBillService.saveMarineInsuranceData(details, bills);
-//        return ResponseEntity.ok("Marine Insurance details and bills saved successfully!");
-//    }
+    @PostMapping("/save")
+    public void saveMarineInsuranceBill(@RequestBody MarineInsuranceBill p) {
+        marineInsuranceBillService.saveMarineInsuranceBill(p);
+    }
 
 
 

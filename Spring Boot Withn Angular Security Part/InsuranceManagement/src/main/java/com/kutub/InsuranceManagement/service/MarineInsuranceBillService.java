@@ -19,23 +19,19 @@ public class MarineInsuranceBillService {
     @Autowired
     private MarineInsuranceBillRepo marineInsuranceBillRepo;
 
-    @Autowired
-    private MarineInsuranceDetailsRepo marineInsuranceDetailsRepo  ;
+//    @Autowired
+//    private MarineInsuranceDetailsRepo marineInsuranceDetailsRepo  ;
 
 
     public List<MarineInsuranceBill> getAllMarineInsuranceBills() {
+
         return marineInsuranceBillRepo.findAll();
     }
 
-//    @Transactional
-//    public void saveMarineInsuranceData(MarineInsuranceDetails details, List<MarineInsuranceBill> bills) {
-//        for (MarineInsuranceBill bill : bills) {
-//            bill.setMarineDetails(details);
-//        }
-//
-//        details.setMarineInsuranceBills(bills);
-//        marineInsuranceDetailsRepo.save(details);
-//    }
+
+    public void saveMarineInsuranceBill(MarineInsuranceBill p) {
+        marineInsuranceBillRepo.save(p);
+    }
 
 
     public MarineInsuranceBill getMarineInsuranceBillById(long id) {

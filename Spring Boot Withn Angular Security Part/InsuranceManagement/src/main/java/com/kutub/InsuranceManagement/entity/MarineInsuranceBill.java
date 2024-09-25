@@ -19,8 +19,6 @@ public class MarineInsuranceBill {
     @Column(nullable = false)
     private double marineRate;
 
-    @Column(nullable = false)
-    private double marinePremium;
 
     @Column(nullable = false)
     private double warSrccRate;
@@ -41,4 +39,7 @@ public class MarineInsuranceBill {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "marineDetailsId", nullable = false)  // Foreign key for marineDetails entity
     private MarineInsuranceDetails marineDetails;
+
+
+
 }

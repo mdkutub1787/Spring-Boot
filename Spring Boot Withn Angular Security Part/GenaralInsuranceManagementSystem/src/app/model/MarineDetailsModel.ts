@@ -11,7 +11,7 @@ export class MarineDetailsModel {
     voyageFrom!: string;
     voyageTo!: string;
     via!: string;
-    riskCovered!: string;
+    coverage!: string;
    
   }
   

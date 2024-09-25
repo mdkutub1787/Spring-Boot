@@ -25,7 +25,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit{
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
     this.marineinsurancedetails.date = formattedDate;
-    this.marineinsurancedetails.riskCovered = 'Lorry Risk Only';
+    this.marineinsurancedetails.coverage = 'Lorry Risk Only';
     this.marinedetailsService.getExchangeRate().subscribe({
       next: (data) => {
         this.exchangeRate = data.rates.BDT;

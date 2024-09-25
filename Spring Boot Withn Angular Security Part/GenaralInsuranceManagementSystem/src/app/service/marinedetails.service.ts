@@ -26,18 +26,18 @@ export class MarinedetailsService {
   }
 
   // Create a new policy
-  createMarinedetails(policy: MarineDetailsModel): Observable<any> {
-    return this.http.post(this.baseUrl + "save", policy);
+  createMarinedetails(marinelist: MarineDetailsModel): Observable<any> {
+    return this.http.post(this.baseUrl + "save", marinelist);
   }
 
   // Delete a policy by ID
-  deleteMarineDetails(id: number): Observable<any> {
+  deleteMarineList(id: number): Observable<any> {
     return this.http.delete(this.baseUrl + "delete/" + id);
   }
 
   // Update a policy by ID
-  updateMarineDetails(id: number, policy: MarineDetailsModel): Observable<any> {
-    return this.http.put(this.baseUrl + "update/" + id, policy);
+  updateMarineList(id: number, marinelist: MarineDetailsModel): Observable<any> {
+    return this.http.put(this.baseUrl + "update/" + id, marinelist);
   }
 
   // Get a MarineDetails by ID

@@ -32,9 +32,9 @@
                 <td>{{ marine.address }}</td>
                 <td>{{ marine.sumInsured | currency:'TK':'symbol' }}</td>
                 <td class="text-center">
-                    <button class="btn btn-outline-secondary" aria-label="Edit">
+                    <button class="btn btn-outline-secondary" aria-label="Edit" (click)="editMarineInsurance(marine.id)">
                         <i class="fas fa-edit"></i>
-                    </button>
+                      </button>                      
                     <button class="btn btn-outline-danger" aria-label="Delete" (click)="deleteMarineDetails(marine.id)">
                         <i class="fas fa-trash-alt"></i>
                     </button>

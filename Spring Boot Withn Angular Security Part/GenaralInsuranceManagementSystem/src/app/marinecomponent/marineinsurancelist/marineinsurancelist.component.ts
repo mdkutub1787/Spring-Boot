@@ -31,7 +31,7 @@ export class MarineinsurancelistComponent implements OnInit{
 
   
   deleteMarineDetails(id: number) {
-    this.marinedetailsService.deleteMarineDetails(id).subscribe({
+    this.marinedetailsService.deleteMarineList(id).subscribe({
       next: res => {
         console.log(res);
         this.loadMarineDetails()
@@ -42,6 +42,12 @@ export class MarineinsurancelistComponent implements OnInit{
       }
     });
   }
+
+ 
+  editMarineInsurance(id: number) {
+    this.router.navigate(['createmarinelist', id]);
+  }
+  
 
   detailsMarineInsurance(id: number) {
     this.router.navigate(['marinedetails', id]);

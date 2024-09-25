@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MarineDetailsModel } from '../../model/MarineDetailsModel';
 import { MarinedetailsService } from '../../service/marinedetails.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-createmarineinsurancedetails',
@@ -9,40 +9,83 @@ import { Router } from '@angular/router';
   styleUrl: './createmarineinsurancedetails.component.css'
 })
 
-export class CreatemarineinsurancedetailsComponent implements OnInit{
+export class CreatemarineinsurancedetailsComponent implements OnInit {
 
   marineinsurancedetails: MarineDetailsModel = new MarineDetailsModel();
   errorMessage: string = '';
-  submitted = false;
-  exchangeRate: number = 1; 
+  isEditMode: boolean = false;
+  exchangeRate: number = 1;
 
   constructor(
     private marinedetailsService: MarinedetailsService,
+    private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0];
-    this.marineinsurancedetails.date = formattedDate;
-    this.marineinsurancedetails.coverage = 'Lorry Risk Only';
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.isEditMode = true;
+        this.getDetails(params['id']);
+      } else {
+        this.initializeForm();
+      }
+    });
+
+    // Fetch exchange rate
     this.marinedetailsService.getExchangeRate().subscribe({
       next: (data) => {
-        this.exchangeRate = data.rates.BDT;
+        this.exchangeRate = data.rates.BDT || 1; // Default to 1 if rate not available
         console.log('Exchange rate fetched:', this.exchangeRate);
       },
       error: (err) => {
         console.error('Error fetching exchange rate:', err);
         this.errorMessage = 'Could not fetch exchange rate. Defaulting to 1.';
+        this.exchangeRate = 1; // Default to 1 on error
       }
     });
   }
 
-  createMarineList() {
-    this.marineinsurancedetails.sumInsured *= this.exchangeRate;
+  initializeForm() {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0];
+    this.marineinsurancedetails.date = formattedDate;
+    this.marineinsurancedetails.coverage = 'Lorry Risk Only'; // Assuming default coverage
+  }
 
-    this.marinedetailsService.createMarinedetails(this.marineinsurancedetails)
-      .subscribe({
+  getDetails(id: number) {
+    this.marinedetailsService.getByMarineDetailsId(id).subscribe({
+      next: (data) => {
+        console.log('Marine details data retrieved:', data);
+        this.marineinsurancedetails = data;
+      },
+      error: (err) => {
+        console.error('Error fetching marine details data:', err);
+        this.errorMessage = 'Could not fetch marine details. Please try again.';
+      }
+    });
+  }
+
+  createOrUpdateMarineList() {
+    if (this.exchangeRate !== 1) {
+      this.marineinsurancedetails.sumInsured *= this.exchangeRate;
+    }
+
+    if (this.isEditMode) {
+      // Update existing record
+      this.marinedetailsService.updateMarineList(this.marineinsurancedetails.id, this.marineinsurancedetails).subscribe({
+        next: (data) => {
+          console.log('Marine insurance updated successfully', data);
+          this.router.navigate(['/viewmarinelist']);
+        },
+        error: (err) => {
+          console.error('Error occurred while updating marine details', err);
+          this.errorMessage = 'There was an error updating the marine details. Please try again.';
+        }
+      });
+    } else {
+      // Create new record
+      this.marinedetailsService.createMarinedetails(this.marineinsurancedetails).subscribe({
         next: (data) => {
           console.log('Marine insurance created successfully', data);
           this.router.navigate(['/viewmarinelist']);
@@ -52,6 +95,6 @@ export class CreatemarineinsurancedetailsComponent implements OnInit{
           this.errorMessage = 'There was an error creating the marine details. Please try again.';
         }
       });
+    }
   }
-
-}
+}   

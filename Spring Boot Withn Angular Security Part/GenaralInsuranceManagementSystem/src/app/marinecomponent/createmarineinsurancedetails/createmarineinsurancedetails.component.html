@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marine Insurance Details Add Form</title>
+    <title>Marine Insurance Details Add/Update Form</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-
 <body>
     <div class="container d-flex justify-content-center">
         <div class="col-md-10 mb-5">
             <h3 class="text-center mb-4">
-                <i class="fas fa-plus"></i> Marine Insurance Details Add Form
+                <i class="fas fa-plus"></i> Marine Insurance Details Form
             </h3>
-            <form (ngSubmit)="createMarineList()" #marineinsurancedetailsForm="ngForm"
+            <form (ngSubmit)="createOrUpdateMarineList()" #marineinsurancedetailsForm="ngForm"
                 style="border: 2px solid #ddd; padding: 20px; border-radius: 10px;">
 
                 <div class="row">
@@ -101,7 +99,8 @@
                                 <i class="fas fa-map-marker"></i> Voyage To
                             </label>
                             <input type="text" class="form-control rounded-pill" id="voyageTo" required
-                                [(ngModel)]="marineinsurancedetails.voyageTo" name="voyageTo" placeholder="Enter voyage to">
+                                [(ngModel)]="marineinsurancedetails.voyageTo" name="voyageTo"
+                                placeholder="Enter voyage to">
                         </div>
                         <div class="mb-3">
                             <label for="via" class="form-label">
@@ -117,7 +116,7 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-success btn-md rounded-pill"
                         [disabled]="marineinsurancedetailsForm.invalid">
-                        <i class="fas fa-paper-plane"></i> Submit
+                        <i class="fas fa-paper-plane"></i> {{ isEditMode ? 'Update' : 'Submit' }}
                     </button>
                 </div>
             </form>
@@ -130,5 +129,4 @@
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

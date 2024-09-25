@@ -1,9 +1,12 @@
 package com.kutub.InsuranceManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -46,5 +49,9 @@ public class MarineInsuranceDetails {
 
     @Column(nullable = false)
     private String riskCovered;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "marineDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<MarineInsuranceBill> marinBills;
 
 }

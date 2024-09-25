@@ -1,8 +1,14 @@
 package com.kutub.InsuranceManagement.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "marineinsurancebills")
 public class MarineInsuranceBill {
 
@@ -32,4 +38,7 @@ public class MarineInsuranceBill {
     @Column(nullable = false)
     private double grossPremium;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "marineDetailsId", nullable = false)  // Foreign key for marineDetails entity
+    private MarineInsuranceDetails marineDetails;
 }

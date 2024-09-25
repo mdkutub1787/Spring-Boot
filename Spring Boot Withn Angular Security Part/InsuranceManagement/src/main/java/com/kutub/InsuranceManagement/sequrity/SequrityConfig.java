@@ -40,7 +40,8 @@ public class SequrityConfig {
                                                 "api/receipt/**",
                                                 "api/moneyreceipt/**",
                                                 "api/policy/search/policyholder/{policyholder}",
-                                                "api/marine/**"
+                                                "api/marine/**",
+                                                "api/marinebill/**"
                                                  )
                                                  .permitAll()
                                                  .requestMatchers("api/medicine/save", "api/medicinegeneric/save")

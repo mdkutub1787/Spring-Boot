@@ -28,11 +28,14 @@ public class MarineInsuranceBillController {
     }
 
     @PostMapping("/save")
-    public void saveMarineInsuranceBill(@RequestBody MarineInsuranceBill p) {
-        marineInsuranceBillService.saveMarineInsuranceBill(p);
+    public void saveMarineInsuranceBill(@RequestBody MarineInsuranceBill mb) {
+        marineInsuranceBillService.saveMarineInsuranceBill(mb);
     }
 
-
+    @PutMapping("/update/{id}")
+    public  void updateMarineInsuranceBill(@RequestBody MarineInsuranceBill mb){
+        marineInsuranceBillService.saveMarineInsuranceBill(mb);
+    }
 
     @DeleteMapping("/delete/{id}")
     public void deleteMarineInsuranceBillById(@PathVariable long id) {

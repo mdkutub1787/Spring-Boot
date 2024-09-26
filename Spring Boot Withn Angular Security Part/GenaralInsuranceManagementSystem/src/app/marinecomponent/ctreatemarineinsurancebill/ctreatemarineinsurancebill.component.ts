@@ -22,7 +22,7 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
     private marineDetailsService: MarinedetailsService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Load all policyholders for dropdown
@@ -56,22 +56,22 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
       this.calculatePremiums();
     }
   }
-  
+
   calculatePremiums(): void {
     const marineRate = this.marineBill.marineRate / 100;
     const warSrccRate = this.marineBill.warSrccRate / 100;
     const taxRate = 0.15;
-  
+
     if (this.marineBill.marineDetails.sumInsured) {
       const netPremium = this.marineBill.marineDetails.sumInsured * (marineRate + warSrccRate);
       this.marineBill.netPremium = this.roundToTwoDecimalPlaces(netPremium);
-  
+
       const tax = this.marineBill.netPremium * taxRate;
       const grossPremium = this.marineBill.netPremium + tax + (this.marineBill.stampDuty || 0);
       this.marineBill.grossPremium = this.roundToTwoDecimalPlaces(grossPremium);
     }
   }
-  
+
 
   // Save or Update Marine Bill based on ID
   saveOrUpdateMarineBill(): void {
@@ -111,4 +111,18 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
   private roundToTwoDecimalPlaces(value: number): number {
     return Math.round(value * 100) / 100;
   }
+
+  get roundedSumInsured(): number {
+    return Math.round(this.marineBill.marineDetails.sumInsured);
+  }
+
+
+  get roundedNetPremium(): number {
+    return Math.round(this.marineBill.netPremium);
+  }
+
+  get roundedGrossPremium(): number {
+    return Math.round(this.marineBill.grossPremium);
+  }
+
 }

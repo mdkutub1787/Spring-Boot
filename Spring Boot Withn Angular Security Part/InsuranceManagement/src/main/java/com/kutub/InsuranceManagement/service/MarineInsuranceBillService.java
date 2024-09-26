@@ -44,7 +44,7 @@ public class MarineInsuranceBillService {
 
     }
 
-    public void deleteMarineInsuranceBill(long id) {
+    public void deleteMarineInsuranceBill(long id)  {
         marineInsuranceBillRepo.deleteById(id);
     }
 

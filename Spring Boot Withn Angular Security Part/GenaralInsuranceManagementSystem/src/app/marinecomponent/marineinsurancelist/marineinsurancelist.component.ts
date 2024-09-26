@@ -45,10 +45,11 @@ export class MarineinsurancelistComponent implements OnInit{
 
  
   editMarineInsurance(id: number) {
-    this.router.navigate(['createmarinelist', id]);
+    this.router.navigate(['updatemarinelist', id]);
   }
-  
 
+ 
+  
   detailsMarineInsurance(id: number) {
     this.router.navigate(['marinedetails', id]);
   }

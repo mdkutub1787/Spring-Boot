@@ -21,9 +21,34 @@ public class MarineInsuranceDetailsService {
         return marineInsuranceDetailsRepo.findAll();
     }
 
-    // Save or update marine insurance details
-    public void saveMarineInsuranceDetails(MarineInsuranceDetails md) {
+    // Save new marine insurance details
+    public void saveMarineInsuranceDetails(MarineInsuranceDetails md, double exchangeRate) {
+        md.setSumInsured(md.getSumInsured() * exchangeRate); // Convert sumInsured from dollars to BDT
         marineInsuranceDetailsRepo.save(md);
+    }
+
+    // Update existing marine insurance details
+    public void updateMarineInsuranceDetails(MarineInsuranceDetails md, long id, double exchangeRate) {
+        MarineInsuranceDetails existingDetails = findById(id);
+        if (existingDetails != null) {
+            // Update fields
+            existingDetails.setDate(md.getDate());
+            existingDetails.setBankName(md.getBankName());
+            existingDetails.setPolicyholder(md.getPolicyholder());
+            existingDetails.setAddress(md.getAddress());
+            existingDetails.setVoyageFrom(md.getVoyageFrom());
+            existingDetails.setVoyageTo(md.getVoyageTo());
+            existingDetails.setVia(md.getVia());
+            existingDetails.setStockItem(md.getStockItem());
+            existingDetails.setCoverage(md.getCoverage());
+
+            // Convert sumInsured from dollars to BDT if it has changed
+            if (existingDetails.getSumInsured() != md.getSumInsured()) {
+                existingDetails.setSumInsured(md.getSumInsured() * exchangeRate);
+            }
+
+            marineInsuranceDetailsRepo.save(existingDetails);
+        }
     }
 
     // Find marine insurance details by ID
@@ -41,7 +66,6 @@ public class MarineInsuranceDetailsService {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://api.exchangeratesapi.io/latest?base=USD&symbols=BDT";
 
-        // Call external API to fetch the exchange rate
         try {
             var response = restTemplate.getForObject(url, Map.class);
             if (response != null && response.containsKey("rates")) {
@@ -52,7 +76,6 @@ public class MarineInsuranceDetailsService {
             e.printStackTrace();
         }
 
-        // Default exchange rate in case of error
-        return BigDecimal.ONE;
+        return BigDecimal.ONE; // Default to 1 if exchange rate fetch fails
     }
 }

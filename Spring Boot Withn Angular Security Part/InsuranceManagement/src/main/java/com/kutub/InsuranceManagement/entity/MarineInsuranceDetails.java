@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,8 @@ public class MarineInsuranceDetails {
     private int id;
 
     @Column(nullable = false)
-    private String date;
+    @Temporal(TemporalType.DATE)
+    private Date date = new Date();
 
     @Column(nullable = false)
     private String bankName;
@@ -53,5 +55,11 @@ public class MarineInsuranceDetails {
     @JsonIgnore
     @OneToMany(mappedBy = "marineDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MarineInsuranceBill> marineInsuranceBills;
+
+
+    public void convertSumInsured(double exchangeRate) {
+        this.sumInsured *= exchangeRate;
+    }
+
 
 }

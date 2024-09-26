@@ -20,17 +20,21 @@ public class MarineInsuranceDetailsController {
         return marineInsuranceDetailsService.getAllMarineInsuranceDetails();
     }
 
+    // Save new marine insurance details
     @PostMapping("/save")
     public void saveMarineInsuranceDetails(@RequestBody MarineInsuranceDetails md) {
         double exchangeRate = marineInsuranceDetailsService.getExchangeRate().doubleValue();
-        marineInsuranceDetailsService.saveMarineInsuranceDetails(md, exchangeRate);
+        md.convertSumInsured(exchangeRate); // Convert sumInsured from dollars to BDT
+        marineInsuranceDetailsService.saveMarineInsuranceDetails(md ,exchangeRate);
     }
 
+    // Update existing marine insurance details
     @PutMapping("/update/{id}")
     public void updateMarineInsuranceDetails(@PathVariable long id, @RequestBody MarineInsuranceDetails md) {
         double exchangeRate = marineInsuranceDetailsService.getExchangeRate().doubleValue();
-        marineInsuranceDetailsService.updateMarineInsuranceDetails(md, id, exchangeRate);
+        marineInsuranceDetailsService.updateMarineInsuranceDetails(md, id, exchangeRate); // Ensure update method includes exchangeRate
     }
+
 
 
     @DeleteMapping("/delete/{id}")

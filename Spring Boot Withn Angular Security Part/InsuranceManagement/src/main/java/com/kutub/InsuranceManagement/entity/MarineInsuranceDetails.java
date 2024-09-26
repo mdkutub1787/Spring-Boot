@@ -58,8 +58,7 @@ public class MarineInsuranceDetails {
 
 
     public void convertSumInsured(double exchangeRate) {
-        this.sumInsured *= exchangeRate;
+        this.sumInsured = this.sumInsured * exchangeRate;
     }
-
 
 }

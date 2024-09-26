@@ -28,7 +28,6 @@ public class MarineInsuranceDetailsService {
     }
 
 
-    // Update existing marine insurance details
     public void updateMarineInsuranceDetails(MarineInsuranceDetails md, long id, double exchangeRate) {
         MarineInsuranceDetails existingDetails = findById(id);
         if (existingDetails != null) {
@@ -43,14 +42,13 @@ public class MarineInsuranceDetailsService {
             existingDetails.setStockItem(md.getStockItem());
             existingDetails.setCoverage(md.getCoverage());
 
-            // Convert sumInsured from dollars to BDT if it has changed
-            if (existingDetails.getSumInsured() != md.getSumInsured()) {
-                existingDetails.setSumInsured(md.getSumInsured() * exchangeRate);
-            }
+            // Convert sumInsured from dollars to BDT
+            existingDetails.setSumInsured(md.getSumInsured() * exchangeRate); // Convert using exchange rate
 
             marineInsuranceDetailsRepo.save(existingDetails);
         }
     }
+
 
     // Find marine insurance details by ID
     public MarineInsuranceDetails findById(long id) {
@@ -62,7 +60,6 @@ public class MarineInsuranceDetailsService {
         marineInsuranceDetailsRepo.deleteById(id);
     }
 
-    // Fetch exchange rate from a third-party API (BDT to USD)
     public BigDecimal getExchangeRate() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://api.exchangeratesapi.io/latest?base=USD&symbols=BDT";
@@ -76,7 +73,7 @@ public class MarineInsuranceDetailsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return BigDecimal.ONE; // Default to 1 if exchange rate fetch fails
+        return BigDecimal.ONE; // Default to 1 if there is an issue
     }
+
 }

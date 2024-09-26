@@ -6,15 +6,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-createmarineinsurancedetails',
   templateUrl: './createmarineinsurancedetails.component.html',
-  styleUrls: ['./createmarineinsurancedetails.component.css']  // Fixed typo here
+  styleUrl: './createmarineinsurancedetails.component.css'
 })
-
 export class CreatemarineinsurancedetailsComponent implements OnInit {
 
   marineinsurancedetails: MarineDetailsModel = new MarineDetailsModel();
   errorMessage: string = '';
   isEditMode: boolean = false;
   exchangeRate: number = 1;
+  
+  isSumInsuredConverted: boolean = false; 
 
   constructor(
     private marinedetailsService: MarinedetailsService,
@@ -32,7 +33,6 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
       }
     });
 
-    // Fetch exchange rate
     this.marinedetailsService.getExchangeRate().subscribe({
       next: (data) => {
         this.exchangeRate = data.rates.BDT || 1;
@@ -41,7 +41,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
       error: (err) => {
         console.error('Error fetching exchange rate:', err);
         this.errorMessage = 'Could not fetch exchange rate. Defaulting to 1.';
-        this.exchangeRate = 1; 
+        this.exchangeRate = 1;
       }
     });
   }
@@ -50,7 +50,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
     this.marineinsurancedetails.date = formattedDate;
-    this.marineinsurancedetails.coverage = 'Lorry Risk Only'; 
+    this.marineinsurancedetails.coverage = 'Lorry Risk Only';
   }
 
   getDetails(id: number) {
@@ -58,6 +58,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
       next: (data) => {
         console.log('Marine details data retrieved:', data);
         this.marineinsurancedetails = data;
+        this.isSumInsuredConverted = true; 
       },
       error: (err) => {
         console.error('Error fetching marine details data:', err);
@@ -67,16 +68,18 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
   }
 
   createOrUpdateMarineList() {
-    if (this.exchangeRate !== 1) {
+    
+    if (!this.isEditMode && this.exchangeRate !== 1 && !this.isSumInsuredConverted) {
       this.marineinsurancedetails.sumInsured *= this.exchangeRate;
+      this.isSumInsuredConverted = true; 
     }
 
     if (this.isEditMode) {
       // Update existing record
       this.marinedetailsService.updateMarineList(
         this.marineinsurancedetails.id,
-         this.marineinsurancedetails)
-         .subscribe({
+        this.marineinsurancedetails
+      ).subscribe({
         next: (data) => {
           console.log('Marine insurance updated successfully', data);
           this.router.navigate(['/viewmarinelist']);

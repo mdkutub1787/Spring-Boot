@@ -74,10 +74,15 @@ export class MarineinsurancebillDetailsComponent implements OnInit{
     return Math.round(totalPremium * taxRate);
   }
 
+  getStampDuty(): number {
+    return this.marinebill?.stampDuty ?? 0;
+  }
+
   getTotalPremiumWithTax(): number {
     const totalPremium = this.getTotalPremium();
     const totalTax = this.getTotalTax();
-    return Math.round(totalPremium + totalTax);
+    const stampDuty = this.getStampDuty();
+    return Math.round(totalPremium + totalTax+stampDuty);
   }
 
 

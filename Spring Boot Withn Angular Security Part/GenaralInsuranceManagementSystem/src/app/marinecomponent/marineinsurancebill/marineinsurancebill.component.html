@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let marine of marinebill">
-                <td>{{ marine.id }}</td>
+                <td>{{ marine.marineDetails.id }}</td>
                 <td>{{ marine.marineDetails.bankName }}</td>
                 <td>{{ marine.marineDetails.policyholder }}</td>
                 <td>{{ round(marine.marineDetails.sumInsured) | currency:'TK':'symbol' }}</td>

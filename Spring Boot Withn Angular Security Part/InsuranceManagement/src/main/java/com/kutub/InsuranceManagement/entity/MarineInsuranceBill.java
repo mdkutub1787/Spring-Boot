@@ -24,7 +24,7 @@ public class MarineInsuranceBill {
     @Column( name = "warSrcc_rate_% ",nullable = false)
     private double warSrccRate;
 
-//    @Column(nullable = false)
+    @Column(nullable = false)
     private double netPremium;
 
     @Column( name = "tax_rate_% ",nullable = false)
@@ -34,7 +34,7 @@ public class MarineInsuranceBill {
     @Column(nullable = false)
     private double stampDuty;
 
-//    @Column(nullable = false)
+    @Column(nullable = false)
     private double grossPremium;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -76,14 +76,7 @@
                                 placeholder="Enter sum insured in USD">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="riskCovered" class="form-label">
-                                <i class="fas fa-check-square"></i> Risk Covered
-                            </label>
-                            <input type="text" class="form-control rounded-pill" id="coverage" required
-                                [(ngModel)]="marineinsurancedetails.coverage" name="coverage"
-                                placeholder="Enter coverage" readonly>
-                        </div>
+                  
 
                         <div class="mb-3">
                             <label for="voyageFrom" class="form-label">
@@ -108,6 +101,15 @@
                             </label>
                             <input type="text" class="form-control rounded-pill" id="via" required
                                 [(ngModel)]="marineinsurancedetails.via" name="via" placeholder="Enter via location">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="riskCovered" class="form-label">
+                                <i class="fas fa-check-square"></i> Risk Covered
+                            </label>
+                            <input type="text" class="form-control rounded-pill" id="coverage" required
+                                [(ngModel)]="marineinsurancedetails.coverage" name="coverage"
+                                placeholder="Enter coverage" readonly>
                         </div>
 
                     </div>

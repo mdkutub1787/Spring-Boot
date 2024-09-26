@@ -6,7 +6,7 @@
 
     <!-- marineDeatails Details Header -->
     <div class="profile-header text-center">
-        <h3>Marine  Details</h3>
+        <h3>Marine Insurance Details (LC)</h3>
     </div>
 
 
@@ -17,7 +17,7 @@
                 <div class="table-row" *ngIf="marineDeatails">
                     <div class="table-cell">
                         <div class="data-row">
-                            <strong>Bill No:</strong> <span>{{ marineDeatails.id }}</span>
+                            <strong>Marine Bill No:</strong> <span>{{ marineDeatails.id }}</span>
                         </div>
                         <div class="data-row">
                             <strong>Date:</strong> <span>{{ marineDeatails.date }}</span>
@@ -37,10 +37,7 @@
                         <div class="data-row">
                             <strong>Sum Insured:</strong> <span>TK {{ marineDeatails.sumInsured }}</span>
                         </div>
-                     
-                        <div class="data-row">
-                            <strong>Risk Coverage:</strong> <span>{{ marineDeatails.coverage }}</span>
-                        </div>
+                    
                      
                         <div class="data-row">
                             <strong>Voyage From:</strong> <span>Any Port of  {{ marineDeatails.voyageFrom }}</span>
@@ -52,6 +49,11 @@
                         <div class="data-row">
                             <strong> Via:</strong> <span>{{ marineDeatails.via }}  Bangladesh</span>
                         </div>
+
+                        <div class="data-row">
+                            <strong>Risk Coverage:</strong> <span>{{ marineDeatails.coverage }}</span>
+                        </div>
+
                     </div>
 
                 </div>

@@ -14,7 +14,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
   errorMessage: string = '';
   isEditMode: boolean = false;
   exchangeRate: number = 1;
-  originalSumInsured: number = 0; // এক্সচেঞ্জ রেট প্রয়োগ করার আগে sumInsured সংরক্ষণ করতে ব্যবহার হবে
+  originalSumInsured: number = 0; 
 
   constructor(
     private marinedetailsService: MarinedetailsService,
@@ -56,7 +56,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
     this.marinedetailsService.getByMarineDetailsId(id).subscribe({
       next: (data) => {
         this.marineinsurancedetails = data;
-        this.originalSumInsured = this.marineinsurancedetails.sumInsured; // ডাটাবেস থেকে প্রাপ্ত মূল মান সংরক্ষণ
+        this.originalSumInsured = this.marineinsurancedetails.sumInsured;
         console.log('Marine details data retrieved:', data);
       },
       error: (err) => {
@@ -66,16 +66,14 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
     });
   }
 
-  // কনভার্শন শুধুমাত্র তখন হবে যখন ফর্ম সাবমিট করা হবে এবং ডলার পরিবর্তন করা হয়েছে
+ 
   createOrUpdateMarineList() {
-    // যদি নতুন এন্ট্রি হয় বা এডিট মোডে থাকলেও ডলার পরিবর্তন করা হয়
     if (!this.isEditMode || this.marineinsurancedetails.sumInsured !== this.originalSumInsured) {
-      // নতুন বা পরিবর্তিত ডলারের উপর ভিত্তি করে টাকার কনভারশন
       this.marineinsurancedetails.sumInsured *= this.exchangeRate;
     }
 
     if (this.isEditMode) {
-      // এডিট মোডে আপডেট করা হবে
+    
       this.marinedetailsService.updateMarineList(this.marineinsurancedetails.id, this.marineinsurancedetails)
         .subscribe({
           next: (data) => {
@@ -88,7 +86,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
           }
         });
     } else {
-      // নতুন এন্ট্রি তৈরি করা হবে
+    
       this.marinedetailsService.createMarinedetails(this.marineinsurancedetails)
         .subscribe({
           next: (data) => {

@@ -12,8 +12,6 @@ export class MarinedetailsService {
 
   private exchangeRateApiUrl = 'https://api.exchangerate-api.com/v4/latest/USD'; 
 
-  private newpolicy: MarineDetailsModel[] = []; 
-
   constructor(private http: HttpClient) { }
 
   

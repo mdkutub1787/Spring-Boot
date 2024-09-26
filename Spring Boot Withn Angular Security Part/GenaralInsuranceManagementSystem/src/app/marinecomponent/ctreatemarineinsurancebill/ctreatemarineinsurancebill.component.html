@@ -1,93 +1,130 @@
-<form (ngSubmit)="saveOrUpdateMarineBill()" #marineBillForm="ngForm">
-  <div>
-    <label for="policyholder">Select Policyholder:</label>
-    <select [(ngModel)]="selectedPolicyholder" (change)="onPolicyholderChange()" name="policyholder" required>
-      <option *ngFor="let holder of policyholders" [ngValue]="holder">
-        {{ holder.policyholder }} <!-- Assuming this is the field name -->
-      </option>
-    </select>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marine Bill Form</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <div class="container d-flex justify-content-center">
+    <div class="col-md-8 mb-5">
+      <h3 class="text-center mb-4">
+        <i class="fas fa-ship"></i> Marine Insurance Bill Form
+      </h3>
+      <form (ngSubmit)="saveOrUpdateMarineBill()" #marineBillForm="ngForm"
+        style="border: 2px solid #ddd; padding: 20px; border-radius: 10px;">
+
+        <!-- Policyholder Dropdown -->
+        <div class="mb-3">
+          <label for="policyholder" class="form-label">
+            <i class="fas fa-user"></i> Select Policyholder:
+          </label>
+          <select class="form-control rounded-pill" id="policyholder" [(ngModel)]="selectedPolicyholder"
+            (change)="onPolicyholderChange()" name="policyholder" required>
+            <option *ngFor="let holder of policyholders" [ngValue]="holder">
+              {{ holder.policyholder }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row">
+          <!-- Bank Name Field (Readonly) -->
+          <div class="col-md-6 mb-3">
+            <label for="bankName" class="form-label">Bank Name</label>
+            <input id="bankName" type="text" class="form-control rounded-pill"
+              [(ngModel)]="marineBill.marineDetails.bankName" name="bankName" readonly />
+          </div>
+
+          <!-- Sum Insured Field (Readonly) -->
+          <div class="col-md-6 mb-3">
+            <label for="sumInsured" class="form-label">
+              <i class="fas fa-dollar-sign"></i> Sum Insured
+            </label>
+            <input type="number" class="form-control rounded-pill" id="sumInsured"
+              [(ngModel)]="marineBill.marineDetails.sumInsured" name="sumInsured" readonly />
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Marine Rate Field -->
+          <div class="col-md-6 mb-3">
+            <label for="marineRate" class="form-label">
+              <i class="fas fa-percent"></i> Marine Rate (%)
+            </label>
+            <input type="number" class="form-control rounded-pill" id="marineRate" [(ngModel)]="marineBill.marineRate"
+              name="marineRate" (input)="calculatePremiums()" />
+          </div>
+
+          <!-- War SRCC Rate Field -->
+          <div class="col-md-6 mb-3">
+            <label for="warSrccRate" class="form-label">
+              <i class="fas fa-percent"></i> War SRCC Rate (%)
+            </label>
+            <input type="number" class="form-control rounded-pill" id="warSrccRate" [(ngModel)]="marineBill.warSrccRate"
+              name="warSrccRate" (input)="calculatePremiums()" />
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Net Premium Field (Readonly) -->
+          <div class="col-md-6 mb-3">
+            <label for="netPremium" class="form-label">
+              <i class="fas fa-dollar-sign"></i> Net Premium
+            </label>
+            <input type="number" class="form-control rounded-pill" id="netPremium" [(ngModel)]="marineBill.netPremium"
+              name="netPremium" readonly />
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="tax" class="form-label">
+              <i class="fas fa-receipt"></i> Tax Rate (%)
+            </label>
+            <input type="number" class="form-control rounded-pill" id="tax"
+              [(ngModel)]="marineBill.tax" name="tax" readonly />
+          </div>
+         
+        </div>
+
+        <div class="row">
+           <!-- Stamp Duty Field -->
+           <div class="col-md-6 mb-3">
+            <label for="stampDuty" class="form-label">
+              <i class="fas fa-stamp"></i> Stamp Duty
+            </label>
+            <input type="number" class="form-control rounded-pill" id="stampDuty" [(ngModel)]="marineBill.stampDuty"
+              name="stampDuty" (input)="calculatePremiums()" />
+          </div>
+
+          <!-- Gross Premium Field (Readonly) -->
+          <div class="col-md-6 mb-3">
+            <label for="grossPremium" class="form-label">
+              <i class="fas fa-dollar-sign"></i> Gross Premium
+            </label>
+            <input type="number" class="form-control rounded-pill" id="grossPremium"
+              [(ngModel)]="marineBill.grossPremium" name="grossPremium" readonly />
+          </div>
+
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-outline-success btn-md rounded-pill">
+            <i class="fas fa-paper-plane"></i> {{ marineBillId ? 'Update ' : 'Save ' }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <div class="mb-3">
-    <!-- Sum Insured Field (Readonly) -->
-    <label for="sumInsured" class="form-label">Sum Insured</label>
-    <input
-      id="sumInsured"
-      type="number"
-      class="form-control rounded-pill"
-      [(ngModel)]="marineBill.marineDetails.sumInsured"
-      name="sumInsured"
-      readonly
-    />
-  </div>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 
-  <div class="mb-3">
-    <!-- Marine Rate Field -->
-    <label for="marineRate" class="form-label">Marine Rate (%)</label>
-    <input
-      id="marineRate"
-      type="number"
-      class="form-control rounded-pill"
-      [(ngModel)]="marineBill.marineRate"
-      name="marineRate"
-      (input)="calculatePremiums()"
-    />
-  </div>
-
-  <div class="mb-3">
-    <!-- War SRCC Rate Field -->
-    <label for="warSrccRate" class="form-label">War SRCC Rate (%)</label>
-    <input
-      id="warSrccRate"
-      type="number"
-      class="form-control rounded-pill"
-      [(ngModel)]="marineBill.warSrccRate"
-      name="warSrccRate"
-      (input)="calculatePremiums()"
-    />
-  </div>
-
-  <div class="mb-3">
-    <!-- Net Premium Field (Readonly) -->
-    <label for="netPremium" class="form-label">Net Premium</label>
-    <input
-      id="netPremium"
-      type="number"
-      class="form-control rounded-pill"
-      [(ngModel)]="marineBill.netPremium"
-      name="netPremium"
-      readonly
-    />
-  </div>
-
-  <div class="mb-3">
-    <!-- Stamp Duty Field -->
-    <label for="stampDuty" class="form-label">Stamp Duty</label>
-    <input
-      id="stampDuty"
-      type="number"
-      class="form-control rounded-pill"
-      [(ngModel)]="marineBill.stampDuty"
-      name="stampDuty"
-      (input)="calculatePremiums()"
-    />
-  </div>
-
-  <div class="mb-3">
-    <!-- Gross Premium Field (Readonly) -->
-    <label for="grossPremium" class="form-label">Gross Premium</label>
-    <input
-      id="grossPremium"
-      type="number"
-      class="form-control rounded-pill"
-      [(ngModel)]="marineBill.grossPremium"
-      name="grossPremium"
-      readonly
-    />
-  </div>
-
-  <!-- Submit Button -->
-  <button type="submit" class="btn btn-outline-success btn-md rounded-pill">
-    {{ marineBillId ? 'Update Marine Bill' : 'Save Marine Bill' }}
-  </button>
-</form>
+</html>

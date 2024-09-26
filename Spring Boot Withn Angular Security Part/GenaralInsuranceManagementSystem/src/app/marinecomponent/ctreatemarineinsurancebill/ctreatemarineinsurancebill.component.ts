@@ -48,29 +48,30 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
     });
   }
 
-  // Called when the policyholder is selected
+
   onPolicyholderChange(): void {
     if (this.selectedPolicyholder) {
       this.marineBill.marineDetails.sumInsured = this.selectedPolicyholder.sumInsured;
+      this.marineBill.marineDetails.bankName = this.selectedPolicyholder.bankName;
       this.calculatePremiums();
     }
   }
-
-  // Method to calculate the premiums and update the bill data
+  
   calculatePremiums(): void {
     const marineRate = this.marineBill.marineRate / 100;
     const warSrccRate = this.marineBill.warSrccRate / 100;
-    const taxRate = 0.15; // Fixed tax rate of 15%
-
+    const taxRate = 0.15;
+  
     if (this.marineBill.marineDetails.sumInsured) {
       const netPremium = this.marineBill.marineDetails.sumInsured * (marineRate + warSrccRate);
       this.marineBill.netPremium = this.roundToTwoDecimalPlaces(netPremium);
-
+  
       const tax = this.marineBill.netPremium * taxRate;
       const grossPremium = this.marineBill.netPremium + tax + (this.marineBill.stampDuty || 0);
       this.marineBill.grossPremium = this.roundToTwoDecimalPlaces(grossPremium);
     }
   }
+  
 
   // Save or Update Marine Bill based on ID
   saveOrUpdateMarineBill(): void {

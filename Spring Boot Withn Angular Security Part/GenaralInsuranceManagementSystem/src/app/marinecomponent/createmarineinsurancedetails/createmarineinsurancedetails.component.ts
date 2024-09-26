@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-createmarineinsurancedetails',
   templateUrl: './createmarineinsurancedetails.component.html',
-  styleUrl: './createmarineinsurancedetails.component.css'
+  styleUrls: ['./createmarineinsurancedetails.component.css']
 })
 export class CreatemarineinsurancedetailsComponent implements OnInit {
 
@@ -14,8 +14,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
   errorMessage: string = '';
   isEditMode: boolean = false;
   exchangeRate: number = 1;
-  
-  isSumInsuredConverted: boolean = false; 
+  originalSumInsured: number = 0; // এক্সচেঞ্জ রেট প্রয়োগ করার আগে sumInsured সংরক্ষণ করতে ব্যবহার হবে
 
   constructor(
     private marinedetailsService: MarinedetailsService,
@@ -56,51 +55,51 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
   getDetails(id: number) {
     this.marinedetailsService.getByMarineDetailsId(id).subscribe({
       next: (data) => {
-        console.log('Marine details data retrieved:', data);
         this.marineinsurancedetails = data;
-        this.isSumInsuredConverted = true; 
+        this.originalSumInsured = this.marineinsurancedetails.sumInsured; // ডাটাবেস থেকে প্রাপ্ত মূল মান সংরক্ষণ
+        console.log('Marine details data retrieved:', data);
       },
       error: (err) => {
-        console.error('Error fetching marine details data:', err);
         this.errorMessage = 'Could not fetch marine details. Please try again.';
+        console.error('Error fetching marine details data:', err);
       }
     });
   }
 
+  // কনভার্শন শুধুমাত্র তখন হবে যখন ফর্ম সাবমিট করা হবে এবং ডলার পরিবর্তন করা হয়েছে
   createOrUpdateMarineList() {
-    
-    if (!this.isEditMode && this.exchangeRate !== 1 && !this.isSumInsuredConverted) {
+    // যদি নতুন এন্ট্রি হয় বা এডিট মোডে থাকলেও ডলার পরিবর্তন করা হয়
+    if (!this.isEditMode || this.marineinsurancedetails.sumInsured !== this.originalSumInsured) {
+      // নতুন বা পরিবর্তিত ডলারের উপর ভিত্তি করে টাকার কনভারশন
       this.marineinsurancedetails.sumInsured *= this.exchangeRate;
-      this.isSumInsuredConverted = true; 
     }
 
     if (this.isEditMode) {
-      // Update existing record
-      this.marinedetailsService.updateMarineList(
-        this.marineinsurancedetails.id,
-        this.marineinsurancedetails
-      ).subscribe({
-        next: (data) => {
-          console.log('Marine insurance updated successfully', data);
-          this.router.navigate(['/viewmarinelist']);
-        },
-        error: (err) => {
-          console.error('Error occurred while updating marine details', err);
-          this.errorMessage = 'There was an error updating the marine details. Please try again.';
-        }
-      });
+      // এডিট মোডে আপডেট করা হবে
+      this.marinedetailsService.updateMarineList(this.marineinsurancedetails.id, this.marineinsurancedetails)
+        .subscribe({
+          next: (data) => {
+            console.log('Marine insurance updated successfully', data);
+            this.router.navigate(['/viewmarinelist']);
+          },
+          error: (err) => {
+            this.errorMessage = 'There was an error updating the marine details. Please try again.';
+            console.error('Error occurred while updating marine details', err);
+          }
+        });
     } else {
-      // Create new record
-      this.marinedetailsService.createMarinedetails(this.marineinsurancedetails).subscribe({
-        next: (data) => {
-          console.log('Marine insurance created successfully', data);
-          this.router.navigate(['/viewmarinelist']);
-        },
-        error: (err) => {
-          console.error('Error occurred while creating marine details', err);
-          this.errorMessage = 'There was an error creating the marine details. Please try again.';
-        }
-      });
+      // নতুন এন্ট্রি তৈরি করা হবে
+      this.marinedetailsService.createMarinedetails(this.marineinsurancedetails)
+        .subscribe({
+          next: (data) => {
+            console.log('Marine insurance created successfully', data);
+            this.router.navigate(['/viewmarinelist']);
+          },
+          error: (err) => {
+            this.errorMessage = 'There was an error creating the marine details. Please try again.';
+            console.error('Error occurred while creating marine details', err);
+          }
+        });
     }
   }
 }

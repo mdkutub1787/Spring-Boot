@@ -32,6 +32,7 @@ public class MarineInsuranceDetailsController {
         marineInsuranceDetailsService.updateMarineInsuranceDetails(md, id, exchangeRate);
     }
 
+
     @DeleteMapping("/delete/{id}")
     public void deleteMarineInsuranceDetailsById(@PathVariable long id) {
         marineInsuranceDetailsService.deleteMarineInsuranceDetails(id);

@@ -21,11 +21,12 @@ public class MarineInsuranceDetailsService {
         return marineInsuranceDetailsRepo.findAll();
     }
 
-    // Save new marine insurance details
     public void saveMarineInsuranceDetails(MarineInsuranceDetails md, double exchangeRate) {
-        md.setSumInsured(md.getSumInsured() * exchangeRate); // Convert sumInsured from dollars to BDT
+        // Convert sumInsured from dollars to BDT
+        md.setSumInsured(md.getSumInsured() * exchangeRate);
         marineInsuranceDetailsRepo.save(md);
     }
+
 
     // Update existing marine insurance details
     public void updateMarineInsuranceDetails(MarineInsuranceDetails md, long id, double exchangeRate) {

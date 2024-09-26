@@ -44,7 +44,7 @@ export class MarinedetailsService {
   }
 
   // View all policies for bill (typed Observable)
-  viewAllPolicyForBill(): Observable<MarineDetailsModel[]> {
+  viewAllMarineListForMarineBill(): Observable<MarineDetailsModel[]> {
     return this.http.get<MarineDetailsModel[]>(this.baseUrl);
   }
 

@@ -20,7 +20,6 @@ public class MarineInsuranceBill {
     @Column( name = "marine_rate_% ",nullable = false)
     private double marineRate;
 
-
     @Column( name = "warSrcc_rate_% ",nullable = false)
     private double warSrccRate;
 
@@ -30,7 +29,6 @@ public class MarineInsuranceBill {
     @Column( name = "tax_rate_% ",nullable = false)
     private double tax = 15; // Fixed tax rate at 15%
 
-
     @Column(nullable = false)
     private double stampDuty;
 
@@ -38,9 +36,7 @@ public class MarineInsuranceBill {
     private double grossPremium;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "marineDetailsId", nullable = false)  // Foreign key for marineDetails entity
+    @JoinColumn(name = "marineDetailsId", nullable = false)
     private MarineInsuranceDetails marineDetails;
-
-
 
 }

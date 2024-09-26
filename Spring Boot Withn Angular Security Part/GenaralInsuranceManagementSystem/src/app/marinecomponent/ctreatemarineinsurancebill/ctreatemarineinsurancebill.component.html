@@ -1,0 +1,93 @@
+<form (ngSubmit)="saveOrUpdateMarineBill()" #marineBillForm="ngForm">
+  <div>
+    <label for="policyholder">Select Policyholder:</label>
+    <select [(ngModel)]="selectedPolicyholder" (change)="onPolicyholderChange()" name="policyholder" required>
+      <option *ngFor="let holder of policyholders" [ngValue]="holder">
+        {{ holder.policyholder }} <!-- Assuming this is the field name -->
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <!-- Sum Insured Field (Readonly) -->
+    <label for="sumInsured" class="form-label">Sum Insured</label>
+    <input
+      id="sumInsured"
+      type="number"
+      class="form-control rounded-pill"
+      [(ngModel)]="marineBill.marineDetails.sumInsured"
+      name="sumInsured"
+      readonly
+    />
+  </div>
+
+  <div class="mb-3">
+    <!-- Marine Rate Field -->
+    <label for="marineRate" class="form-label">Marine Rate (%)</label>
+    <input
+      id="marineRate"
+      type="number"
+      class="form-control rounded-pill"
+      [(ngModel)]="marineBill.marineRate"
+      name="marineRate"
+      (input)="calculatePremiums()"
+    />
+  </div>
+
+  <div class="mb-3">
+    <!-- War SRCC Rate Field -->
+    <label for="warSrccRate" class="form-label">War SRCC Rate (%)</label>
+    <input
+      id="warSrccRate"
+      type="number"
+      class="form-control rounded-pill"
+      [(ngModel)]="marineBill.warSrccRate"
+      name="warSrccRate"
+      (input)="calculatePremiums()"
+    />
+  </div>
+
+  <div class="mb-3">
+    <!-- Net Premium Field (Readonly) -->
+    <label for="netPremium" class="form-label">Net Premium</label>
+    <input
+      id="netPremium"
+      type="number"
+      class="form-control rounded-pill"
+      [(ngModel)]="marineBill.netPremium"
+      name="netPremium"
+      readonly
+    />
+  </div>
+
+  <div class="mb-3">
+    <!-- Stamp Duty Field -->
+    <label for="stampDuty" class="form-label">Stamp Duty</label>
+    <input
+      id="stampDuty"
+      type="number"
+      class="form-control rounded-pill"
+      [(ngModel)]="marineBill.stampDuty"
+      name="stampDuty"
+      (input)="calculatePremiums()"
+    />
+  </div>
+
+  <div class="mb-3">
+    <!-- Gross Premium Field (Readonly) -->
+    <label for="grossPremium" class="form-label">Gross Premium</label>
+    <input
+      id="grossPremium"
+      type="number"
+      class="form-control rounded-pill"
+      [(ngModel)]="marineBill.grossPremium"
+      name="grossPremium"
+      readonly
+    />
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-outline-success btn-md rounded-pill">
+    {{ marineBillId ? 'Update Marine Bill' : 'Save Marine Bill' }}
+  </button>
+</form>

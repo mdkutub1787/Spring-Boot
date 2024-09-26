@@ -28,4 +28,26 @@ export class MarineinsurancebillComponent implements OnInit{
       this.marinebill = [...this.marinebill]; 
     });
   }
+
+  deleteMarineBill(id: number) {
+    this.marinebillService.deleteMarineBill(id).subscribe({
+      next: res => {
+        console.log(res);
+        this.loadMarineDetails()
+        this.router.navigate(['/viewmarinebill']);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+  }
+
+ 
+  editMarineBill(id: number) {
+    this.router.navigate(['updatemarinebill', id]);
+  }
+
+  navigateToAddMarineBill() {
+    this.router.navigateByUrl('/createmarinebill');
+  }
 }

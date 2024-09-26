@@ -5,11 +5,11 @@
             <i class="fas fa-plus"></i> Create Bill
         </button>
     </div>
-    <!-- <div class="col text-right">
-        <button type="button" class="btn btn-primary" (click)="navigateToAddMarineList()">
-            <i class="fas fa-plus"></i> Create Marine List
+    <div class="col text-right">
+        <button type="button" class="btn btn-primary" (click)="navigateToAddMarineBill()">
+            <i class="fas fa-plus"></i> Create Marine Bill
         </button>
-    </div> -->
+    </div>
 </div>
 <div class="table-wrapper">
     <table class="table table-striped">
@@ -32,10 +32,10 @@
                 <td>{{ marine.marineDetails.sumInsured | currency:'TK':'symbol' }}</td>
                 <td>{{ marine.netPremium }}</td>
                 <td class="text-center">
-                    <button class="btn btn-outline-secondary" aria-label="Edit" >
+                    <button class="btn btn-outline-secondary" aria-label="Edit" (click)="editMarineBill(marine.id)">
                         <i class="fas fa-edit"></i>
                       </button>                      
-                    <button class="btn btn-outline-danger" aria-label="Delete" >
+                    <button class="btn btn-outline-danger" aria-label="Delete" (click)="deleteMarineBill(marine.id)" >
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>

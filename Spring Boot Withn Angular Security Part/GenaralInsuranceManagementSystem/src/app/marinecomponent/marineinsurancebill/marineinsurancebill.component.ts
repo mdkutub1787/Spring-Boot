@@ -50,4 +50,8 @@ export class MarineinsurancebillComponent implements OnInit{
   navigateToAddMarineBill() {
     this.router.navigateByUrl('/createmarinebill');
   }
+
+  round(value: number): number {
+    return Math.round(value);
+  }
 }

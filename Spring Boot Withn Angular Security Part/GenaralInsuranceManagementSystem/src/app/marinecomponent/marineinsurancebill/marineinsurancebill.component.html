@@ -30,14 +30,14 @@
                 <td>{{ marine.id }}</td>
                 <td>{{ marine.marineDetails.bankName }}</td>
                 <td>{{ marine.marineDetails.policyholder }}</td>
-                <td>{{ marine.marineDetails.sumInsured | currency:'TK':'symbol' }}</td>
-                <td>{{ marine.netPremium | currency:'TK':'symbol'}}</td>
-                <td>{{ marine.grossPremium | currency:'TK':'symbol'}}</td>
+                <td>{{ round(marine.marineDetails.sumInsured) | currency:'TK':'symbol' }}</td>
+                <td>{{ round(marine.netPremium) | currency:'TK':'symbol' }}</td>
+                <td>{{ round(marine.grossPremium) | currency:'TK':'symbol' }}</td>
                 <td class="text-center">
                     <button class="btn btn-outline-secondary" aria-label="Edit" (click)="editMarineBill(marine.id)">
                         <i class="fas fa-edit"></i>
-                      </button>                      
-                    <button class="btn btn-outline-danger" aria-label="Delete" (click)="deleteMarineBill(marine.id)" >
+                    </button>
+                    <button class="btn btn-outline-danger" aria-label="Delete" (click)="deleteMarineBill(marine.id)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>
@@ -47,6 +47,7 @@
                     </button>
                 </td>
             </tr>
+            
         </tbody>
     </table>
 </div>

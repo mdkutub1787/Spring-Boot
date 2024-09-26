@@ -33,6 +33,52 @@ export class MarineinsurancebillDetailsComponent implements OnInit{
     });
   }
 
- 
+  getSumInsured(): number {
+    return this.marinebill?.marineDetails?.sumInsured ?? 0;
+  }
+
+  getFireRate(): number {
+    return (this.marinebill?.marineRate ?? 0) / 100;
+  }
+
+  getTotalFire(): number {
+    const sumInsured = this.getSumInsured();
+    const fireRate = this.getFireRate();
+    return Math.round(sumInsured * fireRate);
+  }
+
+  getRsdRate(): number {
+    return (this.marinebill?.warSrccRate ?? 0) / 100;
+  }
+
+  getTotalRsd(): number {
+    const sumInsured = this.getSumInsured();
+    const rsdRate = this.getRsdRate();
+    return Math.round(sumInsured * rsdRate);
+  }
+
+  getTaxRate(): number {
+    return (this.marinebill?.tax ?? 0) / 100;
+  }
+
+  getTotalPremium(): number {
+    const sumInsured = this.getSumInsured();
+    const fireRate = this.getFireRate();
+    const rsdRate = this.getRsdRate();
+    return Math.round(sumInsured * (fireRate + rsdRate));
+  }
+
+  getTotalTax(): number {
+    const totalPremium = this.getTotalPremium();
+    const taxRate = this.getTaxRate();
+    return Math.round(totalPremium * taxRate);
+  }
+
+  getTotalPremiumWithTax(): number {
+    const totalPremium = this.getTotalPremium();
+    const totalTax = this.getTotalTax();
+    return Math.round(totalPremium + totalTax);
+  }
+
 
 }

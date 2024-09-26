@@ -47,6 +47,10 @@ export class MarineinsurancebillComponent implements OnInit{
     this.router.navigate(['updatemarinebill', id]);
   }
 
+  detailsMarineBill(id: number) {
+    this.router.navigate(['marinebilldetails', id]);
+  }
+
   navigateToAddMarineBill() {
     this.router.navigateByUrl('/createmarinebill');
   }
@@ -54,4 +58,6 @@ export class MarineinsurancebillComponent implements OnInit{
   round(value: number): number {
     return Math.round(value);
   }
+
+  
 }

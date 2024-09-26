@@ -23,6 +23,7 @@ import { CreatemarineinsurancedetailsComponent } from './marinecomponent/createm
 import { MarineinsurancelistComponent } from './marinecomponent/marineinsurancelist/marineinsurancelist.component';
 import { MarineinsurancebillComponent } from './marinecomponent/marineinsurancebill/marineinsurancebill.component';
 import { CtreatemarineinsurancebillComponent } from './marinecomponent/ctreatemarineinsurancebill/ctreatemarineinsurancebill.component';
+import { MarineinsurancebillDetailsComponent } from './marinecomponent/marineinsurancebill-details/marineinsurancebill-details.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: "viewmarinebill", component: MarineinsurancebillComponent},
   { path: 'createmarinebill', component: CtreatemarineinsurancebillComponent },
   { path: 'updatemarinebill/:id', component: CtreatemarineinsurancebillComponent },
+  { path: "marinebilldetails/:id", component: MarineinsurancebillDetailsComponent },
   { path: "reg", component: RegistrationComponent},
   { path: "login", component: LoginComponent},
   { path: "logout", component: LogoutComponent},

@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-createmarineinsurancedetails',
   templateUrl: './createmarineinsurancedetails.component.html',
-  styleUrl: './createmarineinsurancedetails.component.css'
+  styleUrls: ['./createmarineinsurancedetails.component.css']  // Fixed typo here
 })
 
 export class CreatemarineinsurancedetailsComponent implements OnInit {
@@ -32,10 +32,10 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
       }
     });
 
-  
+    // Fetch exchange rate
     this.marinedetailsService.getExchangeRate().subscribe({
       next: (data) => {
-        this.exchangeRate = data.rates.BDT || 1; 
+        this.exchangeRate = data.rates.BDT || 1;
         console.log('Exchange rate fetched:', this.exchangeRate);
       },
       error: (err) => {
@@ -100,4 +100,4 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
       });
     }
   }
-}   
+}

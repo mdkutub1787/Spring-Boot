@@ -7,7 +7,7 @@ import { MarinedetailsService } from '../../service/marinedetails.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarineBillMoneyreceiptService } from '../../service/marine-bill-moneyreceipt.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BillModel } from '../../model/bill.model';
+
 
 @Component({
   selector: 'app-create-marine-bill-money-receipt',
@@ -67,7 +67,6 @@ export class CreateMarineBillMoneyReceiptComponent implements OnInit {
           date: [null, Validators.required],
           bankName: [null, Validators.required],
           policyholder: [null, Validators.required],
-          address: [null, Validators.required],
           sumInsured: [null, Validators.required],
           stockItem: [null, Validators.required],
           coverage: [null, Validators.required],

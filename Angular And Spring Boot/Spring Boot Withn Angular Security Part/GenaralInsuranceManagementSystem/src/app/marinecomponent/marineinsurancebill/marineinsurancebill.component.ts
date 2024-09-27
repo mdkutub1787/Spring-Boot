@@ -72,7 +72,7 @@ export class MarineinsurancebillComponent implements OnInit {
   }
 
   navigateToAddMarineReceipt(): void {
-    this.router.navigateByUrl('/createmarinereceipt');
+    this.router.navigateByUrl('/createmarinemoneyreceipt');
   }
 
 

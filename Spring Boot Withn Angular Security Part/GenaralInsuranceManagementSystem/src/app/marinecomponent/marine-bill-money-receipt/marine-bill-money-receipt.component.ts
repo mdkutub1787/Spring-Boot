@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class MarineBillMoneyReceiptComponent implements OnInit {
 
-  marinebill!: MarineMoneyReceiptModel[]; 
+  marinebill!: MarineMoneyReceiptModel[];
 
   constructor(
     private marineBillMoneyreceiptService: MarineBillMoneyreceiptService,
@@ -18,36 +18,45 @@ export class MarineBillMoneyReceiptComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadMarineMoneyReceipt(); 
+    this.loadMarineMoneyReceipt();
   }
 
   // Load all Marine Money Receipts
   loadMarineMoneyReceipt() {
     this.marineBillMoneyreceiptService.getMarineManyReceipt()
-    .subscribe((data: MarineMoneyReceiptModel[]) => {
-      this.marinebill = data;
-    });
+      .subscribe((data: MarineMoneyReceiptModel[]) => {
+        this.marinebill = data;
+      });
   }
 
   // Delete a specific Marine Money Receipt by ID
-  deleteMarineManyReceipt(id: number) {
-    this.marineBillMoneyreceiptService.deleteMarineManyReceipt(id)
-    .subscribe({
-      next: res => {
-        console.log(res);
-        this.loadMarineMoneyReceipt(); 
-        this.router.navigate(['/viewmarinemoneyreceipt']);// Refresh the list after deletion
-      },
-      error: error => {
-        console.log(error);
-      }
-    });
+  deleteMarineManyReceipt(id?: number) {
+    if (id !== undefined) {
+      this.marineBillMoneyreceiptService.deleteMarineManyReceipt(id).subscribe({
+        next: res => {
+          console.log(res);
+          this.loadMarineMoneyReceipt();
+          this.router.navigate(['/viewmarinemoneyrecipt']);
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    } else {
+      console.error('Invalid id');
+    }
   }
 
-  // Navigate to edit the Marine Money Receipt
-  editMarineMoneyReceipt(id: number) {
-    this.router.navigate(['updatemarinebill', id]);
+  editMarineMoneyReceipt(id?: number) {
+    if (id !== undefined) {
+      this.router.navigate(['updatemarinebill', id]);
+    } else {
+      console.error('Invalid id');
+    }
   }
+
+
+
 
   // Navigate to view details of Marine Money Receipt
   detailsMarineMoneyReceipt(id: number) {

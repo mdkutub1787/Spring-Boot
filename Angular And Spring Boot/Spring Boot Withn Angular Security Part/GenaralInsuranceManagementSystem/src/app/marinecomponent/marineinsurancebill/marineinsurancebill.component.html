@@ -1,0 +1,53 @@
+
+<div class="row mb-3">
+    <div class="col text-left">
+        <button type="button" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Create Bill
+        </button>
+    </div>
+    <div class="col text-right">
+        <button type="button" class="btn btn-primary" (click)="navigateToAddMarineBill()">
+            <i class="fas fa-plus"></i> Create Marine Bill
+        </button>
+    </div>
+</div>
+<div class="table-wrapper">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><i class="fas fa-file-alt"></i>Marine Bill No</th>
+                <th><i class="fas fa-university"></i> Bank Name</th>
+                <th><i class="fas fa-user"></i> Policy Holder</th>
+                <th><i class="fas fa-dollar-sign"></i> Sum Insured</th>
+                <th><i class="fas fa-map-marker-alt"></i> Net Premium</th>
+                <th><i class="fas fa-map-marker-alt"></i> Gross Premium</th>
+                <th><i class="fas fa-cogs"></i> Actions</th>
+                <th><i class="fas fa-eye"></i> View Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let marine of marinebill">
+                <td>{{ marine.marineDetails.id }}</td>
+                <td>{{ marine.marineDetails.bankName }}</td>
+                <td>{{ marine.marineDetails.policyholder }}</td>
+                <td>{{ round(marine.marineDetails.sumInsured) | currency:'TK':'symbol' }}</td>
+                <td>{{ round(marine.netPremium) | currency:'TK':'symbol' }}</td>
+                <td>{{ round(marine.grossPremium) | currency:'TK':'symbol' }}</td>
+                <td class="text-center">
+                    <button class="btn btn-outline-secondary" aria-label="Edit" (click)="editMarineBill(marine.id)">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-outline-danger" aria-label="Delete" (click)="deleteMarineBill(marine.id)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-outline-primary" aria-label="View" (click)="detailsMarineBill(marine.id)">
+                        <i class="fas fa-eye"></i>Print View
+                    </button>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>

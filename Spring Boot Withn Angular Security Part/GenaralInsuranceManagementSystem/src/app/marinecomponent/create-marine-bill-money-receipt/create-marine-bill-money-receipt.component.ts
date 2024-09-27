@@ -74,8 +74,6 @@ export class CreateMarineBillMoneyReceiptComponent implements OnInit {
           
          
           
-         
-         
         })
       })
     });

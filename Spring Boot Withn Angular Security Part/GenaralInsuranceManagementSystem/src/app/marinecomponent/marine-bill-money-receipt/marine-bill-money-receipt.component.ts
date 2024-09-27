@@ -36,7 +36,7 @@ export class MarineBillMoneyReceiptComponent implements OnInit {
         next: res => {
           console.log(res);
           this.loadMarineMoneyReceipt();
-          this.router.navigate(['/viewmarinemoneyrecipt']);
+          this.router.navigate(['/viewmarinemoneyreceipt']);
         },
         error: error => {
           console.log(error);
@@ -49,7 +49,7 @@ export class MarineBillMoneyReceiptComponent implements OnInit {
 
   editMarineMoneyReceipt(id?: number) {
     if (id !== undefined) {
-      this.router.navigate(['updatemarinebill', id]);
+      this.router.navigate(['updatemarinemoneyreceipt', id]);
     } else {
       console.error('Invalid id');
     }
@@ -65,7 +65,7 @@ export class MarineBillMoneyReceiptComponent implements OnInit {
 
   // Navigate to add a new Marine Money Receipt
   navigateToAddMarineMoneyReceipt() {
-    this.router.navigateByUrl('/createmarinebill');
+    this.router.navigateByUrl('/createmarinemoneyreceipt');
   }
 
   // Round a value

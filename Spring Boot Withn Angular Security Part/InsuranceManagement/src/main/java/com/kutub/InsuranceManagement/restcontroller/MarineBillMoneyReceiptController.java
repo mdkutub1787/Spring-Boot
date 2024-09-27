@@ -1,11 +1,7 @@
 package com.kutub.InsuranceManagement.restcontroller;
 
 import com.kutub.InsuranceManagement.entity.MarineBillMoneyReceipt;
-import com.kutub.InsuranceManagement.entity.MoneyReceipt;
-import com.kutub.InsuranceManagement.entity.Policy;
 import com.kutub.InsuranceManagement.service.MarineBillMoneyReceiptService;
-import com.kutub.InsuranceManagement.service.MoneyReceiptService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

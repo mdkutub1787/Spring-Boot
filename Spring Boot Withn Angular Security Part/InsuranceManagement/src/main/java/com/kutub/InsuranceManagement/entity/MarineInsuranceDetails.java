@@ -21,6 +21,7 @@ public class MarineInsuranceDetails {
     private int id;
 
     @Column(nullable = false)
+
     @Temporal(TemporalType.DATE)
     private Date date = new Date();
 

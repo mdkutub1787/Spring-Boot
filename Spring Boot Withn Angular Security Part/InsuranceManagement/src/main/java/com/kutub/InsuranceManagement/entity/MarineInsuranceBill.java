@@ -1,10 +1,13 @@
 package com.kutub.InsuranceManagement.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -38,5 +41,9 @@ public class MarineInsuranceBill {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "marineDetailsId", nullable = false)
     private MarineInsuranceDetails marineDetails;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "marinebill",  cascade = CascadeType.ALL)
+    private List<MarineBillMoneyReceipt> marinebillreceipts;
 
 }

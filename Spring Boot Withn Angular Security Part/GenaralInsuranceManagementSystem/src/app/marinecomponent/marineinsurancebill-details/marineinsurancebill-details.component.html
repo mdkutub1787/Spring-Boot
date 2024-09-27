@@ -38,9 +38,9 @@
                 <tbody>
                     <tr>
                         <td><strong>Marine Bill No:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.id }}</td>
+                        <td>{{ marinebill.marineDetails.id }}</td>
                         <td><strong>Issu Date:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.date}}</td>
+                        <td>{{ marinebill.marineDetails.date}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -54,15 +54,15 @@
                 <tbody>
                     <tr>
                         <td><strong>Bank & Branch Name:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.bankName }}</td>
+                        <td>{{ marinebill.marineDetails.bankName }}</td>
                     </tr>
                     <tr>
                         <td><strong>Policy Holder Name :</strong></td>
-                        <td>{{ marinebill?.marineDetails?.policyholder }}</td>
+                        <td>{{ marinebill.marineDetails.policyholder }}</td>
                     </tr>
                     <tr>
                         <td><strong>Address:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.address }}</td>
+                        <td>{{ marinebill.marineDetails.address }}</td>
                     </tr>
                 </tbody>
 
@@ -74,11 +74,11 @@
                 <tbody>
                     <tr>
                         <td><strong>Stock Item:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.stockItem }}</td>
+                        <td>{{ marinebill.marineDetails.stockItem }}</td>
                     </tr>
                     <tr>
                         <td><strong>Sum Insured:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.sumInsured | currency: 'TK': 'symbol': '1.0-0' }}</td>
+                        <td>{{ marinebill.marineDetails.sumInsured | currency: 'TK': 'symbol': '1.0-0' }}</td>
                     </tr>
                 </tbody>
 
@@ -91,7 +91,7 @@
 
                     <tr>
                         <td><strong>Coverage:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.coverage }}</td>
+                        <td>{{ marinebill.marineDetails.coverage }}</td>
                     </tr>
 
 
@@ -106,14 +106,14 @@
                 <tbody>
                     <tr>
                         <td><strong>Voyage From:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.voyageFrom }}</td>
+                        <td>{{ marinebill.marineDetails.voyageFrom }}</td>
 
                         <td><strong>Voyage To:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.voyageTo }}</td>
+                        <td>{{ marinebill.marineDetails.voyageTo }}</td>
 
 
                         <td><strong>Via:</strong></td>
-                        <td>{{ marinebill?.marineDetails?.via }}</td>
+                        <td>{{ marinebill.marineDetails.via }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -128,14 +128,14 @@
                 <tbody>
                     <tr>
                         <td><strong>Marine Rate</strong></td>
-                        <td>{{ (marinebill?.marineRate ?? 0) / 100 | percent }}{{ marinebill?.marineDetails?.sumInsured
+                        <td>{{ (marinebill.marineRate ) / 100 | percent }}{{ marinebill.marineDetails.sumInsured
                             | number:'1.2-2' }}</td> <!-- Ensures 2 decimal places -->
                         <td class="currency-symbol">TK</td>
                         <td>{{ getTotalFire() | number:'1.2-2' }}</td>
                     </tr>
                     <tr>
                         <td><strong>WarSrcc Rate </strong></td>
-                        <td>{{ (marinebill?.warSrccRate ?? 0) / 100 | percent }}{{ marinebill?.marineDetails?.sumInsured
+                        <td>{{ (marinebill.warSrccRate ) / 100 | percent }}{{ marinebill.marineDetails.sumInsured
                             | number:'1.2-2' }}</td> <!-- Ensures 2 decimal places -->
                         <td class="currency-symbol">TK</td>
                         <td>{{ getTotalRsd() | number:'1.2-2' }}</td>
@@ -147,7 +147,7 @@
                     </tr>
                     <tr>
                         <td><strong>Tax on Net Premium</strong></td>
-                        <td>{{ (marinebill?.tax ?? 0) / 100 | percent }}{{ getTotalPremium() | number:'1.2-2' }}</td>
+                        <td>{{ (marinebill.tax ) / 100 | percent }}{{ getTotalPremium() | number:'1.2-2' }}</td>
                         <td class="currency-symbol">TK</td>
                         <td>{{ getTotalTax() | number:'1.2-2' }}
                         </td>
@@ -155,7 +155,7 @@
                     <tr>
                         <td colspan="2"><strong>Stamp Duty</strong></td>
                         <td class="currency-symbol">TK</td>
-                        <td>{{ (marinebill?.stampDuty ?? 0) | number:'1.2-2' }}</td>
+                        <td>{{ (marinebill.stampDuty ) | number:'1.2-2' }}</td>
                     </tr>
 
                     <tr>

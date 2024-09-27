@@ -2,6 +2,9 @@ package com.kutub.InsuranceManagement.restcontroller;
 
 import com.kutub.InsuranceManagement.entity.MarineBillMoneyReceipt;
 import com.kutub.InsuranceManagement.service.MarineBillMoneyReceiptService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,36 +14,48 @@ import java.util.List;
 @CrossOrigin("*")
 public class MarineBillMoneyReceiptController {
 
-    private MarineBillMoneyReceiptService marineBillMoneyReceiptService;
+    private final MarineBillMoneyReceiptService marineBillMoneyReceiptService;
 
-    // Get all Receipt
+    // Constructor-based Dependency Injection
+    @Autowired
+    public MarineBillMoneyReceiptController(MarineBillMoneyReceiptService marineBillMoneyReceiptService) {
+        this.marineBillMoneyReceiptService = marineBillMoneyReceiptService;
+    }
+
+    // Get all receipts
     @GetMapping("/")
-    public List<MarineBillMoneyReceipt> getAllMarineBillMoneyReceipt() {
-        return marineBillMoneyReceiptService.getAllMarineBillMoneyReceipt();
+    public ResponseEntity<List<MarineBillMoneyReceipt>> getAllMarineBillMoneyReceipt() {
+        List<MarineBillMoneyReceipt> receipts = marineBillMoneyReceiptService.getAllMarineBillMoneyReceipt();
+        return ResponseEntity.ok(receipts);
     }
 
-
-    // Create a new Receipt
+    // Create a new receipt
     @PostMapping("/save")
-    public void saveMarineBillMoneyReceipt(@RequestBody MarineBillMoneyReceipt mr) {
-        marineBillMoneyReceiptService.saveMarineBillMoneyReceipt(mr);
+    public ResponseEntity<MarineBillMoneyReceipt> saveMarineBillMoneyReceipt(@RequestBody MarineBillMoneyReceipt mr) {
+        MarineBillMoneyReceipt savedReceipt = marineBillMoneyReceiptService.saveMarineBillMoneyReceipt(mr);
+        return new ResponseEntity<>(savedReceipt, HttpStatus.CREATED);
     }
 
-
+    // Update an existing receipt
     @PutMapping("/update/{id}")
-    public  void updateMarineBillMoneyReceipt(@RequestBody MarineBillMoneyReceipt mr){
-        marineBillMoneyReceiptService.saveMarineBillMoneyReceipt(mr);
+    public ResponseEntity<MarineBillMoneyReceipt> updateMarineBillMoneyReceipt(
+            @RequestBody MarineBillMoneyReceipt mr,
+            @PathVariable long id) {
+        MarineBillMoneyReceipt updatedReceipt = marineBillMoneyReceiptService.updateMarineBillMoneyReceipt(mr, id);
+        return ResponseEntity.ok(updatedReceipt);
     }
 
-    // Delete a Receipt by ID
+    // Delete a receipt by ID
     @DeleteMapping("/delete/{id}")
-    public void deleteMarineBillMoneyReceiptById(@PathVariable long id) {
+    public ResponseEntity<Void> deleteMarineBillMoneyReceiptById(@PathVariable long id) {
         marineBillMoneyReceiptService.deleteMarineBillMoneyReceipt(id);
+        return ResponseEntity.noContent().build(); // Returns 204 No Content
     }
 
-
+    // Get a specific receipt by ID
     @GetMapping("/{id}")
-    public MarineBillMoneyReceipt getMarineBillMoneyReceiptById(@PathVariable ("id") long id){
-        return   marineBillMoneyReceiptService.findById(id);
+    public ResponseEntity<MarineBillMoneyReceipt> getMarineBillMoneyReceiptById(@PathVariable long id) {
+        MarineBillMoneyReceipt receipt = marineBillMoneyReceiptService.findById(id);
+        return ResponseEntity.ok(receipt);
     }
 }

@@ -33,20 +33,21 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
     this.marineBillForm = this.formBuilder.group({
       marineRate: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       warSrccRate: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
-      netPremium: [{ value: 0, disabled: true }],
+      netPremium: [{ value: 0 }],
       tax: [15, [Validators.min(0), Validators.max(100)]],
       stampDuty: [{ value: 0 }],
-      grossPremium: [{ value: 0, disabled: true }],
+      grossPremium: [{ value: 0 }],
       marineDetails: this.formBuilder.group({
         policyholder: [null, Validators.required],
-        address: [null, Validators.required],
         sumInsured: [null, Validators.required]
       })
     });
   }
 
   private setupFormSubscriptions(): void {
-    this.marineBillForm.valueChanges.subscribe(() => this.calculatePremiums());
+    this.marineBillForm.get('marineRate')?.valueChanges.subscribe(() => this.calculatePremiums());
+    this.marineBillForm.get('warSrccRate')?.valueChanges.subscribe(() => this.calculatePremiums());
+    this.marineBillForm.get('tax')?.valueChanges.subscribe(() => this.calculatePremiums());
 
     this.marineBillForm.get('marineDetails.policyholder')?.valueChanges.subscribe(policyholder => {
       const selectedPolicy = this.marineDetails.find(policy => policy.policyholder === policyholder);
@@ -78,8 +79,8 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
       return;
     }
 
-    const netPremium = sumInsured * (marineRate + warSrccRate) / 100;
-    const tax = netPremium * taxRate / 100;
+    const netPremium = (sumInsured * (marineRate + warSrccRate)) / 100;
+    const tax = (netPremium * taxRate) / 100;
     const grossPremium = netPremium + tax + stampDuty;
 
     this.marineBillForm.patchValue({ netPremium, grossPremium }, { emitEvent: false });
@@ -89,7 +90,7 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
     return Math.round((this.marineBillForm.get(controlName)?.value || 0) * 100) / 100;
   }
 
-  createBill(): void {
+  createMarineBill(): void {
     if (this.marineBillForm.invalid) {
       this.handleError('Please fill in all required fields correctly.');
       return;

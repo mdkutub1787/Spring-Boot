@@ -3,9 +3,9 @@
     <div class="form-container col-md-8 mb-4">
         <h3 class="text-center text-2xl font-bold mb-4">
             <i class="fas fa-plus"></i>
-            Bill Add Form
+            Create Marine Bill Form
         </h3>
-        <form [formGroup]="marineBillForm" (ngSubmit)="createBill()">
+        <form [formGroup]="marineBillForm" (ngSubmit)="createMarineBill()">
             <div class="row">
                 <!-- Policyholder Field -->
                 <div class="form-group col-md-6 mb-3" formGroupName="marineDetails">
@@ -15,30 +15,16 @@
                     </label>
                     <select id="policyholder" formControlName="policyholder" class="form-control rounded-pill" required>
                         <option value="" disabled>Select your policy holder</option>
-                        <option *ngFor="let pol of marineDetails" [ngValue]="pol.policyholder">{{pol.policyholder}}</option>
+                        <option *ngFor="let pol of marineDetails" [ngValue]="pol.policyholder">{{pol.policyholder}}
+                        </option>
                     </select>
-                    <div *ngIf="marineBillForm.get('marineDetails.policyholder')?.invalid && (marineBillForm.get('marineDetails.policyholder')?.touched || marineBillForm.get('marineDetails.policyholder')?.dirty)" class="text-danger">
-                        <div *ngIf="marineBillForm.get('marineDetails.policyholder')?.errors?.['required']">Policy holder is required.</div>
+                    <div *ngIf="marineBillForm.get('marineDetails.policyholder')?.invalid && (marineBillForm.get('marineDetails.policyholder')?.touched || marineBillForm.get('marineDetails.policyholder')?.dirty)"
+                        class="text-danger">
+                        <div *ngIf="marineBillForm.get('marineDetails.policyholder')?.errors?.['required']">Policy
+                            holder is required.</div>
                     </div>
                 </div>
 
-                <!-- Address Field -->
-                <div class="form-group col-md-6 mb-3" formGroupName="marineDetails">
-                    <label for="address" class="form-label">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Address
-                    </label>
-                    <select id="address" formControlName="address" class="form-control rounded-pill" required>
-                        <option value="" disabled>Select your address</option>
-                        <option *ngFor="let pol of marineDetails" [ngValue]="pol.address">{{pol.address}}</option>
-                    </select>
-                    <div *ngIf="marineBillForm.get('marineDetails.address')?.invalid && (marineBillForm.get('marineDetails.address')?.touched || marineBillForm.get('marineDetails.address')?.dirty)" class="text-danger">
-                        <div *ngIf="marineBillForm.get('marineDetails.address')?.errors?.['required']">Address is required.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
                 <!-- Sum Insured Field -->
                 <div class="form-group col-md-6 mb-3" formGroupName="marineDetails">
                     <label for="sumInsured" class="form-label">
@@ -49,48 +35,53 @@
                         <option value="" disabled>Select sum insured</option>
                         <option *ngFor="let pol of marineDetails" [ngValue]="pol.sumInsured">{{pol.sumInsured}}</option>
                     </select>
-                    <div *ngIf="marineBillForm.get('marineDetails.sumInsured')?.invalid && (marineBillForm.get('marineDetails.sumInsured')?.touched || marineBillForm.get('marineDetails.sumInsured')?.dirty)" class="text-danger">
-                        <div *ngIf="marineBillForm.get('marineDetails.sumInsured')?.errors?.['required']">Sum insured is required.</div>
+                    <div *ngIf="marineBillForm.get('marineDetails.sumInsured')?.invalid && (marineBillForm.get('marineDetails.sumInsured')?.touched || marineBillForm.get('marineDetails.sumInsured')?.dirty)"
+                        class="text-danger">
+                        <div *ngIf="marineBillForm.get('marineDetails.sumInsured')?.errors?.['required']">Sum insured is
+                            required.</div>
                     </div>
                 </div>
 
-                <!-- Fire Rate Field -->
-                <div class="form-group col-md-6 mb-3">
-                    <label for="fire" class="form-label">
-                        <i class="fas fa-fire"></i>
-                        Fire Rate (%)
-                    </label>
-                    <input id="fire" type="number" class="form-control rounded-pill" formControlName="fire" placeholder="Enter fire rate" step="0.01" max="100">
-                    <div *ngIf="marineBillForm.get('fire')?.invalid && (marineBillForm.get('fire')?.touched || marineBillForm.get('fire')?.dirty)" class="text-danger">
-                        <div *ngIf="marineBillForm.get('fire')?.errors?.['required']">Fire rate is required.</div>
-                        <div *ngIf="marineBillForm.get('fire')?.errors?.['min']">Fire rate must be at least 0.</div>
-                        <div *ngIf="marineBillForm.get('fire')?.errors?.['max']">Fire rate cannot exceed 100.</div>
-                    </div>
-                </div>
             </div>
 
             <div class="row">
-                <!-- R&SD Rate Field -->
+                <!-- Marine Rate Field -->
                 <div class="form-group col-md-6 mb-3">
-                    <label for="rsd" class="form-label">
+                    <label for="marineRate" class="form-label">
                         <i class="fas fa-chart-line"></i>
-                        R&SD Rate (%)
+                        Marine Rate (%)
                     </label>
-                    <input id="rsd" type="number" class="form-control rounded-pill" formControlName="rsd" placeholder="Enter R&SD rate" step="0.01" max="100">
-                    <div *ngIf="marineBillForm.get('rsd')?.invalid && (marineBillForm.get('rsd')?.touched || marineBillForm.get('rsd')?.dirty)" class="text-danger">
-                        <div *ngIf="marineBillForm.get('rsd')?.errors?.['required']">R&SD rate is required.</div>
-                        <div *ngIf="marineBillForm.get('rsd')?.errors?.['min']">R&SD rate must be at least 0.</div>
-                        <div *ngIf="marineBillForm.get('rsd')?.errors?.['max']">R&SD rate cannot exceed 100.</div>
+                    <input id="marineRate" type="number" class="form-control rounded-pill" formControlName="marineRate"
+                        placeholder="Enter marine rate" step="0.01" min="0" max="100" required>
+                    <div *ngIf="marineBillForm.get('marineRate')?.invalid && (marineBillForm.get('marineRate')?.touched || marineBillForm.get('marineRate')?.dirty)"
+                        class="text-danger">
+                        <div *ngIf="marineBillForm.get('marineRate')?.errors?.['required']">Marine rate is required.
+                        </div>
+                        <div *ngIf="marineBillForm.get('marineRate')?.errors?.['min']">Marine rate must be at least 0.
+                        </div>
+                        <div *ngIf="marineBillForm.get('marineRate')?.errors?.['max']">Marine rate cannot exceed 100.
+                        </div>
                     </div>
                 </div>
 
-                <!-- Net Premium Field -->
+                <!-- War Srcc Rate Field -->
                 <div class="form-group col-md-6 mb-3">
-                    <label for="netPremium" class="form-label">
-                        <i class="fas fa-wallet"></i>
-                        Net Premium
+                    <label for="warSrccRate" class="form-label">
+                        <i class="fas fa-chart-line"></i>
+                        War Srcc Rate (%)
                     </label>
-                    <input id="netPremium" type="number" class="form-control rounded-pill" formControlName="netPremium" placeholder="Net Premium" [value]="marineBillForm.get('netPremium')?.value" >
+                    <input id="warSrccRate" type="number" class="form-control rounded-pill"
+                        formControlName="warSrccRate" placeholder="Enter War SRCC rate" step="0.01" min="0" max="100"
+                        required>
+                    <div *ngIf="marineBillForm.get('warSrccRate')?.invalid && (marineBillForm.get('warSrccRate')?.touched || marineBillForm.get('warSrccRate')?.dirty)"
+                        class="text-danger">
+                        <div *ngIf="marineBillForm.get('warSrccRate')?.errors?.['required']">War SRCC rate is required.
+                        </div>
+                        <div *ngIf="marineBillForm.get('warSrccRate')?.errors?.['min']">War SRCC rate must be at least
+                            0.</div>
+                        <div *ngIf="marineBillForm.get('warSrccRate')?.errors?.['max']">War SRCC rate cannot exceed 100.
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -101,22 +92,50 @@
                         <i class="fas fa-receipt"></i>
                         Tax Rate (%)
                     </label>
-                    <input id="tax" type="number" class="form-control rounded-pill" formControlName="tax" placeholder="Enter tax rate" step="0.01" readonly>
+                    <input id="tax" type="number" class="form-control rounded-pill" formControlName="tax"
+                        placeholder="Enter tax rate" step="0.01" value="15" readonly>
+                </div>
+
+                <!-- Net Premium Field -->
+                <div class="form-group col-md-6 mb-3">
+                    <label for="netPremium" class="form-label">
+                        <i class="fas fa-wallet"></i>
+                        Net Premium
+                    </label>
+                    <input id="netPremium" type="number" class="form-control rounded-pill" formControlName="netPremium"
+                        placeholder="Net Premium" [value]="marineBillForm.get('netPremium')?.value" readonly>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="form-group col-md-6 mb-3">
+                    <label for="stampDuty" class="form-label">
+                        <i class="fas fa-receipt"></i>
+                        Stamp Duty
+                    </label>
+                    <input id="stampDuty" type="number" class="form-control rounded-pill" formControlName="stampDuty"
+                        placeholder="Enter stamp duty" step="0.01">
                 </div>
 
                 <!-- Gross Premium Field -->
                 <div class="form-group col-md-6 mb-3">
                     <label for="grossPremium" class="form-label">
-                        <i class="fas fa-euro-sign"></i>
-                        Gross Premium
-                    </label>
-                    <input id="grossPremium" type="number" class="form-control rounded-pill" formControlName="grossPremium" placeholder="Gross Premium" [value]="marineBillForm.get('grossPremium')?.value" >
+                        <i class="fas fa-euro-sign"></i> Gross Premium </label>
+                    <input id="grossPremium" type="number" class="form-control rounded-pill"
+                        formControlName="grossPremium" placeholder="Gross Premium"
+                        [value]="marineBillForm.get('grossPremium')?.value" readonly>
                 </div>
+
             </div>
 
             <!-- Submit Button -->
             <div class="text-center mb-3">
-                <button type="submit" class="btn btn-outline-success rounded-pill shadow-sm" [disabled]="marineBillForm.invalid">
+                <button type="submit" class="btn btn-outline-success rounded-pill shadow-sm"
+                    [disabled]="marineBillForm.invalid">
                     <i class="fas fa-paper-plane"></i>
                     Submit
                 </button>

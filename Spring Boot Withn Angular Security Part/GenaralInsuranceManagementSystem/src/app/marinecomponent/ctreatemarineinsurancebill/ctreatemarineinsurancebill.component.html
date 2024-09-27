@@ -42,7 +42,7 @@
                     <div class="col-md-6 mb-3">
                         <!-- Bank Name Field (Readonly) -->
                         <label for="bankName" class="form-label">Bank Name</label>
-                        <input id="bankName" type="text" class="form-control rounded-pill" [(ngModel)]="marineBill.marineDetails.bankName" name="bankName"  />
+                        <input id="bankName" type="text" class="form-control rounded-pill" [(ngModel)]="marineBill.marineDetails.bankName" name="bankName" readonly />
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
                         <label for="sumInsured" class="form-label">
                             <i class="fas fa-dollar-sign"></i> Sum Insured
                         </label>
-                        <input type="number" class="form-control rounded-pill" id="sumInsured" [(ngModel)]="roundedSumInsured" name="sumInsured"  />
+                        <input type="number" class="form-control rounded-pill" id="sumInsured" [(ngModel)]="roundedSumInsured" name="sumInsured" readonly />
                     </div>
 
                     <div class="col-md-6 mb-3">

@@ -27,7 +27,6 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
   ngOnInit(): void {
     // Load all policyholders for dropdown
     this.marineDetailsService.getMarinedetails().subscribe((data: MarineDetailsModel[]) => {
-      console.log('Policyholders Data:', data);  // For debugging
       this.policyholders = data;
     });
 
@@ -45,22 +44,20 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
   loadMarineBill(id: number): void {
     this.marineBillService.getByMarineBillId(id).subscribe((data: MarineBillModel) => {
       this.marineBill = data;
-      // Set selected policyholder after the policyholders have been loaded
-      this.selectedPolicyholder = this.policyholders.find(p => p.id === this.marineBill.marineDetails.id);
+      this.selectedPolicyholder = this.marineBill.marineDetails;  // Set selected policyholder
+            this.selectedPolicyholder = this.policyholders.find(p => p.id === this.marineBill.marineDetails.id);
     });
   }
 
-  // Triggered when the user selects a different policyholder from the dropdown
+
   onPolicyholderChange(): void {
     if (this.selectedPolicyholder) {
-      // Update marineBill with selected policyholder details
       this.marineBill.marineDetails.sumInsured = this.selectedPolicyholder.sumInsured;
       this.marineBill.marineDetails.bankName = this.selectedPolicyholder.bankName;
       this.calculatePremiums();
     }
   }
 
-  // Calculate premiums based on rates and policyholder details
   calculatePremiums(): void {
     const marineRate = this.marineBill.marineRate / 100;
     const warSrccRate = this.marineBill.warSrccRate / 100;
@@ -76,22 +73,22 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
     }
   }
 
-  // Save or update the marine bill
+
+  // Save or Update Marine Bill based on ID
   saveOrUpdateMarineBill(): void {
     if (!this.selectedPolicyholder) {
       console.log('Please select a policyholder.');
       return;
     }
 
-    // Set selected policyholder details in marineBill
-    this.marineBill.marineDetails = this.selectedPolicyholder;
+    this.marineBill.marineDetails = this.selectedPolicyholder;  // Set the selected policyholder
 
     if (this.marineBillId) {
       // Update case
       this.marineBillService.updateMarineBill(this.marineBillId, this.marineBill).subscribe(
         (response) => {
           console.log('Marine Bill updated successfully', response);
-          this.router.navigate(['/viewmarinebill']);  // Navigate after update
+          this.router.navigate(['viewmarinebill']);  // Navigate after update
         },
         (error) => {
           console.error('Error updating marine bill', error);
@@ -119,6 +116,7 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
   get roundedSumInsured(): number {
     return Math.round(this.marineBill.marineDetails.sumInsured);
   }
+
 
   get roundedNetPremium(): number {
     return Math.round(this.marineBill.netPremium);

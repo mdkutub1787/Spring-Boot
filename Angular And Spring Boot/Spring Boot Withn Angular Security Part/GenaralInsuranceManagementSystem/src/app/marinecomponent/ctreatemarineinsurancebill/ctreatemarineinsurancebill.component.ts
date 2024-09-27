@@ -33,16 +33,18 @@ export class CtreatemarineinsurancebillComponent implements OnInit {
     this.marineBillForm = this.formBuilder.group({
       marineRate: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       warSrccRate: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
-      netPremium: [{ value: 0 }],
+      netPremium: [{ value: 0, disabled: true }],
       tax: [15, [Validators.min(0), Validators.max(100)]],
       stampDuty: [{ value: 0 }],
-      grossPremium: [{ value: 0 }],
+      grossPremium: [{ value: 0, disabled: true }],
       marineDetails: this.formBuilder.group({
         policyholder: [null, Validators.required],
+        address: [null, Validators.required],
         sumInsured: [null, Validators.required]
       })
     });
   }
+
 
   private setupFormSubscriptions(): void {
     this.marineBillForm.get('marineRate')?.valueChanges.subscribe(() => this.calculatePremiums());

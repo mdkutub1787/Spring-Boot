@@ -4,10 +4,9 @@ import { MarineDetailsModel } from '../../model/MarineDetailsModel';
 import { MarineMoneyReceiptModel } from '../../model/MarineMoneyReceipt.Model';
 import { MarinebillService } from '../../service/marinebill.service';
 import { MarinedetailsService } from '../../service/marinedetails.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MarineBillMoneyreceiptService } from '../../service/marine-bill-moneyreceipt.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-create-marine-bill-money-receipt',
@@ -17,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CreateMarineBillMoneyReceiptComponent implements OnInit {
   policies: MarineDetailsModel[] = [];
   bills: MarineBillModel[] = [];
-  moneyReceipt: MarineMoneyReceiptModel = new MarineMoneyReceiptModel(); // Use correct model here
+  moneyReceipt: MarineMoneyReceiptModel = new MarineMoneyReceiptModel();
   moneyReceiptForm!: FormGroup;
   selectedBill?: MarineBillModel;
 
@@ -57,22 +56,24 @@ export class CreateMarineBillMoneyReceiptComponent implements OnInit {
       issuedAgainst: [null, Validators.required],
       bill: this.formBuilder.group({
         id: [null, Validators.required],
-        fire: [null, Validators.required],
-        rsd: [null, Validators.required],
+        marineRate: [null, Validators.required],
+        warSrccRate: [null, Validators.required],
         netPremium: [null, Validators.required],
         tax: [null, Validators.required],
+        stampDuty: [null, Validators.required],
         grossPremium: [null, Validators.required],
         policies: this.formBuilder.group({
           id: [null, Validators.required],
           date: [null, Validators.required],
           bankName: [null, Validators.required],
           policyholder: [null, Validators.required],
+          address: [null, Validators.required],
           sumInsured: [null, Validators.required],
           stockItem: [null, Validators.required],
+          voyageFrom: [null, Validators.required],
+          voyageTo: [null, Validators.required],
+          via: [null, Validators.required],
           coverage: [null, Validators.required],
-          
-         
-          
         })
       })
     });
@@ -99,17 +100,17 @@ export class CreateMarineBillMoneyReceiptComponent implements OnInit {
       this.moneyReceiptForm.patchValue({
         bill: {
           id: selectedBill.id,
-          fire: selectedBill.marineRate,
-          rsd: selectedBill.warSrccRate,
+          marineRate: selectedBill.marineRate, // Ensure property names are correct
+          warSrccRate: selectedBill.warSrccRate,
           netPremium: selectedBill.netPremium,
           tax: selectedBill.tax,
+          stampDuty: selectedBill.stampDuty,
           grossPremium: selectedBill.grossPremium,
           policies: selectedBill.marineDetails // Ensure this matches the expected type
         }
       }, { emitEvent: false });
     }
   }
-  
 
   createMarineMoneyReceipt(): void {
     if (this.moneyReceiptForm.valid) {

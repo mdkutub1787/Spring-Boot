@@ -1,8 +1,5 @@
 package com.kutub.InsuranceManagement.service;
 
-
-
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,7 +9,7 @@ import java.util.Map;
 @Service
 public class CurrencyService {
 
-    private static final String EXCHANGE_RATE_API_URL = "https://api.exchangeratesapi.io/latest?base=USD&symbols=BDT";
+    private static final String EXCHANGE_RATE_API_URL = "https://api.exchangerate-api.com/v4/latest/USD"; // Replace with a working URL
 
     public BigDecimal fetchExchangeRate() {
         RestTemplate restTemplate = new RestTemplate();
@@ -20,7 +17,7 @@ public class CurrencyService {
             Map<String, Object> response = restTemplate.getForObject(EXCHANGE_RATE_API_URL, Map.class);
             if (response != null && response.containsKey("rates")) {
                 Map<String, BigDecimal> rates = (Map<String, BigDecimal>) response.get("rates");
-                return rates.get("BDT");
+                return rates.get("BDT"); // Getting the BDT rate
             }
         } catch (Exception e) {
             e.printStackTrace();

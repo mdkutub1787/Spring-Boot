@@ -23,7 +23,7 @@ export class MarineBillMoneyReceiptComponent implements OnInit {
 
   // Load all Marine Money Receipts
   loadMarineMoneyReceipt() {
-    this.marineBillMoneyreceiptService.getMarineManyReceipt()
+    this.marineBillMoneyreceiptService.getMarineMoneyReceipts()
       .subscribe((data: MarineMoneyReceiptModel[]) => {
         this.marinebill = data;
       });
@@ -32,7 +32,7 @@ export class MarineBillMoneyReceiptComponent implements OnInit {
   // Delete a specific Marine Money Receipt by ID
   deleteMarineManyReceipt(id?: number) {
     if (id !== undefined) {
-      this.marineBillMoneyreceiptService.deleteMarineManyReceipt(id).subscribe({
+      this.marineBillMoneyreceiptService.deleteMarineMoneyReceipt(id).subscribe({
         next: res => {
           console.log(res);
           this.loadMarineMoneyReceipt();
@@ -56,12 +56,14 @@ export class MarineBillMoneyReceiptComponent implements OnInit {
   }
 
 
-
-
-  // Navigate to view details of Marine Money Receipt
-  detailsMarineMoneyReceipt(id: number) {
-    this.router.navigate(['marinebilldetails', id]);
+  printMarineMoneyReceipt(id: number | undefined) {
+    if (id !== undefined) {
+      this.router.navigate(['printmarinemoney', id]);
+    } else {
+      console.error('ID is undefined');
+    }
   }
+  
 
   // Navigate to add a new Marine Money Receipt
   navigateToAddMarineMoneyReceipt() {

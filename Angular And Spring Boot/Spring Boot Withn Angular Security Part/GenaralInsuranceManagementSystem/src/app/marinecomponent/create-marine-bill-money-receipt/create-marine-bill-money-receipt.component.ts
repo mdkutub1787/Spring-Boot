@@ -118,7 +118,7 @@ export class CreateMarineBillMoneyReceiptComponent implements OnInit {
 
       this.moneyReceipt = { ...this.moneyReceipt, ...formValues, marinebill: formValues.bill };
 
-      this.moneyReceiptService.createMarineManyReceipt(this.moneyReceipt)
+      this.moneyReceiptService.createMarineMoneyReceipt(this.moneyReceipt)
         .subscribe({
           next: res => {
             this.moneyReceipt = res;

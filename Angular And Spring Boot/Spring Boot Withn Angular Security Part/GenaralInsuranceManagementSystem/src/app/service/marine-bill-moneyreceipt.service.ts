@@ -8,32 +8,32 @@ import { MarineMoneyReceiptModel } from '../model/MarineMoneyReceipt.Model';
 })
 export class MarineBillMoneyreceiptService {
 
-  baseUrl: string = "http://localhost:8080/api/marinemoneyreceipt/";
-
+  private baseUrl: string = "http://localhost:8080/api/marinemoneyreceipt/";
 
   constructor(private http: HttpClient) { }
 
-  
-  getMarineManyReceipt(): Observable<any> {
-    return this.http.get(this.baseUrl);
+  // Fetch all MarineMoneyReceipts
+  getMarineMoneyReceipts(): Observable<MarineMoneyReceiptModel[]> {
+    return this.http.get<MarineMoneyReceiptModel[]>(this.baseUrl);
   }
 
-  createMarineManyReceipt(marinebill: MarineMoneyReceiptModel): Observable<any> {
+  // Fetch a single MarineMoneyReceipt by ID
+  getMarineMoneyReceiptById(marinebillId: number): Observable<MarineMoneyReceiptModel> {
+    return this.http.get<MarineMoneyReceiptModel>(`${this.baseUrl}${marinebillId}`);
+  }
+
+  // Create a new MarineMoneyReceipt
+  createMarineMoneyReceipt(marinebill: MarineMoneyReceiptModel): Observable<any> {
     return this.http.post(this.baseUrl + "save", marinebill);
   }
 
- 
-  deleteMarineManyReceipt(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + "delete/" + id);
+  // Update an existing MarineMoneyReceipt by ID
+  updateMarineMoneyReceipt(id: number, marinebill: MarineMoneyReceiptModel): Observable<any> {
+    return this.http.put(`${this.baseUrl}update/${id}`, marinebill);
   }
 
-  
-  updateMarineManyReceipt(id: number, marinebill: MarineMoneyReceiptModel): Observable<any> {
-    return this.http.put(this.baseUrl + "update/" + id, marinebill);
-  }
-
-
-  getByMarineManyReceiptId(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}${id}`);
+  // Delete a MarineMoneyReceipt by ID
+  deleteMarineMoneyReceipt(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}delete/${id}`);
   }
 }

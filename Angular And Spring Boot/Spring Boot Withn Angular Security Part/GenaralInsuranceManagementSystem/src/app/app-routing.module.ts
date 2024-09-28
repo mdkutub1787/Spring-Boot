@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: "marinebilldetails/:id", component: MarineinsurancebillDetailsComponent },
   { path: "viewmarinemoneyreceipt", component: MarineBillMoneyReceiptComponent },
   { path: "createmarinemoneyreceipt", component: CreateMarineBillMoneyReceiptComponent },
-  { path: "updatemarinemoneyreceipt/:id'", component: CreateMarineBillMoneyReceiptComponent },
+  { path: "printmarinemoney/:id", component: PrintmoneyreceiptComponent },
   { path: "reg", component: RegistrationComponent},
   { path: "login", component: LoginComponent},
   { path: "logout", component: LogoutComponent},

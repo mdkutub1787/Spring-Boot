@@ -47,8 +47,13 @@ public class MarineInsuranceDetails {
     private String stockItem;
 
     @Column(nullable = false)
-    private double sumInsured;
+    private double sumInsuredUsd;
 
+    @Column(nullable = false)
+    private double usdRate;
+
+    @Column(nullable = false)
+    private double sumInsured;
 
     @Column(nullable = false)
     private String coverage;

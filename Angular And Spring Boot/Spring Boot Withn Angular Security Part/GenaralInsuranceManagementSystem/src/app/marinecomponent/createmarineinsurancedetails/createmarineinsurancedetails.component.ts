@@ -13,8 +13,8 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
   marineinsurancedetails: MarineDetailsModel = new MarineDetailsModel();
   errorMessage: string = '';
   isEditMode: boolean = false;
-  exchangeRate: number = 1;
-  originalSumInsured: number = 0; 
+  exchangeRate: number = 1;  // Current exchange rate
+  sumInsuredBdt: number = 0;  // Converted sum insured in BDT
 
   constructor(
     private marinedetailsService: MarinedetailsService,
@@ -23,6 +23,7 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Check if the component is in edit mode or create mode
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.isEditMode = true;
@@ -32,9 +33,14 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
       }
     });
 
+    // Fetch the current exchange rate
+    this.fetchExchangeRate();
+  }
+
+  fetchExchangeRate() {
     this.marinedetailsService.getExchangeRate().subscribe({
       next: (data) => {
-        this.exchangeRate = data.rates.BDT || 1;
+        this.exchangeRate = data.rates.BDT || 1;  // Fetch exchange rate for BDT
         console.log('Exchange rate fetched:', this.exchangeRate);
       },
       error: (err) => {
@@ -49,14 +55,14 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
     this.marineinsurancedetails.date = formattedDate;
-    this.marineinsurancedetails.coverage = 'Lorry Risk Only';
+    this.marineinsurancedetails.coverage = 'Lorry Risk Only';  // Default coverage
   }
 
   getDetails(id: number) {
     this.marinedetailsService.getByMarineDetailsId(id).subscribe({
       next: (data) => {
         this.marineinsurancedetails = data;
-        this.originalSumInsured = this.marineinsurancedetails.sumInsured;
+        this.sumInsuredBdt = this.marineinsurancedetails.sumInsured;
         console.log('Marine details data retrieved:', data);
       },
       error: (err) => {
@@ -66,14 +72,21 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
     });
   }
 
- 
+  updateSumInsuredInBdt() {
+    if (this.marineinsurancedetails.sumInsuredUsd) {
+      this.sumInsuredBdt = this.marineinsurancedetails.sumInsuredUsd * this.exchangeRate;  // Convert USD to BDT
+      this.marineinsurancedetails.sumInsured = this.sumInsuredBdt;  // Set converted value
+      this.marineinsurancedetails.usdRate = this.exchangeRate;  // Set current exchange rate
+    }
+  }
+
   createOrUpdateMarineList() {
-    if (!this.isEditMode || this.marineinsurancedetails.sumInsured !== this.originalSumInsured) {
-      this.marineinsurancedetails.sumInsured *= this.exchangeRate;
+    // Convert the sum insured from USD to BDT if necessary
+    if (!this.isEditMode || this.marineinsurancedetails.sumInsuredUsd) {
+      this.updateSumInsuredInBdt();
     }
 
     if (this.isEditMode) {
-    
       this.marinedetailsService.updateMarineList(this.marineinsurancedetails.id, this.marineinsurancedetails)
         .subscribe({
           next: (data) => {
@@ -86,7 +99,6 @@ export class CreatemarineinsurancedetailsComponent implements OnInit {
           }
         });
     } else {
-    
       this.marinedetailsService.createMarinedetails(this.marineinsurancedetails)
         .subscribe({
           next: (data) => {

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MarineMoneyReceiptModel } from '../../model/MarineMoneyReceipt.Model';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MarineBillMoneyreceiptService } from '../../service/marine-bill-moneyreceipt.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-print-money-receipt',
-  templateUrl: './print-money-receipt.component.html',
-  styleUrl: './print-money-receipt.component.css'
+  selector: 'app-print-marinemoney-receipt',
+  templateUrl: './print-marinemoney-receipt.component.html',
+  styleUrl: './print-marinemoney-receipt.component.css'
 })
-export class PrintMoneyReceiptComponent implements OnInit {
+export class PrintMarinemoneyReceiptComponent implements OnInit{
+
 
   moneyreceipt?: MarineMoneyReceiptModel;
 
@@ -101,3 +102,4 @@ export class PrintMoneyReceiptComponent implements OnInit {
     return this.convertAmountToWords(totalAmount);
   }
 }
+

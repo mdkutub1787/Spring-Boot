@@ -27,6 +27,7 @@ import { MarineinsurancebillDetailsComponent } from './marinecomponent/marineins
 import { MarineBillMoneyReceiptComponent } from './marinecomponent/marine-bill-money-receipt/marine-bill-money-receipt.component';
 import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-marine-bill-money-receipt/create-marine-bill-money-receipt.component';
 import { UpdateMarineBillComponent } from './marinecomponent/update-marine-bill/update-marine-bill.component';
+import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marinemoney-receipt/print-marinemoney-receipt.component';
 
 
 const routes: Routes = [
@@ -55,7 +56,7 @@ const routes: Routes = [
   { path: "marinebilldetails/:id", component: MarineinsurancebillDetailsComponent },
   { path: "viewmarinemoneyreceipt", component: MarineBillMoneyReceiptComponent },
   { path: "createmarinemoneyreceipt", component: CreateMarineBillMoneyReceiptComponent },
-  { path: "printmarinemoney/:id", component: PrintmoneyreceiptComponent },
+  { path: "printmarinemoney/:id", component: PrintMarinemoneyReceiptComponent },
   { path: "reg", component: RegistrationComponent},
   { path: "login", component: LoginComponent},
   { path: "logout", component: LogoutComponent},

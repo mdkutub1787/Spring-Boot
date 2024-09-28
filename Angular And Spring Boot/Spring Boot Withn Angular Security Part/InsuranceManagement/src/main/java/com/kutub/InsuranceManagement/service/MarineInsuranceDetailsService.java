@@ -16,43 +16,21 @@ public class MarineInsuranceDetailsService {
     @Autowired
     private MarineInsuranceDetailsRepo marineInsuranceDetailsRepo;
 
-    // Retrieve all marine insurance details
-    public List<MarineInsuranceDetails> getAllMarineInsuranceDetails() {
-        return marineInsuranceDetailsRepo.findAll();
+    // Create or update marine insurance details
+    public MarineInsuranceDetails createOrUpdateMarineInsurance(MarineInsuranceDetails marineInsuranceDetails) {
+        double exchangeRate = getExchangeRate().doubleValue(); // Fetch current exchange rate
+        marineInsuranceDetails.convertSumInsuredUsd(exchangeRate); // Convert the sum insured
+        return marineInsuranceDetailsRepo.save(marineInsuranceDetails);
     }
-
-    public void saveMarineInsuranceDetails(MarineInsuranceDetails md, double exchangeRate) {
-        // Convert sumInsured from dollars to BDT
-        md.setSumInsured(md.getSumInsured() * exchangeRate);
-        marineInsuranceDetailsRepo.save(md);
-    }
-
-
-    public void updateMarineInsuranceDetails(MarineInsuranceDetails md, long id, double exchangeRate) {
-        MarineInsuranceDetails existingDetails = findById(id);
-        if (existingDetails != null) {
-            // Update fields
-            existingDetails.setDate(md.getDate());
-            existingDetails.setBankName(md.getBankName());
-            existingDetails.setPolicyholder(md.getPolicyholder());
-            existingDetails.setAddress(md.getAddress());
-            existingDetails.setVoyageFrom(md.getVoyageFrom());
-            existingDetails.setVoyageTo(md.getVoyageTo());
-            existingDetails.setVia(md.getVia());
-            existingDetails.setStockItem(md.getStockItem());
-            existingDetails.setCoverage(md.getCoverage());
-
-            // Convert sumInsured from dollars to BDT
-            existingDetails.setSumInsured(md.getSumInsured() * exchangeRate); // Convert using exchange rate
-
-            marineInsuranceDetailsRepo.save(existingDetails);
-        }
-    }
-
 
     // Find marine insurance details by ID
     public MarineInsuranceDetails findById(long id) {
         return marineInsuranceDetailsRepo.findById(id).orElse(null);
+    }
+
+    // Retrieve all marine insurance details
+    public List<MarineInsuranceDetails> findAll() {
+        return marineInsuranceDetailsRepo.findAll();
     }
 
     // Delete marine insurance details by ID
@@ -60,14 +38,15 @@ public class MarineInsuranceDetailsService {
         marineInsuranceDetailsRepo.deleteById(id);
     }
 
+    // Get the current exchange rate from USD to BDT
     public BigDecimal getExchangeRate() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://api.exchangeratesapi.io/latest?base=USD&symbols=BDT";
 
         try {
-            var response = restTemplate.getForObject(url, Map.class);
+            Map<String, Object> response = restTemplate.getForObject(url, Map.class);
             if (response != null && response.containsKey("rates")) {
-                var rates = (Map<String, BigDecimal>) response.get("rates");
+                Map<String, BigDecimal> rates = (Map<String, BigDecimal>) response.get("rates");
                 return rates.get("BDT");
             }
         } catch (Exception e) {
@@ -75,5 +54,4 @@ public class MarineInsuranceDetailsService {
         }
         return BigDecimal.ONE; // Default to 1 if there is an issue
     }
-
 }

@@ -19,7 +19,6 @@ import { MoneyreceiptComponent } from './component/moneyreceipt/moneyreceipt.com
 import { CreatemoneyreceiptComponent } from './component/createmoneyreceipt/createmoneyreceipt.component';
 import { PrintmoneyreceiptComponent } from './component/printmoneyreceipt/printmoneyreceipt.component';
 import { MarineinsurancedetailsComponent } from './marinecomponent/marineinsurancedetails/marineinsurancedetails.component';
-import { CreatemarineinsurancedetailsComponent } from './marinecomponent/createmarineinsurancedetails/createmarineinsurancedetails.component';
 import { MarineinsurancelistComponent } from './marinecomponent/marineinsurancelist/marineinsurancelist.component';
 import { MarineinsurancebillComponent } from './marinecomponent/marineinsurancebill/marineinsurancebill.component';
 import { CtreatemarineinsurancebillComponent } from './marinecomponent/ctreatemarineinsurancebill/ctreatemarineinsurancebill.component';
@@ -28,6 +27,7 @@ import { MarineBillMoneyReceiptComponent } from './marinecomponent/marine-bill-m
 import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-marine-bill-money-receipt/create-marine-bill-money-receipt.component';
 import { UpdateMarineBillComponent } from './marinecomponent/update-marine-bill/update-marine-bill.component';
 import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marinemoney-receipt/print-marinemoney-receipt.component';
+import { CreateMarineListComponent } from './marinecomponent/create-marine-list/create-marine-list.component';
 
 
 const routes: Routes = [
@@ -48,8 +48,8 @@ const routes: Routes = [
   { path: "printmoneyreciept/:id", component: PrintmoneyreceiptComponent},
   { path: "viewmarinelist", component: MarineinsurancelistComponent},
   { path: "marinedetails/:id", component: MarineinsurancedetailsComponent },
-  { path: 'createmarinelist', component: CreatemarineinsurancedetailsComponent },
-  { path: 'updatemarinelist/:id', component: CreatemarineinsurancedetailsComponent },
+  { path: 'createmarinelist', component: CreateMarineListComponent },
+  { path: 'updatemarinelist/:id', component: CreateMarineListComponent },
   { path: "viewmarinebill", component: MarineinsurancebillComponent},
   { path: 'createmarinebill', component: CtreatemarineinsurancebillComponent },
   { path: 'updatemarinebill/:id', component: UpdateMarineBillComponent },

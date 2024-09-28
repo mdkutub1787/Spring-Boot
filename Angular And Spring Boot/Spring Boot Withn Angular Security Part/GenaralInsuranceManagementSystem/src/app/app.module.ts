@@ -32,7 +32,6 @@ import { PrintmoneyreceiptComponent } from './component/printmoneyreceipt/printm
 import { TokenInterceptor } from './guard/TokenInterceptor';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MarineinsurancedetailsComponent } from './marinecomponent/marineinsurancedetails/marineinsurancedetails.component';
-import { CreatemarineinsurancedetailsComponent } from './marinecomponent/createmarineinsurancedetails/createmarineinsurancedetails.component';
 import { MarineinsurancelistComponent } from './marinecomponent/marineinsurancelist/marineinsurancelist.component';
 import { MarineinsurancebillComponent } from './marinecomponent/marineinsurancebill/marineinsurancebill.component';
 import { CtreatemarineinsurancebillComponent } from './marinecomponent/ctreatemarineinsurancebill/ctreatemarineinsurancebill.component';
@@ -41,6 +40,7 @@ import { MarineBillMoneyReceiptComponent } from './marinecomponent/marine-bill-m
 import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-marine-bill-money-receipt/create-marine-bill-money-receipt.component';
 import { UpdateMarineBillComponent } from './marinecomponent/update-marine-bill/update-marine-bill.component';
 import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marinemoney-receipt/print-marinemoney-receipt.component';
+import { CreateMarineListComponent } from './marinecomponent/create-marine-list/create-marine-list.component';
 
 
 @NgModule({
@@ -66,7 +66,6 @@ import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marine
     PrintmoneyreceiptComponent,
     NavbarComponent,
     MarineinsurancedetailsComponent,
-    CreatemarineinsurancedetailsComponent,
     MarineinsurancelistComponent,
     MarineinsurancebillComponent,
     CtreatemarineinsurancebillComponent,
@@ -75,6 +74,7 @@ import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marine
     CreateMarineBillMoneyReceiptComponent,
     UpdateMarineBillComponent,
     PrintMarinemoneyReceiptComponent,
+    CreateMarineListComponent,
    
 
 

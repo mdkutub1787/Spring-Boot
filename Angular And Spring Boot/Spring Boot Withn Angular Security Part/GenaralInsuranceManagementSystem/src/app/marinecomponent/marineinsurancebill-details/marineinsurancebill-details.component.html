@@ -85,14 +85,14 @@
                     <tr>
                         <td><strong>Sum Insured:</strong></td>
                         <td><strong>
-                            {{ marinebill.marineDetails.sumInsuredUsd | currency:'USD $  ':'symbol':'1.2-2' }}    , 
-                            USD Rate {{ marinebill.marineDetails.usdRate | currency:'TK  ':'symbol':'1.2-2' }}   , 
-                            (BDT) {{ marinebill.marineDetails.sumInsured | currency:'TK  ':'symbol':'1.2-2' }}
-                        </strong>
-                    </td>
+                                {{ marinebill.marineDetails.sumInsuredUsd | currency:'USD $ ':'symbol':'1.2-2' }} ,
+                                USD Rate {{ marinebill.marineDetails.usdRate | currency:'TK ':'symbol':'1.2-2' }} ,
+                                (BDT) {{ marinebill.marineDetails.sumInsured | currency:'TK ':'symbol':'1.2-2' }}
+                            </strong>
+                        </td>
                     </tr>
-                    
-                    
+
+
                 </tbody>
 
 
@@ -106,14 +106,14 @@
                 <tbody>
                     <tr>
                         <td><strong>Voyage From:</strong></td>
-                        <td>{{ marinebill.marineDetails.voyageFrom }}</td>
+                        <td>Any Port of {{ marinebill.marineDetails.voyageFrom }}</td>
 
                         <td><strong>Voyage To:</strong></td>
                         <td>{{ marinebill.marineDetails.voyageTo }}</td>
 
 
                         <td><strong>Via:</strong></td>
-                        <td>{{ marinebill.marineDetails.via }}</td>
+                        <td>{{ marinebill.marineDetails.via }} , Bangladesh</td>
                     </tr>
                 </tbody>
                 <thead>

@@ -1,41 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { ReceiptModel } from '../../model/receipt.model';
-import { ReceiptService } from '../../service/receipt.service';
+import { BillModel } from '../../model/bill.model';
+import { BillService } from '../../service/bill.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-printreceipt',
-  templateUrl: './printreceipt.component.html',
-  styleUrls: ['./printreceipt.component.css'] // Correcting "styleUrl" to "styleUrls"
+  selector: 'app-bill-details',
+  templateUrl: './bill-details.component.html',
+  styleUrl: './bill-details.component.css'
 })
-export class PrintreceiptComponent implements OnInit {
+export class BillDetailsComponent implements OnInit{
 
-  receipt?: ReceiptModel;
+  id!: number;
+  bill!: BillModel;
 
   constructor(
-    private receiptService: ReceiptService,
+    private billService: BillService,
     private router: Router,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    this.receiptService.getReceiptById(id).subscribe({
-      next: response => {
-        this.receipt = response;
+    this.bill = new BillModel();
+    this.id = this.route.snapshot.params['id'];
+    this.billService.getByBillId(this.id).subscribe({
+      next: (data) => {
+        console.log('Marine details data retrieved:', data);
+        this.bill = data;
       },
-      error: error => {
-        alert(error);
+      error: (err) => {
+        console.error('Error fetching Marine details data:', err);
       }
     });
   }
 
   getSumInsured(): number {
-    return this.receipt?.bill?.policy?.sumInsured ?? 0;
+    return this.bill?.policy?.sumInsured ?? 0;
   }
 
   getFireRate(): number {
-    return (this.receipt?.bill?.fire ?? 0) / 100;
+    return (this.bill?.fire ?? 0) / 100;
   }
 
   getTotalFire(): number {
@@ -45,7 +48,7 @@ export class PrintreceiptComponent implements OnInit {
   }
 
   getRsdRate(): number {
-    return (this.receipt?.bill?.rsd ?? 0) / 100;
+    return (this.bill?.rsd ?? 0) / 100;
   }
 
   getTotalRsd(): number {
@@ -55,7 +58,7 @@ export class PrintreceiptComponent implements OnInit {
   }
 
   getTaxRate(): number {
-    return (this.receipt?.bill?.tax ?? 0) / 100;
+    return (this.bill?.tax ?? 0) / 100;
   }
 
   getTotalPremium(): number {
@@ -76,5 +79,4 @@ export class PrintreceiptComponent implements OnInit {
     const totalTax = this.getTotalTax();
     return Math.round(totalPremium + totalTax);
   }
-
-}
+  }

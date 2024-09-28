@@ -22,9 +22,6 @@ import { UpdatepolicyComponent } from './component/updatepolicy/updatepolicy.com
 import { BillComponent } from './component/bill/bill.component';
 import { CreatebillComponent } from './component/createbill/createbill.component';
 import { UpdatebillComponent } from './component/updatebill/updatebill.component';
-import { CreatereceiptComponent } from './component/createreceipt/createreceipt.component';
-import { ReceiptComponent } from './component/receipt/receipt.component';
-import { PrintreceiptComponent } from './component/printreceipt/printreceipt.component';
 import { PolicydetailsComponent } from './component/policydetails/policydetails.component';
 import { MoneyreceiptComponent } from './component/moneyreceipt/moneyreceipt.component';
 import { CreatemoneyreceiptComponent } from './component/createmoneyreceipt/createmoneyreceipt.component';
@@ -41,6 +38,7 @@ import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-
 import { UpdateMarineBillComponent } from './marinecomponent/update-marine-bill/update-marine-bill.component';
 import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marinemoney-receipt/print-marinemoney-receipt.component';
 import { CreateMarineListComponent } from './marinecomponent/create-marine-list/create-marine-list.component';
+import { BillDetailsComponent } from './component/bill-details/bill-details.component';
 
 
 @NgModule({
@@ -57,9 +55,6 @@ import { CreateMarineListComponent } from './marinecomponent/create-marine-list/
     BillComponent,
     CreatebillComponent,
     UpdatebillComponent,
-    CreatereceiptComponent,
-    ReceiptComponent,
-    PrintreceiptComponent,
     PolicydetailsComponent,
     MoneyreceiptComponent,
     CreatemoneyreceiptComponent,
@@ -75,6 +70,7 @@ import { CreateMarineListComponent } from './marinecomponent/create-marine-list/
     UpdateMarineBillComponent,
     PrintMarinemoneyReceiptComponent,
     CreateMarineListComponent,
+    BillDetailsComponent,
    
 
 

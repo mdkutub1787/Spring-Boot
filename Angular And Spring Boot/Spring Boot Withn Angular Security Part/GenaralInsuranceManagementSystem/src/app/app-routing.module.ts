@@ -11,9 +11,6 @@ import { UpdatepolicyComponent } from './component/updatepolicy/updatepolicy.com
 import { BillComponent } from './component/bill/bill.component';
 import { CreatebillComponent } from './component/createbill/createbill.component';
 import { UpdatebillComponent } from './component/updatebill/updatebill.component';
-import { ReceiptComponent } from './component/receipt/receipt.component';
-import { CreatereceiptComponent } from './component/createreceipt/createreceipt.component';
-import { PrintreceiptComponent } from './component/printreceipt/printreceipt.component';
 import { PolicydetailsComponent } from './component/policydetails/policydetails.component';
 import { MoneyreceiptComponent } from './component/moneyreceipt/moneyreceipt.component';
 import { CreatemoneyreceiptComponent } from './component/createmoneyreceipt/createmoneyreceipt.component';
@@ -28,6 +25,7 @@ import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-
 import { UpdateMarineBillComponent } from './marinecomponent/update-marine-bill/update-marine-bill.component';
 import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marinemoney-receipt/print-marinemoney-receipt.component';
 import { CreateMarineListComponent } from './marinecomponent/create-marine-list/create-marine-list.component';
+import { BillDetailsComponent } from './component/bill-details/bill-details.component';
 
 
 const routes: Routes = [
@@ -38,11 +36,9 @@ const routes: Routes = [
   { path: "updatepolicy/:id", component: UpdatepolicyComponent },
   { path: "details/:id", component: PolicydetailsComponent },
   { path: "viewbill", component: BillComponent },
+  { path: "billdetails/:id", component: BillDetailsComponent },
   { path: "createbill", component: CreatebillComponent },
   { path: "updatebill/:id", component: UpdatebillComponent},
-  { path: "viewreciept", component: ReceiptComponent},
-  { path: "createreciept", component: CreatereceiptComponent},
-  { path: "printreciept/:id", component: PrintreceiptComponent},
   { path: "viewmoneyreciept", component: MoneyreceiptComponent},
   { path: "createmoneyreciept", component: CreatemoneyreceiptComponent},
   { path: "printmoneyreciept/:id", component: PrintmoneyreceiptComponent},

@@ -10,18 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/marine")
+@RequestMapping("api/marine")
+@CrossOrigin("*")
 public class MarineInsuranceDetailsController {
 
     @Autowired
     private MarineInsuranceDetailsService marineInsuranceDetailsService;
 
+    // Save new Marine Insurance details
     @PostMapping("/save")
     public ResponseEntity<MarineInsuranceDetails> createMarineInsurance(@RequestBody MarineInsuranceDetails marineInsuranceDetails) {
         MarineInsuranceDetails createdMarineInsurance = marineInsuranceDetailsService.createOrUpdateMarineInsurance(marineInsuranceDetails);
         return new ResponseEntity<>(createdMarineInsurance, HttpStatus.CREATED);
     }
 
+    // Update existing Marine Insurance details by ID
     @PutMapping("/update/{id}")
     public ResponseEntity<MarineInsuranceDetails> updateMarineInsurance(@PathVariable long id, @RequestBody MarineInsuranceDetails marineInsuranceDetails) {
         marineInsuranceDetails.setId(id);
@@ -29,8 +32,16 @@ public class MarineInsuranceDetailsController {
         return new ResponseEntity<>(updatedMarineInsurance, HttpStatus.OK);
     }
 
+    // Get all Marine Insurance details
+    @GetMapping("/")
+    public ResponseEntity<List<MarineInsuranceDetails>> getAllMarineInsuranceDetails() {
+        List<MarineInsuranceDetails> marineInsuranceDetailsList = marineInsuranceDetailsService.findAll();
+        return new ResponseEntity<>(marineInsuranceDetailsList, HttpStatus.OK);
+    }
+
+    // Get Marine Insurance details by ID
     @GetMapping("/{id}")
-    public ResponseEntity<MarineInsuranceDetails> getMarineInsurance(@PathVariable long id) {
+    public ResponseEntity<MarineInsuranceDetails> getMarineInsuranceById(@PathVariable long id) {
         MarineInsuranceDetails marineInsuranceDetails = marineInsuranceDetailsService.findById(id);
         if (marineInsuranceDetails != null) {
             return new ResponseEntity<>(marineInsuranceDetails, HttpStatus.OK);
@@ -39,18 +50,14 @@ public class MarineInsuranceDetailsController {
         }
     }
 
-    @GetMapping("/")
-    public List<MarineInsuranceDetails> getAllPolicies() {
-        return marineInsuranceDetailsService.findAll();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMarineInsurance(@PathVariable long id) {
-        if (marineInsuranceDetailsService.findById(id) != null) {
+    // Delete Marine Insurance details by ID
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteMarineInsurance(@PathVariable long id) {
+        try {
             marineInsuranceDetailsService.deleteMarineInsuranceDetails(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Marine Insurance Details deleted successfully.", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 }

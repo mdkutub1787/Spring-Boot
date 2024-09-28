@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./ctreatemarineinsurancebill.component.css']
 })
 export class CtreatemarineinsurancebillComponent implements OnInit {
+  
   marineDetails: MarineDetailsModel[] = [];
   marineBillForm!: FormGroup;
   marinebill: MarineBillModel = new MarineBillModel();

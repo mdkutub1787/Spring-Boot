@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.List;
@@ -23,36 +22,28 @@ public class MarineInsuranceDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Date date;
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date date = new Date();
 
-    @NotBlank(message = "Bank name cannot be empty")
     @Column(nullable = false)
     private String bankName;
 
-    @NotBlank(message = "Policyholder cannot be empty")
     @Column(nullable = false)
     private String policyholder;
 
-    @NotBlank(message = "Address cannot be empty")
     @Column(nullable = false)
     private String address;
 
-    @NotBlank(message = "Voyage from cannot be empty")
     @Column(nullable = false)
     private String voyageFrom;
 
-    @NotBlank(message = "Voyage to cannot be empty")
     @Column(nullable = false)
     private String voyageTo;
 
-    @NotBlank(message = "Via cannot be empty")
     @Column(nullable = false)
     private String via;
 
-    @NotBlank(message = "Stock item cannot be empty")
     @Column(nullable = false)
     private String stockItem;
 
@@ -66,7 +57,6 @@ public class MarineInsuranceDetails {
     @Column(nullable = false)
     private double sumInsured;
 
-    @NotBlank(message = "Coverage cannot be empty")
     @Column(nullable = false)
     private String coverage;
 

@@ -44,7 +44,7 @@ public class MarineInsuranceDetailsController {
         return marineInsuranceDetailsService.findAll();
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMarineInsurance(@PathVariable long id) {
         if (marineInsuranceDetailsService.findById(id) != null) {
             marineInsuranceDetailsService.deleteMarineInsuranceDetails(id);

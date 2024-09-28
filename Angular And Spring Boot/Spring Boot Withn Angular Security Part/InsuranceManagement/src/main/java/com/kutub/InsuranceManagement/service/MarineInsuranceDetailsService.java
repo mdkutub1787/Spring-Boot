@@ -16,9 +16,12 @@ public class MarineInsuranceDetailsService {
     @Autowired
     private MarineInsuranceDetailsRepo marineInsuranceDetailsRepo;
 
+    @Autowired
+    private CurrencyService currencyService;
+
     // Create or update marine insurance details
     public MarineInsuranceDetails createOrUpdateMarineInsurance(MarineInsuranceDetails marineInsuranceDetails) {
-        double exchangeRate = getExchangeRate().doubleValue(); // Fetch current exchange rate
+        double exchangeRate = currencyService.fetchExchangeRate().doubleValue(); // Fetch current exchange rate
         marineInsuranceDetails.convertSumInsuredUsd(exchangeRate); // Convert the sum insured
         return marineInsuranceDetailsRepo.save(marineInsuranceDetails);
     }
@@ -28,7 +31,7 @@ public class MarineInsuranceDetailsService {
         return marineInsuranceDetailsRepo.findById(id).orElse(null);
     }
 
-    // Retrieve all marine insurance details
+    // Get all marine insurance details
     public List<MarineInsuranceDetails> findAll() {
         return marineInsuranceDetailsRepo.findAll();
     }
@@ -36,22 +39,5 @@ public class MarineInsuranceDetailsService {
     // Delete marine insurance details by ID
     public void deleteMarineInsuranceDetails(long id) {
         marineInsuranceDetailsRepo.deleteById(id);
-    }
-
-    // Get the current exchange rate from USD to BDT
-    public BigDecimal getExchangeRate() {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "https://api.exchangeratesapi.io/latest?base=USD&symbols=BDT";
-
-        try {
-            Map<String, Object> response = restTemplate.getForObject(url, Map.class);
-            if (response != null && response.containsKey("rates")) {
-                Map<String, BigDecimal> rates = (Map<String, BigDecimal>) response.get("rates");
-                return rates.get("BDT");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return BigDecimal.ONE; // Default to 1 if there is an issue
     }
 }

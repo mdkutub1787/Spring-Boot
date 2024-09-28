@@ -12,14 +12,14 @@
 </head>
 
 <body>
+
+
+
     <div class="container d-flex justify-content-center">
-   
 
-        <div *ngIf="errorMessage" class="alert alert-danger">
-            {{ errorMessage }}
-        </div>
 
-        <form (ngSubmit)="createOrUpdateMarineList()" #marineinsurancedetailsForm="ngForm" style="border: 2px solid #ddd; padding: 20px; border-radius: 10px; width: 100%;">
+        <form (ngSubmit)="createOrUpdateMarineList()" #marineinsurancedetailsForm="ngForm"
+            style="border: 2px solid #ddd; padding: 20px; border-radius: 10px; width: 100%;">
             <div class="col-md-10 mb-5">
                 <h3 class="text-center mb-4">
                     <i class="fas fa-plus"></i> Marine Insurance Details Form
@@ -70,6 +70,16 @@
                                 [(ngModel)]="marineinsurancedetails.stockItem" name="stockItem"
                                 placeholder="Enter stock item">
                         </div>
+
+                        <div class="mb-3">
+                            <label for="riskCovered" class="form-label">
+                                <i class="fas fa-check-square"></i> Risk Covered
+                            </label>
+                            <input type="text" class="form-control rounded-pill" id="coverage" required
+                                [(ngModel)]="marineinsurancedetails.coverage" name="coverage"
+                                placeholder="Enter coverage" readonly>
+                        </div>
+                        
                     </div>
 
                     <!-- Second Column -->
@@ -88,8 +98,8 @@
                                 <i class="fas fa-dollar-sign"></i> USD Rate
                             </label>
                             <input type="number" class="form-control rounded-pill" id="usdRate" required
-                                [(ngModel)]="marineinsurancedetails.usdRate" name="usdRate"
-                                placeholder="Enter USD rate" readonly>
+                                [(ngModel)]="marineinsurancedetails.usdRate" name="usdRate" placeholder="Enter USD rate"
+                                readonly>
                         </div>
 
                         <div class="mb-3">
@@ -127,14 +137,7 @@
                                 [(ngModel)]="marineinsurancedetails.via" name="via" placeholder="Enter via location">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="riskCovered" class="form-label">
-                                <i class="fas fa-check-square"></i> Risk Covered
-                            </label>
-                            <input type="text" class="form-control rounded-pill" id="coverage" required
-                                [(ngModel)]="marineinsurancedetails.coverage" name="coverage"
-                                placeholder="Enter coverage" readonly>
-                        </div>
+                     
                     </div>
                 </div>
 
@@ -144,6 +147,11 @@
                         <i class="fas fa-paper-plane"></i> {{ isEditMode ? 'Update' : 'Submit' }}
                     </button>
                 </div>
+
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+                
             </div>
         </form>
     </div>

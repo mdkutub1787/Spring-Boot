@@ -33,8 +33,8 @@
                 <td>{{ mr.marinebill?.marineDetails?.bankName || 'N/A' }}</td>
                 <td>{{ mr.marinebill?.marineDetails?.policyholder || 'N/A' }}</td>
                 <td>{{ mr.marinebill?.marineDetails?.address || 'N/A' }}</td>
-                <td>{{ mr.marinebill?.netPremium || 'N/A' }}</td>
-                <td>{{ mr.marinebill?.grossPremium || 'N/A' }}</td>
+                <td>{{ mr.marinebill?.netPremium || 'N/A' | currency:'TK ':'symbol':'1.2-2' }}</td>
+                <td>{{ mr.marinebill?.grossPremium || 'N/A' | currency:'TK ':'symbol':'1.2-2' }}</td>
                 
                 <td class="text-center">
                   <button class="btn btn-outline-secondary" aria-label="Edit" (click)="editMarineMoneyReceipt(mr.id)">

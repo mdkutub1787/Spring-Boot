@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-marineinsurancelist',
   templateUrl: './marineinsurancelist.component.html',
-  styleUrls: ['./marineinsurancelist.component.css'] // Corrected the 'styleUrl' to 'styleUrls'
+  styleUrls: ['./marineinsurancelist.component.css'] 
 })
 export class MarineinsurancelistComponent implements OnInit {
 
@@ -28,13 +28,12 @@ export class MarineinsurancelistComponent implements OnInit {
     });
   }
 
-// Method to delete marine insurance details and navigate quickly after deletion
 deleteMarineDetails(id: number) {
   this.marinedetailsService.deleteMarineList(id).subscribe({
     next: res => {
       console.log('Marine detail deleted successfully', res);
-      this.router.navigate(['/viewmarinelist']); // Navigate immediately after deletion
-      this.loadMarineDetails(); // Load the remaining marine details
+      this.loadMarineDetails();
+      this.router.navigate(['viewmarinelist']); 
     },
     error: error => {
       console.error('Error deleting marine detail', error);
@@ -44,22 +43,18 @@ deleteMarineDetails(id: number) {
 
 
 
-  // Method to edit marine insurance details
   editMarineInsurance(id: number) {
     this.router.navigate(['updatemarinelist', id]);
   }
 
-  // Method to view marine insurance details
   detailsMarineInsurance(id: number) {
     this.router.navigate(['marinedetails', id]);
   }
 
-  // Navigate to the create marine list page
   navigateToAddMarineList() {
     this.router.navigateByUrl('/createmarinelist');
   }
 
-  // Navigate to the create marine bill page
   navigateToAddMarineBill() {
     this.router.navigateByUrl('/createmarinebill');
   }

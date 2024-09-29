@@ -30,7 +30,7 @@
 
 /* Card styling */
 .policy-card {
-  background-color: green;
+  background-color: rgb(222, 153, 238);
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
@@ -38,14 +38,6 @@
 }
 
 .bill-card {
-  background-color: red;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.receipt-card {
   background-color: orange;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -53,8 +45,31 @@
   margin-bottom: 10px;
 }
 
+
+
 .moneyreceipt-card {
   background-color: rgb(255, 0, 221);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.marine-policy-card {
+  background-color: rgb(184, 216, 40);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.marine-bill-card {
+  background-color: rgb(98, 200, 231);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.marine-moneyreceipt-card {
+  background-color: rgb(120, 206, 87);
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
@@ -117,6 +132,12 @@
 .card img {
   width: 100%; /* Ensures the image fits inside the card */
   height: auto; /* Maintains the aspect ratio of the image */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.card img:hover {
+  transform: scale(1.05); /* Slightly enlarge image on hover */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
 }
 
 .fire-insurance-card {
@@ -135,4 +156,63 @@
 .action-button {
   width: 80%; /* Button width relative to the card */
   margin: 0 auto; /* Centers the button inside the card */
+}
+
+.action-button:hover {
+  background-color: #00b31b;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+}
+
+/* General Styles */
+.container {
+  margin-top: 40px;
+}
+
+.card-icon {
+  font-size: 48px; /* Make the icons larger */
+  color: #007bff;  /* Customize the icon color */
+}
+
+.card {
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift the card when hovered */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+.card-title {
+  font-weight: bold;
+  color: #333333;
+}
+
+.btn.action-button {
+  background-color: #28a745;
+  color: rgb(255, 255, 255);
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.btn.action-button:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Section Margin for better spacing between rows */
+.mt-5 {
+  margin-top: 3rem !important;
+}
+
+@media (max-width: 768px) {
+  .card-icon {
+    font-size: 36px; /* Smaller icon for mobile */
+  }
+  .card-title {
+    font-size: 18px; /* Adjust card title size for mobile */
+  }
 }

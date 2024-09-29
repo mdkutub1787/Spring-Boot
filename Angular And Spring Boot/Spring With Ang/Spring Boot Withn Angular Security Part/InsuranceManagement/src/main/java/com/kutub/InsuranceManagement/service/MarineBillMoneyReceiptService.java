@@ -37,10 +37,7 @@ public class MarineBillMoneyReceiptService {
         return marineBillMoneyReceiptRepo.findAll();
     }
 
-//    // Save a new marine bill money receipt
-//    public MarineBillMoneyReceipt saveMarineBillMoneyReceipt(MarineBillMoneyReceipt receipt) {
-//        return marineBillMoneyReceiptRepo.save(receipt); // Return the saved entity
-//    }
+
 
     // Find a marine bill money receipt by ID
     public MarineBillMoneyReceipt findById(long id) {

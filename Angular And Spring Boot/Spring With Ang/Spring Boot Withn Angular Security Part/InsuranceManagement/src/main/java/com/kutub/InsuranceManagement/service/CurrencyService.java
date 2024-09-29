@@ -26,6 +26,6 @@ public class CurrencyService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 1.0; // Default fallback
+        return 1.0;
     }
 }

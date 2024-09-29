@@ -33,7 +33,7 @@
                 <td>{{ marine.policyholder }}</td>
                 <td>{{ marine.address }}</td>
                 <td>{{ marine.sumInsuredUsd| currency:'$ ':'symbol' }}</td>
-                <td>{{ marine.usdRate | currency:'TK ':'symbol' }}</td>
+                <td>{{ marine.usdRate | currency:'TK':'symbol' }}</td>
                 <td>{{ marine.sumInsured | currency:'TK ':'symbol' }}</td>
                 <td class="text-center">
                     <button class="btn btn-outline-secondary" aria-label="Edit" (click)="editMarineInsurance(marine.id)">

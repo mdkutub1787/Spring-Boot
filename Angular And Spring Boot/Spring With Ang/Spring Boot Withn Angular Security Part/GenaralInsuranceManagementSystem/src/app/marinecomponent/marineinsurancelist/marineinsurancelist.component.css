@@ -15,12 +15,12 @@
     border-top: 1px solid #dee2e6;
   }
   
-  /* Table header styling */
-  .table thead th {
-    background-color: #e1e5ea;
-    font-weight: bold;
-    border-bottom: 2px solid #dee2e6;
-  }
+ /* Table header styling */
+ .table thead th {
+  background-color: #5199f0;
+  font-weight: bold;
+  border-bottom: 2px solid #dee2e6;
+}
   
   /* Table row hover effect */
   .table-striped tbody tr {

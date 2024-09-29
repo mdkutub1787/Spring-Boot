@@ -15,16 +15,17 @@
 <body>
     <div class="container">
 
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <!-- Search Input -->
+            <input class="form-control search-pill w-50" [(ngModel)]="searchTerm" (input)="searchMoneyReceipt()"
+                placeholder="Search by policyholder, bank name, or bill no">
 
-        <button type="button" class="btn btn-primary mt-3 btn-right" (click)="navigateToAddMoneyReceipt()">
-            <i class="fas fa-plus"></i>
-            Create Money Receipt
-        </button>
-
-        <div class="mt-4">
-            <input class="search-pill" [(ngModel)]="searchTerm" (input)="searchMoneyReceipt()"
-                placeholder="search by policyholder or  bank name or bill no ">
+            <!-- Button aligned to the right -->
+            <button type="button" class="btn btn-primary" (click)="navigateToAddMoneyReceipt()">
+                <i class="fas fa-plus"></i> Create Money Receipt
+            </button>
         </div>
+
 
         <table class="table table-striped mt-3">
             <thead>
@@ -57,7 +58,7 @@
                             <i class="fas fa-eye"></i> Print View
                         </button>
 
-                      
+
                         <!-- Delete button -->
                         <button class="btn btn-outline-danger ml-2" aria-label="Delete"
                             (click)="mr.id && deleteMoneyReceipt(mr.id)">

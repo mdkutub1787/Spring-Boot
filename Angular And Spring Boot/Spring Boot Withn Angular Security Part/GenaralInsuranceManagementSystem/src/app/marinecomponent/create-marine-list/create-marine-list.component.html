@@ -13,14 +13,10 @@
 
 <body>
 
-
-
-    <div class="container d-flex justify-content-center">
-
-
+    <div class="container d-flex justify-content-center my-5">
         <form (ngSubmit)="createOrUpdateMarineList()" #marineinsurancedetailsForm="ngForm"
-            style="border: 2px solid #ddd; padding: 20px; border-radius: 10px; width: 100%;">
-            <div class="col-md-10 mb-5">
+            class="border p-4 rounded mx-auto" style="width: 100%; max-width: 800px;">
+            <div class="mb-5">
                 <h3 class="text-center mb-4">
                     <i class="fas fa-plus"></i> Marine Insurance Details Form
                 </h3>
@@ -136,8 +132,6 @@
                             <input type="text" class="form-control rounded-pill" id="via" required
                                 [(ngModel)]="marineinsurancedetails.via" name="via" placeholder="Enter via location">
                         </div>
-
-                     
                     </div>
                 </div>
 

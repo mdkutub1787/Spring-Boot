@@ -29,7 +29,7 @@
 }
 
 /* Card styling */
-.policy-card {
+.fire-policy-card {
   background-color: green;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -37,7 +37,7 @@
   margin-bottom: 10px;
 }
 
-.bill-card {
+.fire-bill-card {
   background-color: red;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -45,7 +45,7 @@
   margin-bottom: 10px;
 }
 
-.receipt-card {
+.fire-moneyreceipt-card {
   background-color: orange;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -53,8 +53,22 @@
   margin-bottom: 10px;
 }
 
-.moneyreceipt-card {
+.marine-policy-card {
   background-color: rgb(255, 0, 221);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.marine-bill-card {
+  background-color: rgb(93, 156, 10);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.marine-moneyreceipt-card {
+  background-color: rgb(67, 172, 190);
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
@@ -136,3 +150,4 @@
   width: 80%; /* Button width relative to the card */
   margin: 0 auto; /* Centers the button inside the card */
 }
+

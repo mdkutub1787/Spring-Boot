@@ -13,12 +13,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <!-- Custom CSS -->
-  <style>
-    /* Make all text bold */
-    body {
-      font-weight: bold;
-    }
-  </style>
+
 </head>
 
 <body>
@@ -32,7 +27,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/home'"><i class="fas fa-home"></i> Home</a>
+          <a class="nav-link font-weight-bold"[routerLink]="'/home'"><i class="fas fa-home"></i> Home</a>
         </li>
         <!-- <ng-container *ngIf="userRole === 'Admin'"> -->
           <li class="nav-item">
@@ -52,10 +47,10 @@
           </li>
         <!-- </ng-container> -->
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/reg'"><i class="fas fa-user-plus"></i> Signup</a>
+          <a class="nav-link font-weight-bold"[routerLink]="'/reg'"><i class="fas fa-user-plus"></i> Signup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/login'"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a class="nav-link font-weight-bold" [routerLink]="'/login'"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
         <!-- Search bar -->
         <li class="nav-item">
@@ -66,10 +61,10 @@
         </li>
         <!-- User profile and logout links directly in the navbar -->
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/userprofile'"><i class="fas fa-user"></i> Profile</a>
+          <a class="nav-link font-weight-bold"[routerLink]="'/userprofile'"><i class="fas fa-user"></i> Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/logout'"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          <a class="nav-link font-weight-bold" [routerLink]="'/logout'"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </li>
       </ul>
     </div>
@@ -85,21 +80,21 @@
       </div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/home'"><i class="fas fa-home"></i> Home</a>
+          <a class="nav-link font-weight-bold"[routerLink]="'/home'"><i class="fas fa-home"></i> Home</a>
         </li>
         <!-- <ng-container *ngIf="userRole === 'Admin'"> -->
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/viewmarinelist'">
+            <a class="nav-link font-weight-bold" [routerLink]="'/viewmarinelist'">
               <i class="fas fa-money-bill fa-lg"></i> Marine Policy
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/viewmarinebill'">
+            <a class="nav-link font-weight-bold" [routerLink]="'/viewmarinebill'">
               <i class="fas fa-tag fa-lg"></i> Marine Bill
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/viewmarinemoneyreceipt'">
+            <a class="nav-link font-weight-bold"[routerLink]="'/viewmarinemoneyreceipt'">
               <i class="fas fa-receipt fa-lg"></i> Marine Money Receipt
             </a>
           </li>

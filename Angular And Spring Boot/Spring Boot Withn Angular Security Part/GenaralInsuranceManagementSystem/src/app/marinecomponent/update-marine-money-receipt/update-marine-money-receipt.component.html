@@ -71,7 +71,7 @@
                   <label for="policyholder" class="form-label">
                     <i class="fas fa-user"></i> Policy Holder
                   </label>
-                  <select id="policyholder" formControlName="policyholder" class="form-control rounded-pill shadow-sm" required>
+                  <select id="policyholder" formControlName="policyholder" class="form-control rounded-pill shadow-sm" >
                     <option value="" disabled selected>Select your policy holder</option>
                     <option *ngFor="let policy of marineDetails" [ngValue]="policy.policyholder">
                       {{ policy.policyholder }}

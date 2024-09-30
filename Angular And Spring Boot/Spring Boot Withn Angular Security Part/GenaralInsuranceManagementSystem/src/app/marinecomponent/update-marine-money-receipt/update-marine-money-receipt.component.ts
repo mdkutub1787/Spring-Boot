@@ -3,6 +3,7 @@ import { MarineMoneyReceiptModel } from '../../model/MarineMoneyReceipt.Model';
 import { MarineBillMoneyreceiptService } from '../../service/marine-bill-moneyreceipt.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MarineDetailsModel } from '../../model/MarineDetailsModel';
 
 @Component({
   selector: 'app-update-marine-money-receipt',
@@ -13,7 +14,7 @@ export class UpdateMarineMoneyReceiptComponent implements OnInit {
 
   moneyReceiptForm!: FormGroup;
   receiptId: number = 0;
-  marineDetails: any[] = [];
+  marineDetails: MarineDetailsModel[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +34,7 @@ export class UpdateMarineMoneyReceiptComponent implements OnInit {
     this.loadMarineMoneyReceipt();
   }
 
+  // Form initialization method
   private initializeForm(): void {
     this.moneyReceiptForm = this.fb.group({
       issuingOffice: ['', Validators.required],
@@ -43,41 +45,49 @@ export class UpdateMarineMoneyReceiptComponent implements OnInit {
       issuedAgainst: ['', Validators.required],
       bill: this.fb.group({
         policies: this.fb.group({
-          policyholder: ['', Validators.required],
-          bankName: ['', Validators.required]
+          policyholder: [''],
+          bankName: ['']
         })
       })
     });
   }
 
+  // Method to load Marine Money Receipt data by ID
   private loadMarineMoneyReceipt(): void {
-    this.marineMoneyReceiptService.getMarineMoneyReceiptById(this.receiptId).subscribe(receipt => {
-      this.moneyReceiptForm.patchValue(receipt);
-      // Patch the nested form group if needed
-      if (receipt.marinebill && receipt.marinebill.marineDetails) {
-        this.moneyReceiptForm.get('bill.policies')?.patchValue(receipt.marinebill.marineDetails);
+    this.marineMoneyReceiptService.getMarineMoneyReceiptById(this.receiptId).subscribe({
+      next: (receipt) => {
+        this.moneyReceiptForm.patchValue(receipt);
+
+        // Patch the nested form group if needed
+        if (receipt.marinebill && receipt.marinebill.marineDetails) {
+          this.moneyReceiptForm.get('bill.policies')?.patchValue(receipt.marinebill.marineDetails);
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching Marine Money Receipt', error);
       }
-    }, error => {
-      console.error('Error fetching Marine Money Receipt', error);
-      // You could also navigate back or show a user-friendly message here
     });
   }
 
+  // Submit handler for form submission
   onSubmit(): void {
     if (this.moneyReceiptForm.valid) {
       const updatedReceipt: MarineMoneyReceiptModel = this.moneyReceiptForm.value;
-
-      // Call the service to update Marine Money Receipt
+  
       this.marineMoneyReceiptService.updateMarineMoneyReceipt(this.receiptId, updatedReceipt)
-        .subscribe(response => {
-          console.log('Marine Money Receipt updated successfully', response);
-          this.router.navigate(['/viewmarinemoneyreceipt']);  // Redirect to the list page after success
-        }, error => {
-          console.error('Error updating Marine Money Receipt', error);
-          // You could also show an error message to the user here
+        .subscribe({
+          next: (response) => {
+            console.log('Marine Money Receipt updated successfully', response);
+            this.router.navigate(['/viewmarinemoneyreceipt']);
+          },
+          error: (error) => {
+            console.error('Error updating Marine Money Receipt', error);
+            // Optionally show an error message to the user
+          }
         });
     } else {
       console.warn('Form is invalid. Please check the fields.');
     }
   }
+  
 }

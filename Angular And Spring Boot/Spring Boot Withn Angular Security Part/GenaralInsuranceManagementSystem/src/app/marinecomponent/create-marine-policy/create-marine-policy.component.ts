@@ -4,11 +4,11 @@ import { MarinedetailsService } from '../../service/marinedetails.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-marine-list',
-  templateUrl: './create-marine-list.component.html',
-  styleUrl: './create-marine-list.component.css'
+  selector: 'app-create-marine-policy',
+  templateUrl: './create-marine-policy.component.html',
+  styleUrl: './create-marine-policy.component.css'
 })
-export class CreateMarineListComponent implements OnInit{
+export class CreateMarinePolicyComponent implements OnInit{
 
   marineinsurancedetails: MarineDetailsModel = new MarineDetailsModel();
   errorMessage: string = '';
@@ -113,4 +113,3 @@ export class CreateMarineListComponent implements OnInit{
     }
   }
 }
-

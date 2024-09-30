@@ -4,11 +4,11 @@ import { MarinedetailsService } from '../../service/marinedetails.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-marineinsurancelist',
-  templateUrl: './marineinsurancelist.component.html',
-  styleUrls: ['./marineinsurancelist.component.css'] // Corrected the 'styleUrl' to 'styleUrls'
+  selector: 'app-marine-policy',
+  templateUrl: './marine-policy.component.html',
+  styleUrl: './marine-policy.component.css'
 })
-export class MarineinsurancelistComponent implements OnInit {
+export class MarinePolicyComponent implements OnInit{
 
   marinedetails!: MarineDetailsModel[]; 
 
@@ -63,4 +63,5 @@ deleteMarineDetails(id: number) {
   navigateToAddMarineBill() {
     this.router.navigateByUrl('/createmarinebill');
   }
+
 }

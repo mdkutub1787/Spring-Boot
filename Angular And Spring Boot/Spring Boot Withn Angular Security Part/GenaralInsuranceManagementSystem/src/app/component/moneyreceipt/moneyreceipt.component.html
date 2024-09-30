@@ -76,6 +76,11 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- Conditional rendering for no data -->
+        <div *ngIf="filteredMoneyReceipts.length === 0" class="alert alert-warning text-center">
+            No Marine Money Receipts found.
+        </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->

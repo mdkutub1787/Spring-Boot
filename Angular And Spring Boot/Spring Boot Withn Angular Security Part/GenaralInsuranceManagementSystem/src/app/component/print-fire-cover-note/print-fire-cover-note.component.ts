@@ -4,12 +4,12 @@ import { MoneyreceiptService } from '../../service/moneyreceipt.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-printmoneyreceipt',
-  templateUrl: './printmoneyreceipt.component.html',
-  styleUrls: ['./printmoneyreceipt.component.css']
+  selector: 'app-print-fire-cover-note',
+  templateUrl: './print-fire-cover-note.component.html',
+  styleUrl: './print-fire-cover-note.component.css'
 })
-export class PrintmoneyreceiptComponent implements OnInit {
-  
+export class PrintFireCoverNoteComponent implements OnInit{
+
   moneyreceipt?: MoneyReceiptModel;
 
   constructor(
@@ -101,4 +101,10 @@ export class PrintmoneyreceiptComponent implements OnInit {
     const totalAmount = this.getTotalPremiumWithTax();
     return this.convertAmountToWords(totalAmount);
   }
+
+    // New Method to Get Sum Insured in Words
+    getSumInsuredInWords(): string {
+      const sumInsuredAmount = this.getSumInsured();
+      return this.convertAmountToWords(sumInsuredAmount);
+    }
 }

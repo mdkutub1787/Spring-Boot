@@ -1,0 +1,201 @@
+<!-- Print Section -->
+<div id="print-section">
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Receipt Page</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <!-- Custom CSS -->
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="contact-info text-center  mt-5">
+                <h2 class="company-name"><strong>ইসলামী ইন্স্যুরেন্স কোম্পানী বাংলাদেশ লিমিটেড</strong></h2>
+                <h2 class="company-name"><strong>Islami Insurance Com. Bangladesh Ltd</strong></h2>
+                <div class="address">
+                    <strong>DR Tower (14th floor), 65/2/2, Box Culvert Road, Purana Paltan, Dhaka-1000.</strong><br>
+                    <strong>Tel: 02478853405, Mob: 01763001787</strong><br>
+                    <strong>Fax: +88 02 55112742</strong><br>
+                    <strong>Email: infociclbd.com</strong><br>
+                    <strong>Web:www.islamiinsurance.com</strong>
+                </div>
+            </div>
+
+            <!-- Tables -->
+            <table class="table table-bordered col-mb-3">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="text-center"><strong>Fire Cover Note </strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fire Cover Note No:</strong></td>
+                        <td>{{ moneyreceipt?.issuedAgainst}}</td>
+                        <td><strong>Issu Date:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.date | date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered col-mb-3">
+                <thead>
+                  
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>The Insured Name & Address:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.bankName }}, {{ moneyreceipt?.bill?.policy?.policyholder }}, {{ moneyreceipt?.bill?.policy?.address }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p class="mb-1">Having this day proposed to effect an insurance against Fire and/or Lightning for a period of 12 (Twelve) months from <strong>{{ moneyreceipt?.bill?.policy?.periodFrom | date }}</strong></p>
+                            <p class="mb-1">to <strong>{{ moneyreceipt?.bill?.policy?.periodTo | date }}</strong> On the usual terms and conditions of the company's Fire Policy. Having paid the undernoted premium in </p>
+                            <p class="mb-1">cash/cheque/P.O/D.D./C.A, the following Property is hereby insured to the extent of <strong>({{getSumInsuredInWords() }})</strong> Only in the manner specified below:</p>
+                        </td>
+                    </tr>
+                </tbody>
+                
+                
+
+                <thead>
+                  
+                    <tr>
+                        <th colspan="2" class="text-center">Segregation of The Sum Insured</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><strong>Stock Insured:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.stockInsured }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sum Insured:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.sumInsured | currency: 'TK ': 'symbol': '1.0-0' }} 
+                            <strong>( {{getSumInsuredInWords() }} )</strong></td>
+                    </tr>
+                </tbody>
+
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-center">Situation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Interest Insured:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.interestInsured }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Coverage:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.coverage }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.location }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Construction:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.construction }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Owner:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.owner }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Used As:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.usedAs }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered col-mb-3">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="text-center">Period</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Period From:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.periodFrom | date }}</td>
+
+                        <td><strong>Period To:</strong></td>
+                        <td>{{ moneyreceipt?.bill?.policy?.periodTo | date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-center">Premium Rate</th>
+                        <th colspan="2" class="text-center">Payable Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fire Rate</strong></td>
+                        <td>{{ (moneyreceipt!.bill!.fire ) / 100 | percent }} on TK.
+                            {{moneyreceipt?.bill?.policy?.sumInsured | number:'1.2-2' }} </td>
+                        <!-- Display Fire rate and sum insured -->
+                        <td class="currency-symbol">TK</td>
+                        <td>{{ getTotalFire() | number:'1.2-2' }}</td> <!-- Total fire premium -->
+                    </tr>
+                    <tr>
+                        <td><strong>R&SD Rate</strong></td>
+                        <td>{{(moneyreceipt!.bill!.rsd ) / 100 | percent }} on TK.
+                            {{moneyreceipt?.bill?.policy?.sumInsured | number:'1.2-2' }} </td>
+                        <!-- Display RSD rate and sum insured -->
+                        <td class="currency-symbol">TK</td>
+                        <td>{{ getTotalRsd() | number:'1.2-2' }}</td> <!-- Total RSD premium -->
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Net Premium (Fire + RSD)</strong></td>
+                        <td class="currency-symbol">TK</td>
+                        <td>{{ getTotalPremium() | number:'1.2-2' }}</td> <!-- Total premium (fire + RSD) -->
+                    </tr>
+                    <tr>
+                        <td><strong>Tax on Net Premium</strong></td>
+                        <td>{{ (moneyreceipt!.bill!.tax ) / 100 | percent }} on TK. {{ getTotalPremium() |
+                            number:'1.2-2' }} </td> <!-- Display tax rate on net premium -->
+                        <td class="currency-symbol">TK</td>
+                        <td>{{ getTotalTax() | number:'1.2-2' }}</td> <!-- Total tax on premium -->
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Gross Premium with Tax</strong></td>
+                        <td class="currency-symbol"><strong>TK</strong></td>
+                        <td><strong>{{ getTotalPremiumWithTax() | number:'1.2-2' }}</strong></td>
+                        <!-- Gross premium with tax -->
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Custom Script for ngxPrint if needed -->
+    </body>
+
+    </html>
+</div>
+
+<!-- Print Button -->
+<div class="d-flex justify-content-center mt-3">
+    <button printSectionId="print-section" ngxPrint class="btn btn-primary printbtn">
+        <i class="fas fa-print"></i> Download PDF
+    </button>
+</div>

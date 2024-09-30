@@ -33,8 +33,8 @@ export class MarinebillService {
   }
 
 
-  getByMarineBillId(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}${id}`);
+  getByMarineBillId(marinebillId: number): Observable<MarineBillModel> {
+    return this.http.get<MarineBillModel>(`${this.baseUrl}${marinebillId}`);
   }
 
   getAllMaeineBillForMoneyReceipt(): Observable<MarineBillModel[]> {

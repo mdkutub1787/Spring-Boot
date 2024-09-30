@@ -2,6 +2,8 @@ package com.kutub.InsuranceManagement.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +20,9 @@ public class MarineInsuranceDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(nullable = false)
-
     @Temporal(TemporalType.DATE)
     private Date date = new Date();
 
@@ -46,9 +47,15 @@ public class MarineInsuranceDetails {
     @Column(nullable = false)
     private String stockItem;
 
+    @Positive(message = "Sum insured in USD must be positive")
+    @Column(nullable = false)
+    private double sumInsuredUsd;
+
+    @Column(nullable = false)
+    private double usdRate;
+
     @Column(nullable = false)
     private double sumInsured;
-
 
     @Column(nullable = false)
     private String coverage;
@@ -57,9 +64,8 @@ public class MarineInsuranceDetails {
     @OneToMany(mappedBy = "marineDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MarineInsuranceBill> marineInsuranceBills;
 
-
-    public void convertSumInsured(double exchangeRate) {
-        this.sumInsured = this.sumInsured * exchangeRate;
+    public void convertSumInsuredUsd(double exchangeRate) {
+        this.sumInsured = this.sumInsuredUsd * exchangeRate;
+        this.usdRate = exchangeRate;
     }
-
 }

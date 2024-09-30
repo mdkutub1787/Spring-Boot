@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MarinebillService } from '../../service/marinebill.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MarineBillModel } from '../../model/MarineBill.Model';
 import { MarineDetailsModel } from '../../model/MarineDetailsModel';
 import { MarinedetailsService } from '../../service/marinedetails.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MarinebillService } from '../../service/marinebill.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ctreatemarineinsurancebill',
@@ -11,119 +12,115 @@ import { MarinedetailsService } from '../../service/marinedetails.service';
   styleUrls: ['./ctreatemarineinsurancebill.component.css']
 })
 export class CtreatemarineinsurancebillComponent implements OnInit {
-
-  marineBill: MarineBillModel = new MarineBillModel();
-  policyholders: MarineDetailsModel[] = [];
-  selectedPolicyholder: MarineDetailsModel | undefined;
-  marineBillId: number | null = null;  // To check if it's an update or save
+  
+  marineDetails: MarineDetailsModel[] = [];
+  marineBillForm!: FormGroup;
+  marinebill: MarineBillModel = new MarineBillModel();
 
   constructor(
-    private marineBillService: MarinebillService,
+    private marinebillService: MarinebillService,
     private marineDetailsService: MarinedetailsService,
-    private route: ActivatedRoute,
-    private router: Router
+    private formBuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    // Load all policyholders for dropdown
-    this.marineDetailsService.getMarinedetails().subscribe((data: MarineDetailsModel[]) => {
-      this.policyholders = data;
-    });
+    this.initializeForm();
+    this.loadMarineDetails();
+    this.setupFormSubscriptions();
+  }
 
-    // Check if we're updating an existing bill
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.marineBillId = +id;  // Convert id to number
-        this.loadMarineBill(this.marineBillId);
+  private initializeForm(): void {
+    this.marineBillForm = this.formBuilder.group({
+      marineRate: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
+      warSrccRate: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
+      netPremium: [{ value: 0, disabled: true }],
+      tax: [15, [Validators.min(0), Validators.max(100)]],
+      stampDuty: [{ value: 0 }],
+      grossPremium: [{ value: 0, disabled: true }],
+      marineDetails: this.formBuilder.group({
+        policyholder: [null, Validators.required],
+        address: [null, Validators.required],
+        sumInsured: [null, Validators.required]
+      })
+    });
+  }
+
+
+  private setupFormSubscriptions(): void {
+    this.marineBillForm.get('marineRate')?.valueChanges.subscribe(() => this.calculatePremiums());
+    this.marineBillForm.get('warSrccRate')?.valueChanges.subscribe(() => this.calculatePremiums());
+    this.marineBillForm.get('tax')?.valueChanges.subscribe(() => this.calculatePremiums());
+
+    this.marineBillForm.get('marineDetails.policyholder')?.valueChanges.subscribe(policyholder => {
+      const selectedPolicy = this.marineDetails.find(policy => policy.policyholder === policyholder);
+      if (selectedPolicy) {
+        this.marineBillForm.get('marineDetails')?.patchValue(selectedPolicy, { emitEvent: false });
+        this.calculatePremiums();
       }
     });
   }
 
-  // Load the Marine Bill by ID (for update case)
-  loadMarineBill(id: number): void {
-    this.marineBillService.getByMarineBillId(id).subscribe((data: MarineBillModel) => {
-      this.marineBill = data;
-      this.selectedPolicyholder = this.marineBill.marineDetails;  // Set selected policyholder
-            this.selectedPolicyholder = this.policyholders.find(p => p.id === this.marineBill.marineDetails.id);
+  private loadMarineDetails(): void {
+    this.marineDetailsService.viewAllMarineListForMarineBill().subscribe({
+      next: res => {
+        this.marineDetails = res;
+      },
+      error: () => this.handleError('Error loading marine details. Please try again.')
     });
   }
 
+  private calculatePremiums(): void {
+    const sumInsured = this.getFormValue('marineDetails.sumInsured');
+    const marineRate = this.getFormValue('marineRate');
+    const warSrccRate = this.getFormValue('warSrccRate');
+    const stampDuty = this.getFormValue('stampDuty');
+    const taxRate = this.getFormValue('tax');
 
-  onPolicyholderChange(): void {
-    if (this.selectedPolicyholder) {
-      this.marineBill.marineDetails.sumInsured = this.selectedPolicyholder.sumInsured;
-      this.marineBill.marineDetails.bankName = this.selectedPolicyholder.bankName;
-      this.calculatePremiums();
-    }
-  }
-
-  calculatePremiums(): void {
-    const marineRate = this.marineBill.marineRate / 100;
-    const warSrccRate = this.marineBill.warSrccRate / 100;
-    const taxRate = 0.15;
-
-    if (this.marineBill.marineDetails.sumInsured) {
-      const netPremium = this.marineBill.marineDetails.sumInsured * (marineRate + warSrccRate);
-      this.marineBill.netPremium = this.roundToTwoDecimalPlaces(netPremium);
-
-      const tax = this.marineBill.netPremium * taxRate;
-      const grossPremium = this.marineBill.netPremium + tax + (this.marineBill.stampDuty || 0);
-      this.marineBill.grossPremium = this.roundToTwoDecimalPlaces(grossPremium);
-    }
-  }
-
-
-  // Save or Update Marine Bill based on ID
-  saveOrUpdateMarineBill(): void {
-    if (!this.selectedPolicyholder) {
-      console.log('Please select a policyholder.');
+    if (marineRate > 100 || warSrccRate > 100 || taxRate > 100) {
+      this.handleError('Rates must be less than or equal to 100%.');
       return;
     }
 
-    this.marineBill.marineDetails = this.selectedPolicyholder;  // Set the selected policyholder
+    const netPremium = (sumInsured * (marineRate + warSrccRate)) / 100;
+    const tax = (netPremium * taxRate) / 100;
+    const grossPremium = netPremium + tax + stampDuty;
 
-    if (this.marineBillId) {
-      // Update case
-      this.marineBillService.updateMarineBill(this.marineBillId, this.marineBill).subscribe(
-        (response) => {
-          console.log('Marine Bill updated successfully', response);
-          this.router.navigate(['viewmarinebill']);  // Navigate after update
-        },
-        (error) => {
-          console.error('Error updating marine bill', error);
-        }
-      );
-    } else {
-      // Save case
-      this.marineBillService.createMarineBill(this.marineBill).subscribe(
-        (response) => {
-          console.log('Marine Bill saved successfully', response);
-          this.router.navigate(['/viewmarinebill']);  // Navigate after save
-        },
-        (error) => {
-          console.error('Error saving marine bill', error);
-        }
-      );
+    this.marineBillForm.patchValue({ netPremium, grossPremium }, { emitEvent: false });
+  }
+
+  private getFormValue(controlName: string): number {
+    return Math.round((this.marineBillForm.get(controlName)?.value || 0) * 100) / 100;
+  }
+
+  createMarineBill(): void {
+    if (this.marineBillForm.invalid) {
+      this.handleError('Please fill in all required fields correctly.');
+      return;
     }
+
+    const formValues = this.marineBillForm.value;
+    this.marinebill = { ...this.marinebill, ...formValues };
+
+    const selectedPolicy = this.marineDetails.find(policy => policy.policyholder === formValues.marineDetails.policyholder);
+    if (!selectedPolicy) {
+      this.handleError('Policy not found. Please select a valid policyholder.');
+      return;
+    }
+
+    this.marinebill.marineDetails = selectedPolicy;
+
+    this.marinebillService.createMarineBill(this.marinebill).subscribe({
+      next: () => {
+        this.marineBillForm.reset();
+        this.router.navigate(['viewmarinebill']);
+      },
+      error: () => this.handleError('There was an error creating the marine bill. Please try again.')
+    });
   }
 
-  // Helper method to round to two decimal places
-  private roundToTwoDecimalPlaces(value: number): number {
-    return Math.round(value * 100) / 100;
+  private handleError(message: string): void {
+    console.error(message);
+    alert(message);
   }
-
-  get roundedSumInsured(): number {
-    return Math.round(this.marineBill.marineDetails.sumInsured);
-  }
-
-
-  get roundedNetPremium(): number {
-    return Math.round(this.marineBill.netPremium);
-  }
-
-  get roundedGrossPremium(): number {
-    return Math.round(this.marineBill.grossPremium);
-  }
-
 }

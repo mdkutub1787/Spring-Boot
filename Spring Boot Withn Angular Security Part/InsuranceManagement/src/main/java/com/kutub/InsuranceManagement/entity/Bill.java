@@ -29,7 +29,7 @@ public class Bill {
     private double netPremium;
 
     @Column( name = "tax_rate_% ",nullable = false)
-    private double tax;
+    private double tax = 15;
 
     @Column(nullable = false)
     private double grossPremium;
@@ -39,9 +39,7 @@ public class Bill {
     @JoinColumn(name = "policyId", nullable = false)  // Foreign key for Policy entity
     private Policy policy;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "bill", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Receipt> receipts;
+
 
 
 }

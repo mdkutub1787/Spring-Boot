@@ -28,9 +28,15 @@
             </div>
         </div>
 
-        <div>
-            <input class="search-pill" [(ngModel)]="searchTerm" (input)="searchPolicy()" placeholder="Search by policyholder or bank name or bill no" />
+        <div class="input-group w-50">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            <input type="text" class="form-control search-pill" [(ngModel)]="searchTerm" (input)="searchPolicy()" placeholder="Search by policyholder, bank name, or bill no">
         </div>
+        
         
 
         <!-- Table Wrapper -->

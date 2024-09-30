@@ -12,6 +12,10 @@ export class MarineMaoneyReceiptComponent implements OnInit{
 
   marinebill!: MarineMoneyReceiptModel[];
 
+  filteredMoneyReceipts: MarineMoneyReceiptModel[] = []; 
+  searchTerm: string = '';            
+  sortBy: 'policyholder' | 'id' | 'bankName' = 'policyholder'; 
+
   constructor(
     private marineBillMoneyreceiptService: MarineBillMoneyreceiptService,
     private router: Router
@@ -73,6 +77,16 @@ export class MarineMaoneyReceiptComponent implements OnInit{
   // Round a value
   round(value: number): number {
     return Math.round(value);
+  }
+
+  searchMoneyReceipt(): void {
+    const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+  
+    this.filteredMoneyReceipts = this.marinebill.filter(item =>
+      item.marinebill?.marineDetails.policyholder?.toLowerCase().includes(lowerCaseSearchTerm) ||
+      item.marinebill?.marineDetails.bankName?.toLowerCase().includes(lowerCaseSearchTerm) ||
+      item.marinebill?.marineDetails.id?.toString().includes(lowerCaseSearchTerm)
+    );
   }
 
 }

@@ -58,4 +58,6 @@ public class MarineBillMoneyReceiptController {
         MarineBillMoneyReceipt receipt = marineBillMoneyReceiptService.findById(id);
         return ResponseEntity.ok(receipt);
     }
+    
+
 }

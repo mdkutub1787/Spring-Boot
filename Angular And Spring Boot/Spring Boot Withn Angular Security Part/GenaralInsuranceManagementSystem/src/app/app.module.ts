@@ -28,8 +28,6 @@ import { CreatemoneyreceiptComponent } from './component/createmoneyreceipt/crea
 import { PrintmoneyreceiptComponent } from './component/printmoneyreceipt/printmoneyreceipt.component';
 import { TokenInterceptor } from './guard/TokenInterceptor';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MarineinsurancedetailsComponent } from './marinecomponent/marineinsurancedetails/marineinsurancedetails.component';
-import { MarineinsurancebillDetailsComponent } from './marinecomponent/marineinsurancebill-details/marineinsurancebill-details.component';
 import { MarineBillMoneyReceiptComponent } from './marinecomponent/marine-bill-money-receipt/marine-bill-money-receipt.component';
 import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-marine-bill-money-receipt/create-marine-bill-money-receipt.component';
 import { UpdateMarineBillComponent } from './marinecomponent/update-marine-bill/update-marine-bill.component';
@@ -41,6 +39,8 @@ import { CreateMarinePolicyComponent } from './marinecomponent/create-marine-pol
 import { CreateMarineBillComponent } from './marinecomponent/create-marine-bill/create-marine-bill.component';
 import { MarineBillComponent } from './marinecomponent/marine-bill/marine-bill.component';
 import { MarinePolicyComponent } from './marinecomponent/marine-policy/marine-policy.component';
+import { MarinePolicyDetailsComponent } from './marinecomponent/marine-policy-details/marine-policy-details.component';
+import { MarineBillDetailsComponent } from './marinecomponent/marine-bill-details/marine-bill-details.component';
 
 
 @NgModule({
@@ -62,9 +62,7 @@ import { MarinePolicyComponent } from './marinecomponent/marine-policy/marine-po
     CreatemoneyreceiptComponent,
     PrintmoneyreceiptComponent,
     NavbarComponent,
-    MarineinsurancedetailsComponent,
     MarinePolicyComponent,
-    MarineinsurancebillDetailsComponent,
     MarineBillMoneyReceiptComponent,
     CreateMarineBillMoneyReceiptComponent,
     UpdateMarineBillComponent,
@@ -75,6 +73,8 @@ import { MarinePolicyComponent } from './marinecomponent/marine-policy/marine-po
     CreateMarinePolicyComponent,
     CreateMarineBillComponent,
     MarineBillComponent,
+    MarinePolicyDetailsComponent,
+    MarineBillDetailsComponent,
    
    
 

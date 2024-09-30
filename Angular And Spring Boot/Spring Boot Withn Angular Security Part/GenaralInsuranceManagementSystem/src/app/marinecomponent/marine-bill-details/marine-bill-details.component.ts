@@ -4,11 +4,11 @@ import { MarinebillService } from '../../service/marinebill.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-marineinsurancebill-details',
-  templateUrl: './marineinsurancebill-details.component.html',
-  styleUrl: './marineinsurancebill-details.component.css'
+  selector: 'app-marine-bill-details',
+  templateUrl: './marine-bill-details.component.html',
+  styleUrl: './marine-bill-details.component.css'
 })
-export class MarineinsurancebillDetailsComponent implements OnInit{
+export class MarineBillDetailsComponent implements OnInit{
 
   id!: number;
   marinebill!: MarineBillModel;
@@ -84,6 +84,5 @@ export class MarineinsurancebillDetailsComponent implements OnInit{
     const stampDuty = this.getStampDuty();
     return Math.round(totalPremium + totalTax+stampDuty);
   }
-
 
 }

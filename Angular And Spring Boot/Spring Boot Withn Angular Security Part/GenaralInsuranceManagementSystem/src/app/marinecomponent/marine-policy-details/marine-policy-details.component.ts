@@ -4,12 +4,13 @@ import { MarinedetailsService } from '../../service/marinedetails.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-marineinsurancedetails',
-  templateUrl: './marineinsurancedetails.component.html',
-  styleUrl: './marineinsurancedetails.component.css'
+  selector: 'app-marine-policy-details',
+  templateUrl: './marine-policy-details.component.html',
+  styleUrl: './marine-policy-details.component.css'
 })
-export class MarineinsurancedetailsComponent implements OnInit{
-        
+export class MarinePolicyDetailsComponent implements OnInit{
+
+
   id!: number;
   marineDeatails!: MarineDetailsModel;
 
@@ -36,5 +37,4 @@ export class MarineinsurancedetailsComponent implements OnInit{
   goBack(): void {
     this.router.navigate(['viewmarinelist']);
   }
-
 }

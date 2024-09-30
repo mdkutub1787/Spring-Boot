@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MarineBillModel } from '../../model/MarineBill.Model';
 import { MarineDetailsModel } from '../../model/MarineDetailsModel';
-import { MarinedetailsService } from '../../service/marinedetails.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MarineBillModel } from '../../model/MarineBill.Model';
 import { MarinebillService } from '../../service/marinebill.service';
+import { MarinedetailsService } from '../../service/marinedetails.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-ctreatemarineinsurancebill',
-  templateUrl: './ctreatemarineinsurancebill.component.html',
-  styleUrls: ['./ctreatemarineinsurancebill.component.css']
+  selector: 'app-create-marine-bill',
+  templateUrl: './create-marine-bill.component.html',
+  styleUrl: './create-marine-bill.component.css'
 })
-export class CtreatemarineinsurancebillComponent implements OnInit {
-  
+export class CreateMarineBillComponent implements OnInit{
+
+
   marineDetails: MarineDetailsModel[] = [];
   marineBillForm!: FormGroup;
   marinebill: MarineBillModel = new MarineBillModel();

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MarineBillModel } from '../../model/MarineBill.Model';
+import { MarinedetailsService } from '../../service/marinedetails.service';
 import { MarinebillService } from '../../service/marinebill.service';
 import { Router } from '@angular/router';
-import { MarinedetailsService } from '../../service/marinedetails.service';
 
 @Component({
-  selector: 'app-marineinsurancebill',
-  templateUrl: './marineinsurancebill.component.html',
-  styleUrl: './marineinsurancebill.component.css'
+  selector: 'app-marine-bill',
+  templateUrl: './marine-bill.component.html',
+  styleUrl: './marine-bill.component.css'
 })
-export class MarineinsurancebillComponent implements OnInit {
+export class MarineBillComponent implements OnInit{
 
   policies: any;
   marinebills: MarineBillModel[] = [];

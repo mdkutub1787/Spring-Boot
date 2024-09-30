@@ -16,8 +16,6 @@ import { MoneyreceiptComponent } from './component/moneyreceipt/moneyreceipt.com
 import { CreatemoneyreceiptComponent } from './component/createmoneyreceipt/createmoneyreceipt.component';
 import { PrintmoneyreceiptComponent } from './component/printmoneyreceipt/printmoneyreceipt.component';
 import { MarineinsurancedetailsComponent } from './marinecomponent/marineinsurancedetails/marineinsurancedetails.component';
-import { MarineinsurancebillComponent } from './marinecomponent/marineinsurancebill/marineinsurancebill.component';
-import { CtreatemarineinsurancebillComponent } from './marinecomponent/ctreatemarineinsurancebill/ctreatemarineinsurancebill.component';
 import { MarineinsurancebillDetailsComponent } from './marinecomponent/marineinsurancebill-details/marineinsurancebill-details.component';
 import { MarineBillMoneyReceiptComponent } from './marinecomponent/marine-bill-money-receipt/marine-bill-money-receipt.component';
 import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-marine-bill-money-receipt/create-marine-bill-money-receipt.component';
@@ -26,6 +24,8 @@ import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marine
 import { BillDetailsComponent } from './component/bill-details/bill-details.component';
 import { UpdateMarineMoneyReceiptComponent } from './marinecomponent/update-marine-money-receipt/update-marine-money-receipt.component';
 import { MarinePolicyComponent } from './marinecomponent/marine-policy/marine-policy.component';
+import { MarineBillComponent } from './marinecomponent/marine-bill/marine-bill.component';
+import { CreateMarineBillComponent } from './marinecomponent/create-marine-bill/create-marine-bill.component';
 
 
 const routes: Routes = [
@@ -46,8 +46,8 @@ const routes: Routes = [
   { path: "marinedetails/:id", component: MarineinsurancedetailsComponent },
   { path: 'createmarinelist', component: CreatepolicyComponent },
   { path: 'updatemarinelist/:id', component: CreatepolicyComponent },
-  { path: "viewmarinebill", component: MarineinsurancebillComponent},
-  { path: 'createmarinebill', component: CtreatemarineinsurancebillComponent },
+  { path: "viewmarinebill", component: MarineBillComponent},
+  { path: 'createmarinebill', component: CreateMarineBillComponent },
   { path: 'updatemarinebill/:id', component: UpdateMarineBillComponent },
   { path: "marinebilldetails/:id", component: MarineinsurancebillDetailsComponent },
   { path: "viewmarinemoneyreceipt", component: MarineBillMoneyReceiptComponent },

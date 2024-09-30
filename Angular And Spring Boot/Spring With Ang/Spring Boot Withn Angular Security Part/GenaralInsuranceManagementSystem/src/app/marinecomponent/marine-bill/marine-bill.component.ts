@@ -13,7 +13,7 @@ export class MarineBillComponent implements OnInit{
 
   policies: any;
   marinebills: MarineBillModel[] = [];
-  filteredBills: MarineBillModel[] = [];
+  filteredmarinebill: MarineBillModel[] = [];
   searchTerm: string = '';
   sortBy: 'policyholder' | 'id' | 'bankName' = 'policyholder';
 
@@ -39,7 +39,7 @@ export class MarineBillComponent implements OnInit{
     this.MarinebillService.getMarineBill().subscribe({
       next: (data: MarineBillModel[]) => {
         this.marinebills = data;
-        this.filteredBills = data; // Initialize filteredBills
+        this.filteredmarinebill = data; // Initialize filteredBills
       },
       error: (error) => console.error('Error fetching marinebill:', error)
     });
@@ -104,4 +104,15 @@ export class MarineBillComponent implements OnInit{
       this.getStampDutyAmount(marinebill)
     );
   }
+
+
+    // Filter policies based on search term
+    searchMarineBill() {
+      const lowerCaseSearchTerm = this.searchTerm.trim().toLowerCase(); 
+      this.filteredmarinebill = this.marinebills.filter(item =>
+        item.marineDetails.policyholder?.toLowerCase().includes(lowerCaseSearchTerm) || 
+        item.marineDetails.bankName?.toLowerCase().includes(lowerCaseSearchTerm) ||      
+        item.marineDetails.id?.toString().includes(lowerCaseSearchTerm)
+      );
+    }
 }

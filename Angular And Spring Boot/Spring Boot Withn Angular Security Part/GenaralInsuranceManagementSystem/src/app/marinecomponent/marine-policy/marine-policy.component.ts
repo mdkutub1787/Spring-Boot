@@ -47,7 +47,7 @@ export class MarinePolicyComponent implements OnInit {
   }
 
   // Method to edit marine insurance details
-  editMarineInsurance(id: number) {
+  editMarinePolicy(id: number) {
     this.router.navigate(['updatemarinelist', id]);
   }
 

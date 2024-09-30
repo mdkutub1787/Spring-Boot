@@ -52,16 +52,20 @@
 
 
                     <td class="text-center">
-                        <!-- Print View button -->
-                        <!-- Delete button -->
+
+                        <button class="btn btn-outline-secondary" aria-label="Edit" >
+                            <i class="fas fa-edit"></i>
+                        </button>
+
                         <button class="btn btn-outline-danger ml-2" aria-label="Delete"
                             (click)="mr.id && deleteMoneyReceipt(mr.id)">
                             <i class="fas fa-trash-alt"></i>
                         </button>
 
-                        <button class="btn btn-outline-primary" aria-label="Print View"  (click)="mr.id && viewMoneyReceipt(mr.id)">
-                            <i class="fas fa-print"></i> Print View 
-                          </button>
+                        <button class="btn btn-outline-primary" aria-label="Print View"
+                            (click)="mr.id && viewMoneyReceipt(mr.id)">
+                            <i class="fas fa-print"></i> Print View
+                        </button>
                     </td>
 
                 </tr>

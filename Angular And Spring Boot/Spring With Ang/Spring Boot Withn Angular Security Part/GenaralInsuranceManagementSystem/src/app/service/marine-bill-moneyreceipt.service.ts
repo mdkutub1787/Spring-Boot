@@ -27,11 +27,12 @@ export class MarineBillMoneyreceiptService {
     return this.http.post(this.baseUrl + "save", marinebill);
   }
 
-  // Update an existing MarineMoneyReceipt by ID
-  updateMarineMoneyReceipt(id: number, marinebill: MarineMoneyReceiptModel): Observable<any> {
-    return this.http.put(`${this.baseUrl}update/${id}`, marinebill);
-  }
 
+  // Method to update Marine Money Receipt
+  updateMarineMoneyReceipt(id: number, marineMoneyReceipt: MarineMoneyReceiptModel): Observable<any> {
+    return this.http.put(this.baseUrl + "update/" + id, marineMoneyReceipt);
+  }
+  
   // Delete a MarineMoneyReceipt by ID
   deleteMarineMoneyReceipt(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}delete/${id}`);

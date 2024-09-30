@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MarineBillModel } from '../../model/MarineBill.Model';
 import { MarineDetailsModel } from '../../model/MarineDetailsModel';
+import { MarineBillModel } from '../../model/MarineBill.Model';
 import { MarineMoneyReceiptModel } from '../../model/MarineMoneyReceipt.Model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MarineBillMoneyreceiptService } from '../../service/marine-bill-moneyreceipt.service';
 import { MarinebillService } from '../../service/marinebill.service';
 import { MarinedetailsService } from '../../service/marinedetails.service';
 import { Router } from '@angular/router';
-import { MarineBillMoneyreceiptService } from '../../service/marine-bill-moneyreceipt.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-create-marine-bill-money-receipt',
-  templateUrl: './create-marine-bill-money-receipt.component.html',
-  styleUrls: ['./create-marine-bill-money-receipt.component.css']
+  selector: 'app-create-marine-maoney-receipt',
+  templateUrl: './create-marine-maoney-receipt.component.html',
+  styleUrl: './create-marine-maoney-receipt.component.css'
 })
-export class CreateMarineBillMoneyReceiptComponent implements OnInit {
+export class CreateMarineMaoneyReceiptComponent implements OnInit{
+
   policies: MarineDetailsModel[] = [];
   bills: MarineBillModel[] = [];
   moneyReceipt: MarineMoneyReceiptModel = new MarineMoneyReceiptModel();

@@ -28,8 +28,6 @@ import { CreatemoneyreceiptComponent } from './component/createmoneyreceipt/crea
 import { PrintmoneyreceiptComponent } from './component/printmoneyreceipt/printmoneyreceipt.component';
 import { TokenInterceptor } from './guard/TokenInterceptor';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MarineBillMoneyReceiptComponent } from './marinecomponent/marine-bill-money-receipt/marine-bill-money-receipt.component';
-import { CreateMarineBillMoneyReceiptComponent } from './marinecomponent/create-marine-bill-money-receipt/create-marine-bill-money-receipt.component';
 import { UpdateMarineBillComponent } from './marinecomponent/update-marine-bill/update-marine-bill.component';
 import { PrintMarinemoneyReceiptComponent } from './marinecomponent/print-marinemoney-receipt/print-marinemoney-receipt.component';
 import { BillDetailsComponent } from './component/bill-details/bill-details.component';
@@ -41,6 +39,8 @@ import { MarineBillComponent } from './marinecomponent/marine-bill/marine-bill.c
 import { MarinePolicyComponent } from './marinecomponent/marine-policy/marine-policy.component';
 import { MarinePolicyDetailsComponent } from './marinecomponent/marine-policy-details/marine-policy-details.component';
 import { MarineBillDetailsComponent } from './marinecomponent/marine-bill-details/marine-bill-details.component';
+import { MarineMaoneyReceiptComponent } from './marinecomponent/marine-maoney-receipt/marine-maoney-receipt.component';
+import { CreateMarineMaoneyReceiptComponent } from './marinecomponent/create-marine-maoney-receipt/create-marine-maoney-receipt.component';
 
 
 @NgModule({
@@ -63,8 +63,6 @@ import { MarineBillDetailsComponent } from './marinecomponent/marine-bill-detail
     PrintmoneyreceiptComponent,
     NavbarComponent,
     MarinePolicyComponent,
-    MarineBillMoneyReceiptComponent,
-    CreateMarineBillMoneyReceiptComponent,
     UpdateMarineBillComponent,
     PrintMarinemoneyReceiptComponent,
     BillDetailsComponent,
@@ -75,6 +73,8 @@ import { MarineBillDetailsComponent } from './marinecomponent/marine-bill-detail
     MarineBillComponent,
     MarinePolicyDetailsComponent,
     MarineBillDetailsComponent,
+    MarineMaoneyReceiptComponent,
+    CreateMarineMaoneyReceiptComponent,
    
    
 

@@ -4,11 +4,11 @@ import { MarineBillMoneyreceiptService } from '../../service/marine-bill-moneyre
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-marine-bill-money-receipt',
-  templateUrl: './marine-bill-money-receipt.component.html',
-  styleUrls: ['./marine-bill-money-receipt.component.css'] // Fixed 'styleUrl' to 'styleUrls'
+  selector: 'app-marine-maoney-receipt',
+  templateUrl: './marine-maoney-receipt.component.html',
+  styleUrl: './marine-maoney-receipt.component.css'
 })
-export class MarineBillMoneyReceiptComponent implements OnInit {
+export class MarineMaoneyReceiptComponent implements OnInit{
 
   marinebill!: MarineMoneyReceiptModel[];
 

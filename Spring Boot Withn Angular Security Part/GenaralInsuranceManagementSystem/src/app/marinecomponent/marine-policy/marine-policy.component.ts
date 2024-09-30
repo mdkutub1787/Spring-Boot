@@ -6,11 +6,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-marine-policy',
   templateUrl: './marine-policy.component.html',
-  styleUrl: './marine-policy.component.css'
+  styleUrls: ['./marine-policy.component.css']
 })
-export class MarinePolicyComponent implements OnInit{
+export class MarinePolicyComponent implements OnInit {
 
   marinedetails!: MarineDetailsModel[]; 
+  searchmarinedetails!: MarineDetailsModel[]; 
+  searchTerm: string = '';            
+  sortBy: 'policyholder' | 'id' | 'bankName' = 'policyholder'; 
 
   constructor(
     private marinedetailsService: MarinedetailsService,
@@ -24,28 +27,27 @@ export class MarinePolicyComponent implements OnInit{
   loadMarineDetails() {
     this.marinedetailsService.getMarinedetails().subscribe((data: MarineDetailsModel[]) => {
       this.marinedetails = data;
-      this.marinedetails = [...this.marinedetails]; 
+      this.searchmarinedetails = [...data];  // Initialize search list with all marine details
     });
   }
 
-// Method to delete marine insurance details and navigate quickly after deletion
-deleteMarineDetails(id: number) {
-  this.marinedetailsService.deleteMarineList(id).subscribe({
-    next: res => {
-      console.log('Marine detail deleted successfully', res);
-      this.router.navigate(['/viewmarinelist']); // Navigate immediately after deletion
-      this.loadMarineDetails(); // Load the remaining marine details
-    },
-    error: error => {
-      console.error('Error deleting marine detail', error);
-    }
-  });
-}
-
-
+  // Method to delete marine insurance details and update UI efficiently
+  deleteMarineDetails(id: number) {
+    this.marinedetailsService.deleteMarineList(id).subscribe({
+      next: res => {
+        console.log('Marine detail deleted successfully', res);
+        // Remove the deleted item from the list to avoid reloading all data
+        this.marinedetails = this.marinedetails.filter(detail => detail.id !== id);
+        this.searchMarinePolicy(); // Update search results after deletion
+      },
+      error: error => {
+        console.error('Error deleting marine detail', error);
+      }
+    });
+  }
 
   // Method to edit marine insurance details
-  editMarineInsurance(id: number) {
+  editMarinePolicy(id: number) {
     this.router.navigate(['updatemarinelist', id]);
   }
 
@@ -55,7 +57,7 @@ deleteMarineDetails(id: number) {
   }
 
   // Navigate to the create marine list page
-  navigateToAddMarineList() {
+  navigateToAddMarinePolicy() {
     this.router.navigateByUrl('/createmarinelist');
   }
 
@@ -64,4 +66,14 @@ deleteMarineDetails(id: number) {
     this.router.navigateByUrl('/createmarinebill');
   }
 
+  // Filter policies based on search term
+  searchMarinePolicy() {
+    const lowerCaseSearchTerm = this.searchTerm.trim().toLowerCase(); 
+
+    this.searchmarinedetails = this.marinedetails.filter(item =>
+      item.policyholder?.toLowerCase().includes(lowerCaseSearchTerm) || 
+      item.bankName?.toLowerCase().includes(lowerCaseSearchTerm) ||      
+      item.id?.toString().includes(lowerCaseSearchTerm)
+    );
+  }
 }

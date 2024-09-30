@@ -37,4 +37,15 @@ export class MarineBillMoneyreceiptService {
   deleteMarineMoneyReceipt(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}delete/${id}`);
   }
+
+    // Filter receipts by policyholder, bankName, or id on the client side
+    searchByPolicyHolderAndBankNameAndId(receipts: MarineMoneyReceiptModel[], searchTerm: string): MarineMoneyReceiptModel[] {
+      const lowerCaseSearchTerm = searchTerm.toLowerCase(); 
+  
+      return receipts.filter(item =>
+        (item.marinebill?.marineDetails.policyholder?.toLowerCase().includes(lowerCaseSearchTerm) ||   
+         item.marinebill?.marineDetails.bankName?.toLowerCase().includes(lowerCaseSearchTerm) || 
+         item.marinebill?.marineDetails.id?.toString().includes(lowerCaseSearchTerm))  
+      );
+    }
 }

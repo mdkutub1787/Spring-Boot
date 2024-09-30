@@ -10,6 +10,7 @@ export class MarineBillModel {
     "tax"!: number;
     "stampDuty"!: number;
     "grossPremium"!: number;
+    
     marineDetails!: MarineDetailsModel ;
 
    

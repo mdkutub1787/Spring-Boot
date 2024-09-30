@@ -57,7 +57,7 @@ export class MarinePolicyComponent implements OnInit {
   }
 
   // Navigate to the create marine list page
-  navigateToAddMarineList() {
+  navigateToAddMarinePolicy() {
     this.router.navigateByUrl('/createmarinelist');
   }
 

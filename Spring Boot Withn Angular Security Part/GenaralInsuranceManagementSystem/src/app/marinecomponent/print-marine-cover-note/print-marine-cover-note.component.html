@@ -50,12 +50,12 @@
             <table class="table table-bordered col-mb-3">
                 <thead>
                     <tr>
-                        <th colspan="2" class="text-center">Insured Details</th>
+                        <th colspan="2" class="text-center"><strong>The Insured Name & Address:</strong></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>The Insured Name & Address:</strong></td>
+                      
                         <td>{{ moneyreceipt?.marinebill?.marineDetails?.bankName }} ,
                             {{ moneyreceipt?.marinebill?.marineDetails?.policyholder }} ,
                             {{ moneyreceipt?.marinebill?.marineDetails?.address }}
@@ -92,6 +92,11 @@
                         <td><strong>Stock Item:</strong></td>
                         <td>{{ moneyreceipt?.marinebill?.marineDetails?.stockItem }}</td>
                     </tr>
+                    <tr>
+                        <td><strong>Stock Item:</strong></td>
+                        <p>
+                            Per any steamer or power-vessel as per Institute Classification Clause and/or conveyance by road and/or rail and/or approved aircraft and/or parcel post to be declared. By TRUCK</p>
+                    </tr>
 
 
                     <tr>
@@ -112,7 +117,10 @@
                         </td>
                     </tr>
                     
-
+                    <tr>
+                        <td><strong>Coverage:</strong></td>
+                        <td colspan="5">{{ moneyreceipt?.marinebill?.marineDetails?.coverage }}</td>
+                    </tr>
 
                 </tbody>
 
@@ -137,18 +145,7 @@
                         <td>{{ moneyreceipt?.marinebill?.marineDetails?.via }} , Bangladesh</td>
                     </tr>
                 </tbody>
-                <thead>
-                   
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <td><strong>Coverage:</strong></td>
-                        <td colspan="5">{{ moneyreceipt?.marinebill?.marineDetails?.coverage }}</td>
-                    </tr>
-
-
-                </tbody>
+            
             </table>
 
             <table class="table table-bordered">

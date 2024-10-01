@@ -32,15 +32,17 @@
             <table class="table table-bordered col-mb-3">
                 <thead>
                     <tr>
-                        <th colspan="4" class="text-center">Marine  Insurance Bill Information</th>
+                        <th colspan="6" class="text-center fire-cover-heading"><strong>Marine Cover Note</strong></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td><strong>Marine Cover Note No:</strong></td>
+                        <td>{{ moneyreceipt?.issuedAgainst}}</td>
                         <td><strong>Marine Bill No:</strong></td>
                         <td>{{ moneyreceipt?.marinebill?.marineDetails?.id }}</td>
                         <td><strong>Issu Date:</strong></td>
-                        <td>{{  moneyreceipt?.marinebill?.marineDetails?.date}}</td>
+                        <td>{{ moneyreceipt?.date}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -53,17 +55,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Bank & Branch Name:</strong></td>
-                        <td>{{  moneyreceipt?.marinebill?.marineDetails?.bankName }}</td>
+                        <td><strong>The Insured Name & Address:</strong></td>
+                        <td>{{ moneyreceipt?.marinebill?.marineDetails?.bankName }} ,
+                            {{ moneyreceipt?.marinebill?.marineDetails?.policyholder }}
+                            {{ moneyreceipt?.marinebill?.marineDetails?.address }}
+                        </td>
                     </tr>
-                    <tr>
-                        <td><strong>Policy Holder Name :</strong></td>
-                        <td>{{ moneyreceipt?.marinebill?.marineDetails?.policyholder }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Address:</strong></td>
-                        <td>{{  moneyreceipt?.marinebill?.marineDetails?.address }}</td>
-                    </tr>
+               
                 </tbody>
 
             </table>
@@ -78,16 +76,19 @@
 
                     <tr>
                         <td><strong>Stock Item:</strong></td>
-                        <td>{{  moneyreceipt?.marinebill?.marineDetails?.stockItem }}</td>
+                        <td>{{ moneyreceipt?.marinebill?.marineDetails?.stockItem }}</td>
                     </tr>
 
 
                     <tr>
                         <td><strong>Sum Insured:</strong></td>
                         <td><strong>
-                                {{  moneyreceipt?.marinebill?.marineDetails?.sumInsuredUsd | currency:'USD $ ':'symbol':'1.2-2' }} ,
-                                USD Rate {{  moneyreceipt?.marinebill?.marineDetails?.usdRate | currency:'TK ':'symbol':'1.2-2' }} ,
-                                (BDT) {{  moneyreceipt?.marinebill?.marineDetails?.sumInsured | currency:'TK ':'symbol':'1.2-2' }}
+                                {{ moneyreceipt?.marinebill?.marineDetails?.sumInsuredUsd | currency:'USD $
+                                ':'symbol':'1.2-2' }} ,
+                                USD Rate {{ moneyreceipt?.marinebill?.marineDetails?.usdRate | currency:'TK
+                                ':'symbol':'1.2-2' }} ,
+                                (BDT) {{ moneyreceipt?.marinebill?.marineDetails?.sumInsured | currency:'TK
+                                ':'symbol':'1.2-2' }}
                             </strong>
                         </td>
                     </tr>
@@ -106,10 +107,10 @@
                 <tbody>
                     <tr>
                         <td><strong>Voyage From:</strong></td>
-                        <td>Any Port of {{  moneyreceipt?.marinebill?.marineDetails?.voyageFrom }}</td>
+                        <td>Any Port of {{ moneyreceipt?.marinebill?.marineDetails?.voyageFrom }}</td>
 
                         <td><strong>Voyage To:</strong></td>
-                        <td>{{  moneyreceipt?.marinebill?.marineDetails?.voyageTo }}</td>
+                        <td>{{ moneyreceipt?.marinebill?.marineDetails?.voyageTo }}</td>
 
 
                         <td><strong>Via:</strong></td>
@@ -142,14 +143,16 @@
                 <tbody>
                     <tr>
                         <td><strong>Marine Rate</strong></td>
-                        <td>{{ ( moneyreceipt!.marinebill!.marineRate ) / 100 | percent }}{{  moneyreceipt?.marinebill?.marineDetails?.sumInsured
+                        <td>{{ ( moneyreceipt!.marinebill!.marineRate ) / 100 | percent }}{{
+                            moneyreceipt?.marinebill?.marineDetails?.sumInsured
                             | number:'1.2-2' }}</td> <!-- Ensures 2 decimal places -->
                         <td class="currency-symbol">TK</td>
                         <td>{{ getTotalMarine() | number:'1.2-2' }}</td>
                     </tr>
                     <tr>
                         <td><strong>WarSrcc Rate </strong></td>
-                        <td>{{ (moneyreceipt!.marinebill!.warSrccRate ) / 100 | percent }}{{ moneyreceipt?.marinebill?.marineDetails?.sumInsured
+                        <td>{{ (moneyreceipt!.marinebill!.warSrccRate ) / 100 | percent }}{{
+                            moneyreceipt?.marinebill?.marineDetails?.sumInsured
                             | number:'1.2-2' }}</td> <!-- Ensures 2 decimal places -->
                         <td class="currency-symbol">TK</td>
                         <td>{{ getTotalwarSrcc() | number:'1.2-2' }}</td>
@@ -161,7 +164,8 @@
                     </tr>
                     <tr>
                         <td><strong>Tax on Net Premium</strong></td>
-                        <td>{{ (moneyreceipt!.marinebill!.tax ) / 100 | percent }}{{ getTotalPremium() | number:'1.2-2' }}</td>
+                        <td>{{ (moneyreceipt!.marinebill!.tax ) / 100 | percent }}{{ getTotalPremium() | number:'1.2-2'
+                            }}</td>
                         <td class="currency-symbol">TK</td>
                         <td>{{ getTotalTax() | number:'1.2-2' }}
                         </td>

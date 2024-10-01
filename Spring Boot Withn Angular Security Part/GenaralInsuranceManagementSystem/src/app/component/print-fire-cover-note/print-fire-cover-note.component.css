@@ -77,5 +77,67 @@ p {
     border-bottom: 2px solid #000; /* Optional: Bottom border for emphasis */
 }
 
+.container {
+    padding: 15px;
+}
 
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+/* Print media styles */
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 12px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .company-name, .address {
+        font-size: 14px;
+    }
+
+    .table, th, td {
+        border-collapse: collapse;
+        font-size: 12px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    /* Adjust font and margins */
+    p {
+        margin: 2px 0;
+        font-size: 12px;
+    }
+
+    /* Hide elements not needed for print */
+    .printbtn {
+        display: none;
+    }
+
+    /* Ensure proper page breaks */
+    .container, .table {
+        page-break-inside: avoid;
+    }
+}
+
+/* Fine-tune some elements for print */
+.table th, .table td {
+    padding: 5px;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
 

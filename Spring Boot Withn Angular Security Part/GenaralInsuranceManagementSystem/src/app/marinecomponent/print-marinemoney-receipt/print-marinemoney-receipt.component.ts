@@ -101,5 +101,11 @@ export class PrintMarinemoneyReceiptComponent implements OnInit{
     const totalAmount = this.getTotalPremiumWithTax();
     return this.convertAmountToWords(totalAmount);
   }
+
+   // New Method to Get Sum Insured in Words
+   getSumInsuredInWords(): string {
+    const sumInsuredAmount = this.getSumInsured();
+    return this.convertAmountToWords(sumInsuredAmount);
+  }
 }
 

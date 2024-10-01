@@ -1,9 +1,48 @@
-.currency-symbol {
-    width: 50px;  /* Adjust width as needed */
-    text-align: center;
-    font-size: 0.9em; /* Optional: Adjust font size if needed */
-  }
-  .company-name {
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px; /* Adjust font size for compactness */
+}
+
+.container {
+    padding: 15px;
+}
+
+p {
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+/* Compact Layout Adjustments */
+.container {
+    padding: 10px; /* Reduce container padding */
+}
+
+.contact-info h2, .address {
+    margin: 5px 0; /* Reduce margin */
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 5px; /* Reduce margin between tables */
+    background-color: transparent;
+}
+
+/* Heading Styles */
+.fire-cover-heading {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px; /* Reduced padding */
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #000;
+}
+
+/* Company and Address Styles */
+.company-name {
     color: #074485;
     font-weight: bold;
 }
@@ -17,77 +56,14 @@
     color: #074485;
 }
 
-@media print {
-    p {
-        margin-bottom: 1rem; /* Adjust as needed */
-        page-break-inside: avoid; /* Prevents breaking inside paragraphs */
-    }
-
-   
+/* Currency Symbol */
+.currency-symbol {
+    width: 50px;  /* Adjust width */
+    text-align: center;
+    font-size: 0.9em;
 }
 
-p {
-    max-width: 1000px; /* Set a maximum width for uniformity */
-    margin: 0 auto; /* Center align the paragraphs */
-    margin-bottom: 1rem; /* Add spacing below each paragraph */
-    line-height: 1.5; /* Optional: Adjust line height for readability */
-    text-align: justify; /* Optional: Justify text for a cleaner look */
-}
-
-@media print {
-    p {
-        page-break-inside: avoid; /* Prevent breaking inside paragraphs when printing */
-    }
-}
-
-.fire-cover-heading {
-    font-size: 24px; /* Adjust font size as needed */
-    font-weight: bold; /* Ensure the text is bold */
-    padding: 15px; /* Add some padding for better spacing */
-    background-color: #f2f2f2; /* Optional: Light background for contrast */
-    border-bottom: 2px solid #000; /* Optional: Bottom border for emphasis */
-}
-
-  /* Custom styles for compact layout */
-  body {
-    margin: 0;
-    padding: 0;
-    font-size: 14px; /* Adjust font size for compactness */
-}
-.container {
-    padding: 10px; /* Reduce container padding */
-}
-.contact-info h2 {
-    margin: 5px 0; /* Reduce margins for headings */
-}
-.address {
-    margin: 5px 0; /* Reduce margin for address */
-}
-.table {
-    margin-bottom: 5px; /* Reduce margin between tables */
-}
-.mb-1 {
-    margin-bottom: 2px; /* Reduce bottom margin for paragraphs */
-}
-.fire-cover-heading {
-    font-size: 24px; /* Ensure large heading */
-    font-weight: bold;
-    padding: 10px; /* Reduce padding */
-    background-color: #f2f2f2; /* Optional: Light background for contrast */
-    border-bottom: 2px solid #000; /* Optional: Bottom border for emphasis */
-}
-
-.container {
-    padding: 15px;
-}
-
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-}
-
-/* Print media styles */
+/* Print-Specific Styles */
 @media print {
     body {
         -webkit-print-color-adjust: exact;
@@ -108,36 +84,27 @@ p {
     .table, th, td {
         border-collapse: collapse;
         font-size: 12px;
+        padding: 5px;
     }
 
-    .row {
-        display: flex;
-        flex-wrap: nowrap;
-    }
-
-    /* Adjust font and margins */
     p {
         margin: 2px 0;
         font-size: 12px;
+        page-break-inside: avoid; /* Prevents breaking inside paragraphs */
     }
 
-    /* Hide elements not needed for print */
+    /* Hide print button */
     .printbtn {
         display: none;
     }
 
-    /* Ensure proper page breaks */
+    /* Page-break avoidance */
     .container, .table {
         page-break-inside: avoid;
     }
 }
 
-/* Fine-tune some elements for print */
-.table th, .table td {
-    padding: 5px;
-}
-
+/* Fine-tuning Elements */
 .mb-1 {
     margin-bottom: 0.5rem;
 }
-

@@ -57,11 +57,25 @@
                     <tr>
                         <td><strong>The Insured Name & Address:</strong></td>
                         <td>{{ moneyreceipt?.marinebill?.marineDetails?.bankName }} ,
-                            {{ moneyreceipt?.marinebill?.marineDetails?.policyholder }}
+                            {{ moneyreceipt?.marinebill?.marineDetails?.policyholder }} ,
                             {{ moneyreceipt?.marinebill?.marineDetails?.address }}
                         </td>
                     </tr>
-               
+                    <tr>
+                        <td colspan="2">
+                            <p class="mb-1">
+                                Having this day proposed to effect an insurance against Fire and/or Lightning for a
+                                period of 12 (Twelve) months from
+                                <strong>{{ moneyreceipt?.marinebill?.marineDetails?.voyageFrom  }}</strong> to
+                                <strong>{{ moneyreceipt?.marinebill?.marineDetails?.voyageTo  }}</strong>  on 
+                                <strong>{{ moneyreceipt?.marinebill?.marineDetails?.via  }} , Bangladesh</strong>
+                                on the usual terms and conditions of the company's Fire Policy. Having paid the
+                                undernoted premium in cash/cheque/P.O/D.D./C.A,
+                                the following Property is hereby insured to the extent of
+                                <strong>({{ getSumInsuredInWords() }})</strong> Only in the manner specified below:
+                            </p>
+                        </td>
+                    </tr>
                 </tbody>
 
             </table>
@@ -82,16 +96,22 @@
 
                     <tr>
                         <td><strong>Sum Insured:</strong></td>
-                        <td><strong>
-                                {{ moneyreceipt?.marinebill?.marineDetails?.sumInsuredUsd | currency:'USD $
-                                ':'symbol':'1.2-2' }} ,
-                                USD Rate {{ moneyreceipt?.marinebill?.marineDetails?.usdRate | currency:'TK
-                                ':'symbol':'1.2-2' }} ,
-                                (BDT) {{ moneyreceipt?.marinebill?.marineDetails?.sumInsured | currency:'TK
-                                ':'symbol':'1.2-2' }}
+                        <td>
+                            <strong>
+                                {{ moneyreceipt?.marinebill?.marineDetails?.sumInsuredUsd 
+                                    | currency: 'USD' : 'symbol' : '1.2-2' }} ,
+                    
+                                USD Rate {{ moneyreceipt?.marinebill?.marineDetails?.usdRate 
+                                    | currency: 'TK' : 'symbol' : '1.2-2' }} 
+                    
+                                = (BDT) {{ moneyreceipt?.marinebill?.marineDetails?.sumInsured 
+                                    | currency: 'TK' : 'symbol' : '1.2-2' }} 
+                    
+                                <strong>({{ getSumInsuredInWords() }} Only)</strong>
                             </strong>
                         </td>
                     </tr>
+                    
 
 
                 </tbody>
@@ -118,9 +138,7 @@
                     </tr>
                 </tbody>
                 <thead>
-                    <tr>
-                        <th colspan="6" class="text-center">Situation</th>
-                    </tr>
+                   
                 </thead>
                 <tbody>
 
@@ -186,7 +204,43 @@
 
             </table>
 
-
+            <p class="mb-1">The following terms, conditions and warranties mentioned/attached here to:
+                Note: Should the terms and conditions of the Company's Policy be unknown to the insured, it shall be
+                incumbent upon him to make application to this Office for a copy for such terms and conditions.
+   
+                Failure to comply with the policy terms and conditions, though the insured being unacquainted with them,
+                shall not excuse his failure to act in accordance therewith, and by the acceptance of this Cover Note,
+                the Insured binds himself by the terms and conditions of the Company's Policy.
+                This Cover Note does not cover computer system records unless specifically mentioned and insured by this
+                Cover Note.
+            </p>
+            
+        
+            
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-4  text-left">  <!-- Corrected class name -->
+                        <p class="mb-1"><strong>Renewal No:</strong></p>
+                        <p>
+                            <strong>{{ moneyreceipt?.issuedAgainst }}</strong> /
+                            <strong>{{ moneyreceipt?.marinebill?.marineDetails?.id }} & </strong>
+                            <strong>{{ moneyreceipt?.date | date }}</strong>
+                        </p>
+                        <p><strong>Check by ________________</strong></p>
+                    </div>
+            
+                    <div class="col-md-4 text-center">
+                        <p><strong>Fully Re-insured with</strong></p>
+                        <p><strong>Sadharan Bima Corporation</strong></p>
+                    </div>
+            
+                    <div class="col-md-4 text-right">
+                        <p><strong>For & on behalf of</strong></p>
+                        <p><strong>Islami Insurance Company Ltd.</strong></p>
+                        <p><strong>Authorized Officer _____________________</strong></p>
+                    </div>
+                </div>
+            </div>
 
         </div>
 

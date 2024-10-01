@@ -41,12 +41,15 @@
                 <tbody>
                     <tr>
                         <td><strong>Fire Cover Note No:</strong></td>
-                        <td>{{ moneyreceipt?.issuedAgainst}}</td>
+                        <td>{{ moneyreceipt?.issuedAgainst }}</td>
+                    
                         <td><strong>Fire Bill No:</strong></td>
-                        <td>{{ moneyreceipt?.bill?.policy?.id}}</td>
+                        <td>{{ moneyreceipt?.bill?.policy?.id }}</td>
+                    
                         <td><strong>Issue Date:</strong></td>
-                        <td>{{ moneyreceipt?.date | date }}</td>
+                        <td>{{ moneyreceipt?.date | date }}</td> 
                     </tr>
+                    
                 </tbody>
             </table>
 
@@ -194,9 +197,9 @@
                         <p>
                             <strong>{{ moneyreceipt?.issuedAgainst }}</strong> /
                             <strong>{{ moneyreceipt?.bill?.policy?.id }} & </strong>
-                            <strong>{{ moneyreceipt?.bill?.policy?.date | date }}</strong>
+                            <strong>{{ moneyreceipt?.date | date }}</strong>
                         </p>
-                        <p><strong>Check by ________________</strong></p>
+                        <p><strong>Checked by ________________</strong></p>
                     </div>
             
                     <div class="col-md-4 text-center">

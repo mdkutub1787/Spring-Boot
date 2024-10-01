@@ -19,15 +19,10 @@
 
     <body>
         <div class="container">
-            <div class="contact-info text-center mt-5" style="color: #000; font-family: Arial, sans-serif;">
-               
-                <h2 class="company-name" style="font-size: 26px; font-weight: bold; color: #003366;">
-                    <strong>Islami Insurance Company Bangladesh Ltd</strong>
-                </h2>
-                <h2 class="company-name" style="font-size: 24px; font-weight: bold; color: #003366;">
-                    <strong>ইসলামী ইন্স্যুরেন্স কোম্পানী বাংলাদেশ লিমিটেড</strong>
-                </h2>
-                <div class="address" style="font-size: 16px; color: #333;">
+            <div class="contact-info text-center mt-3">
+                <h2 class="company-name"><strong>ইসলামী ইন্স্যুরেন্স কোম্পানী বাংলাদেশ লিমিটেড</strong></h2>
+                <h2 class="company-name"><strong>Islami Insurance Com. Bangladesh Ltd</strong></h2>
+                <div class="address">
                     <strong>DR Tower (14th floor), 65/2/2, Box Culvert Road, Purana Paltan, Dhaka-1000.</strong><br>
                     <strong>Tel: 02478853405, Mob: 01763001787</strong><br>
                     <strong>Fax: +88 02 55112742</strong><br>
@@ -35,8 +30,6 @@
                     <strong>Web: www.islamiinsurance.com</strong>
                 </div>
             </div>
-            
-            
 
             <!-- Tables -->
             <table class="table table-bordered col-mb-3">
@@ -48,15 +41,12 @@
                 <tbody>
                     <tr>
                         <td><strong>Fire Cover Note No:</strong></td>
-                        <td>{{ moneyreceipt?.issuedAgainst }}</td>
-                    
+                        <td>{{ moneyreceipt?.issuedAgainst}}</td>
                         <td><strong>Fire Bill No:</strong></td>
-                        <td>{{ moneyreceipt?.bill?.policy?.id }}</td>
-                    
+                        <td>{{ moneyreceipt?.bill?.policy?.id}}</td>
                         <td><strong>Issue Date:</strong></td>
-                        <td>{{ moneyreceipt?.date | date }}</td> 
+                        <td>{{ moneyreceipt?.bill?.policy?.date | date }}</td>
                     </tr>
-                    
                 </tbody>
             </table>
 
@@ -89,7 +79,9 @@
                 </tbody>
 
                 <thead>
-                   
+                    <tr>
+                        <th colspan="2" class="text-center">Segregation of The Sum Insured</th>
+                    </tr>
                 </thead>
 
                 <tbody>
@@ -180,52 +172,46 @@
                 </tbody>
             </table>
 
-            <p class="mb-1">The following terms, conditions and warranties mentioned/attached here to:
-                Note: Should the terms and conditions of the Company's Policy be unknown to the insured, it shall be
-                incumbent upon him to make application to this Office for a copy for such terms and conditions.
-   
-                Failure to comply with the policy terms and conditions, though the insured being unacquainted with them,
-                shall not excuse his failure to act in accordance therewith, and by the acceptance of this Cover Note,
-                the Insured binds himself by the terms and conditions of the Company's Policy.
-                This Cover Note does not cover computer system records unless specifically mentioned and insured by this
-                Cover Note.
+            <p class="mb-1">The following terms, conditions, and warranties mentioned/attached with the proposal
+                form shall form part of the policy and must be adhered to. It is understood that if the sum
+                insured is found to be inadequate, the company reserves the right to apply average. This note
+                shall be treated as a policy subject to the company's endorsement. This cover note is valid for 30
+                days only.
             </p>
-            
-        
-            
             <div class="container">
-                <div class="row mb-3">
-                    <div class="col-md-4  text-left">  <!-- Corrected class name -->
+                <div class="row">
+                    <div class="col-md-4 mt-3 text-left">  <!-- Corrected class name -->
                         <p class="mb-1"><strong>Renewal No:</strong></p>
                         <p>
                             <strong>{{ moneyreceipt?.issuedAgainst }}</strong> /
                             <strong>{{ moneyreceipt?.bill?.policy?.id }} & </strong>
-                            <strong>{{ moneyreceipt?.date | date }}</strong>
+                            <strong>{{ moneyreceipt?.bill?.policy?.date | date }}</strong>
                         </p>
-                        <p><strong>Checked by ________________</strong></p>
+                        <p><strong>Check by ________________</strong></p>
                     </div>
             
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center mt-4">
                         <p><strong>Fully Re-insured with</strong></p>
                         <p><strong>Sadharan Bima Corporation</strong></p>
                     </div>
             
-                    <div class="col-md-4 mb-3">
-                        <p> <strong>For & on behalf of</strong></p>
+                    <div class="col-md-4 text-right mt-4">
+                        <p><strong>For & on behalf of</strong></p>
                         <p><strong>Islami Insurance Company Ltd.</strong></p>
-                        <p><strong>Authorized Officer  - - - - - - -- -</strong></p>
-                         
+                        <p><strong>Authorized Signature _____________________</strong></p>
                     </div>
                 </div>
             </div>
             
+            
+
         </div>
     </body>
 
     </html>
 </div>
 <!-- Print Button -->
-<div class="d-flex justify-content-center mb-3">
+<div class="d-flex justify-content-center mt-3">
     <button printSectionId="print-section" ngxPrint class="btn btn-primary printbtn">
         <i class="fas fa-print"></i> Download PDF
     </button>

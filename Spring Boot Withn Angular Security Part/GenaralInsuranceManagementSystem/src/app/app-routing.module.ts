@@ -28,7 +28,6 @@ import { MarineMaoneyReceiptComponent } from './marinecomponent/marine-maoney-re
 import { CreateMarineMaoneyReceiptComponent } from './marinecomponent/create-marine-maoney-receipt/create-marine-maoney-receipt.component';
 import { CreateMarinePolicyComponent } from './marinecomponent/create-marine-policy/create-marine-policy.component';
 import { PrintFireCoverNoteComponent } from './component/print-fire-cover-note/print-fire-cover-note.component';
-import { PrintMarineCoverNoteComponent } from './marinecomponent/print-marine-cover-note/print-marine-cover-note.component';
 
 
 const routes: Routes = [
@@ -58,7 +57,6 @@ const routes: Routes = [
   { path: "createmarinemoneyreceipt", component: CreateMarineMaoneyReceiptComponent },
   { path: "printmarinemoney/:id", component: PrintMarinemoneyReceiptComponent },
   { path: "print-fire-cover-note/:id", component: PrintFireCoverNoteComponent },
-  { path: "print-marine-cover-note/:id", component: PrintMarineCoverNoteComponent },
   { path: "reg", component: RegistrationComponent},
   { path: "login", component: LoginComponent},
   { path: "logout", component: LogoutComponent},

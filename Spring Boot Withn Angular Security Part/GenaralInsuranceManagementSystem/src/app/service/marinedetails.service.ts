@@ -12,37 +12,39 @@ export class MarinedetailsService {
 
   private exchangeRateApiUrl = 'https://api.exchangerate-api.com/v4/latest/USD';
 
+  // Initialize the array for storing policies
   private newpolicy: MarineDetailsModel[] = [];
 
   constructor(private http: HttpClient) { }
 
-
-  getMarinedetails(): Observable<any> {
-    return this.http.get(this.baseUrl);
+  // Get all MarineDetails from the server
+  getMarinedetails(): Observable<MarineDetailsModel[]> {
+    return this.http.get<MarineDetailsModel[]>(this.baseUrl);
   }
 
+  // Get exchange rate from external API
   getExchangeRate(): Observable<any> {
     return this.http.get(this.exchangeRateApiUrl);
   }
 
-  // Create a new policy
+  // Create a new marine policy
   createMarinedetails(marinelist: MarineDetailsModel): Observable<any> {
     return this.http.post(this.baseUrl + "save", marinelist);
   }
 
-  // Delete a policy by ID
+  // Delete a marine policy by ID
   deleteMarineList(id: number): Observable<any> {
     return this.http.delete(this.baseUrl + "delete/" + id);
   }
 
-  // Update a policy by ID
+  // Update a marine policy by ID
   updateMarineList(id: number, marinelist: MarineDetailsModel): Observable<any> {
     return this.http.put(this.baseUrl + "update/" + id, marinelist);
   }
 
   // Get a MarineDetails by ID
-  getByMarineDetailsId(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}${id}`);
+  getByMarineDetailsId(id: number): Observable<MarineDetailsModel> {
+    return this.http.get<MarineDetailsModel>(`${this.baseUrl}${id}`);
   }
 
   // View all policies for bill (typed Observable)
@@ -53,15 +55,19 @@ export class MarinedetailsService {
   // Filter policies by policyholder, bankName, or ID  
   searchByPolicyHolderAndBankNameAndId(searchTerm: string): MarineDetailsModel[] {
     const lowerCaseSearchTerm = searchTerm.trim().toLowerCase();
-    if (!lowerCaseSearchTerm) {
-      return this.newpolicy;
-    }
-
+    
+    // Filter on newpolicy data if search term is provided
     return this.newpolicy.filter(item =>
-    (item.policyholder?.toLowerCase().includes(lowerCaseSearchTerm) ||
+      item.policyholder?.toLowerCase().includes(lowerCaseSearchTerm) ||
       item.bankName?.toLowerCase().includes(lowerCaseSearchTerm) ||
-      item.id?.toString().includes(lowerCaseSearchTerm))
+      item.id?.toString().includes(lowerCaseSearchTerm)
     );
+  }
 
+  // Load marine details to `newpolicy` (utility method)
+  loadMarineDetails(): void {
+    this.getMarinedetails().subscribe(data => {
+      this.newpolicy = data;  // Populate newpolicy with the latest data
+    });
   }
 }

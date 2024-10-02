@@ -38,10 +38,10 @@ public class SequrityConfig {
                                                         "api/**"
                                                  )
                                                  .permitAll()
-                                                 .requestMatchers("api/medicine/save", "api/medicinegeneric/save")
+                                                 .requestMatchers("api/policy/save", "api/bill/save")
                                                  .hasAuthority("ADMIN")
-                                                 .requestMatchers( "api/medicine/{id}","api/pharmacist/all/**", "api/location/")
-                                                 .hasAnyAuthority("ADMIN", "PHARMACIST")
+                                                 .requestMatchers( "api/bill/{id}","api/bill/all/**", "api/bill/")
+                                                 .hasAnyAuthority("ADMIN", "BILL")
                                                  .requestMatchers("api/user/**")
                                                  .hasAuthority("USER")
                                                  .requestMatchers("/images/**").permitAll()

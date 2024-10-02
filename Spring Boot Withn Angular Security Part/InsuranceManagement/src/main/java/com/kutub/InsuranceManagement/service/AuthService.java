@@ -168,7 +168,7 @@ public class AuthService {
                 + ",</h3>"
                 + "<p>Please click on the following link to confirm your account:</p>"
                 + "<a href=\"" + activationLink + "\">Activate Account</a>"
-                + "<br><br>Regards,<br>Pharmacy";
+                + "<br><br>Regards,<br>Insurance";
 
         String subject = "Confirm User Account";
 

@@ -9,12 +9,24 @@ import { AuthService } from './auth.service';
 })
 export class UserprofileService {
 
-  private baseUrl = 'http://localhost:3000/user';
+  baseurl="http://localhost:8080/registerview";
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService
+  constructor(private authService:AuthService,
+    private http:HttpClient
   ) { }
+
+  // getUserProfile(): Observable<UserModel | null> {
+  //   return of(this.authService.getUserProfileFromStorage());
+  // }
+
+  getUserProfile(): Observable<UserModel> {
+    return this.http.get<UserModel>(`${this.baseurl}`);
+  }
+
+  updateUserProfile(user: UserModel): Observable<UserModel> {
+    localStorage.setItem('userProfile', JSON.stringify(user));
+    return this.http.put<UserModel>(`${this.baseurl}/${user.id}`, user);
+  }
 
 
 

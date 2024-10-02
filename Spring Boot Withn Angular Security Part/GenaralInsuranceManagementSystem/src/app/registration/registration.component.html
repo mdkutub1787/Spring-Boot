@@ -84,6 +84,19 @@
             </div>
           </div>
 
+
+          <div class="mb-3">
+            <label for="role" class="form-label">
+              <strong><i class="fas fa-users"></i> Role:</strong>
+            </label>
+            <select id="role" class="form-select" formControlName="role">
+              <option value="">Select role</option>
+              <option value="admin">ADMIN</option>
+              <option value="user">USER</option>
+              <!-- <option value="bill">BILL</option> -->
+            </select>
+          </div>
+
           <div class="text-center mt-4">
             <button type="submit" class="btn btn-success rounded-pill" [disabled]="registerForm.invalid">Register</button>
           </div>

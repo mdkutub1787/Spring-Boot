@@ -29,6 +29,8 @@ import { CreateMarineMaoneyReceiptComponent } from './marinecomponent/create-mar
 import { CreateMarinePolicyComponent } from './marinecomponent/create-marine-policy/create-marine-policy.component';
 import { PrintFireCoverNoteComponent } from './component/print-fire-cover-note/print-fire-cover-note.component';
 import { PrintMarineCoverNoteComponent } from './marinecomponent/print-marine-cover-note/print-marine-cover-note.component';
+import { RoleGuard } from './guard/roleguard.guard';
+import { AuthGuard } from './guard/authguard.guard';
 
 
 const routes: Routes = [
@@ -64,7 +66,13 @@ const routes: Routes = [
   { path: "logout", component: LogoutComponent},
   { path: "userprofile", component: UserprofileComponent},
 
-
+  {
+    path: 'userprofile',
+    component: UserprofileComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data:{role: ['ADMIN','USER','BILL']}
+    
+  },
   { path: "**", redirectTo: 'login', pathMatch: 'full' },
 ];
 

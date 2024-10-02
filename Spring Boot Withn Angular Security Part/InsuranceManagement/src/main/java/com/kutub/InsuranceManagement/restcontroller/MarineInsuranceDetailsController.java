@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/marinepolicy")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class MarineInsuranceDetailsController {
 
     @Autowired

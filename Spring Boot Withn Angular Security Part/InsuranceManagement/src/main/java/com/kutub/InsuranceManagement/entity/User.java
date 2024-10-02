@@ -42,7 +42,7 @@ public class User implements UserDetails {
 
     private String gender;
 
-    private String image;
+//    private String image;
 
     @Column(nullable = false)
     private boolean active;

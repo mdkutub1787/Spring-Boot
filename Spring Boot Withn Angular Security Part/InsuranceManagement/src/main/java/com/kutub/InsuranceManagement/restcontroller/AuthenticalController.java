@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class AuthenticalController {
 
     private final AuthService authService;
@@ -28,11 +28,11 @@ public class AuthenticalController {
         return ResponseEntity.ok(authService.registerAdmin(request));
     }
 
-    @PostMapping("/register/pharmacisat")
-    public ResponseEntity<AuthenticationResponse> registerPharmacist(
+    @PostMapping("/register/bill")
+    public ResponseEntity<AuthenticationResponse> registerBill(
             @RequestBody User request
     ) {
-        return ResponseEntity.ok(authService.registerPharmacist(request));
+        return ResponseEntity.ok(authService.registerBill(request));
     }
 
 

@@ -13,6 +13,34 @@ import { Subscription } from 'rxjs';
 })
 export class UserprofileComponent  {
 
+  user!: UserModel;
 
+  constructor(private userprofileService: UserprofileService,
+    private router: Router
+
+  ) { }
+
+  ngOnInit(): void {
+    this.loadUserProfile();
+
+  }
+
+  loadUserProfile(): void {
+    this.userprofileService.getUserProfile()
+      .subscribe({
+        next: (user) => {
+          if (user) {
+            this.user = user;
+          }
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          } else {
+            console.log('Error fetching user profile', error);
+          }
+        }
+      });
+  }
  
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/marinemoneyreceipt")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class MarineBillMoneyReceiptController {
 
     private final MarineBillMoneyReceiptService marineBillMoneyReceiptService;

@@ -10,17 +10,15 @@ import { AuthService } from '../service/auth.service';
 export class NavbarComponent implements OnInit{
 
   userRole: string | null = '';
-  currentUser: UserModel| null = null;
+  currentUser: UserModel | null = null;
+
   
-  constructor(private authService:AuthService){
-
-  }
-
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
-    // this.authService.currentUser$.subscribe(user => {
-    //   this.currentUser = user;
-    //   this.userRole = user?.role || null;
-    // });
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
+  
 }

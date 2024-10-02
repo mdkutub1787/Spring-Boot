@@ -9,7 +9,7 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
 
   registerForm: FormGroup;
   errorMessage: string | null = null;
@@ -34,9 +34,6 @@ export class RegistrationComponent implements OnInit {
     }
     ,{ validators: this.passwordMatchValidator });
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
@@ -49,9 +46,9 @@ export class RegistrationComponent implements OnInit {
       return;
     }
 
-    const { name, email, password, cell, address, dob, gender, image, } = this.registerForm.value;
+    const { name, email, password, cell, address, dob, gender,  } = this.registerForm.value;
 
-    this.authService.register({ name, email, password, cell, address, dob, gender }).subscribe(
+    this.authService.register({ name, email, password, cell, address, dob, gender, }).subscribe(
    {
 
     next: AuthResponse => {

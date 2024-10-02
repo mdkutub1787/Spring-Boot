@@ -4,6 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthResponse } from '../guard/auth-response';
 import { Router } from '@angular/router';
+import { UserModel } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +19,41 @@ export class AuthService {
   private userRoleSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
   public userRole$: Observable<string | null> = this.userRoleSubject.asObservable();
 
-  constructor(
+  private currentUserSubject: BehaviorSubject<UserModel | null> = new BehaviorSubject<UserModel | null>(null);
+  public currentUser$: Observable<UserModel | null> = this.currentUserSubject.asObservable();
 
-      @Inject(PLATFORM_ID) private platformId: Object,
-  
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private http: HttpClient,
     private router: Router
   ) {
-    
-    const storedRole = this.isBrowser() ? localStorage.getItem('userRole') : null;
-    this.userRoleSubject.next(storedRole);
+    // Initialize the role from localStorage only if it's a browser
+    if (this.isBrowser()) {
+      const storedRole = localStorage.getItem('userRole');
+      this.userRoleSubject.next(storedRole);
+    }
   }
 
+  // New methods to handle localStorage
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
 
+  private setItem(key: string, value: string): void {
+    if (this.isBrowser()) {
+      localStorage.setItem(key, value);
+    }
+  }
+
+  private getItem(key: string): string | null {
+    return this.isBrowser() ? localStorage.getItem(key) : null;
+  }
+
+  private removeItem(key: string): void {
+    if (this.isBrowser()) {
+      localStorage.removeItem(key);
+    }
+  }
 
   login(email: string, password: string): Observable<AuthResponse> {
     return this.http
@@ -38,10 +61,11 @@ export class AuthService {
       .pipe(
         map((response: AuthResponse) => {
           if (this.isBrowser() && response.token) {
-            localStorage.setItem('authToken', response.token);
+            this.setItem('authToken', response.token);
             const decodedToken = this.decodeToken(response.token);
-            localStorage.setItem('userRole', decodedToken.role);
+            this.setItem('userRole', decodedToken.role);
             this.userRoleSubject.next(decodedToken.role); 
+            this.currentUserSubject.next(decodedToken.user); 
           }
           return response;
         })
@@ -53,7 +77,7 @@ export class AuthService {
       user, { headers: this.headers }).pipe(
         map((response: AuthResponse) => {
           if (this.isBrowser() && response.token) {
-            localStorage.setItem('authToken', response.token); // Store JWT token
+            this.setItem('authToken', response.token); 
           }
           return response;
         })
@@ -61,19 +85,27 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem('token'); // Safely access localStorage only in the browser
+    if (this.isBrowser()) {
+      return localStorage.getItem('authToken');
     }
-    return null; // Return null if not running in the browser (SSR)
+    return null;
   }
 
   decodeToken(token: string): any {
-    const payload = token.split('.')[1];
-    return JSON.parse(atob(payload));
+    try {
+      const payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    } catch (e) {
+      console.error('Token decoding failed:', e);
+      return null; // Return null if decoding fails
+    }
   }
 
   getUserRole(): string | null {
-    return localStorage.getItem('userRole');
+    if (this.isBrowser()) {
+      return localStorage.getItem('userRole');
+    }
+    return null;
   }
 
   isAdmin(): boolean {
@@ -85,7 +117,7 @@ export class AuthService {
     return role === 'ADMIN' || role === 'BILL';
   }
 
-  isBILL(): boolean {
+  isBill(): boolean {
     return this.getUserRole() === 'BILL';
   }
 
@@ -95,8 +127,13 @@ export class AuthService {
 
   isTokenExpired(token: string): boolean {
     const decodedToken = this.decodeToken(token);
-    const expiry = decodedToken.exp * 1000; 
+    const expiry = decodedToken.exp * 1000; // Convert expiry to milliseconds
     return Date.now() > expiry;
+  }
+
+  getUserProfileFromStorage(): UserModel | null {
+    const userProfileJson = this.getItem('userProfile');
+    return userProfileJson ? JSON.parse(userProfileJson) : null;
   }
 
   isLoggedIn(): boolean {
@@ -104,20 +141,21 @@ export class AuthService {
     if (token && !this.isTokenExpired(token)) {
       return true;
     }
-    this.logout(); 
+    this.logout(); // Automatically log out if token is expired
     return false;
   }
 
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('userRole');
-      this.userRoleSubject.next(null); 
+      this.removeItem('authToken');
+      this.removeItem('userRole');
+      this.userRoleSubject.next(null); // Clear role in BehaviorSubject
     }
     this.router.navigate(['/login']);
   }
 
-  private isBrowser(): boolean {
-    return isPlatformBrowser(this.platformId);
+  hasRole(roles: string[]): boolean {
+    const userRole = this.getUserRole();
+    return userRole ? roles.includes(userRole) : false;
   }
 }

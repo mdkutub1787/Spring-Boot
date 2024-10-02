@@ -107,7 +107,7 @@ public class AuthService {
         return new AuthenticationResponse(jwt, "User registration was successful");
     }
 
-    public AuthenticationResponse registerPharmacist(User user) {
+    public AuthenticationResponse registerBill(User user) {
 
         // Check if the user already exists
         if (userRepository.findByEmail(user.getUsername()).isPresent()) {
@@ -117,7 +117,7 @@ public class AuthService {
         // Create a new user entity and save it to the database
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.valueOf("PHARMACIST"));
+        user.setRole(Role.valueOf("BILL"));
 //        user.setLock(false);
         user.setActive(false);
 

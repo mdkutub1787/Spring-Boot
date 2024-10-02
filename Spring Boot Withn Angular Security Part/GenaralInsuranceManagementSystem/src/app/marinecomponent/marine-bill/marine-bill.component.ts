@@ -49,7 +49,7 @@ export class MarineBillComponent implements OnInit{
     this.MarinebillService.deleteMarineBill(id).subscribe({
       next: () => {
         this.refreshBills();
-        this.router.navigate(['/viewmarinebill']);
+        this.router.navigate(['viewmarinebill']);
       },
       error: (error) => console.error('Error deleting marinebill:', error)
     });

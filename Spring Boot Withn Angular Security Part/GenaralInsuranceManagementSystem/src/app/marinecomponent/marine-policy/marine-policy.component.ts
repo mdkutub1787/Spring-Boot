@@ -39,6 +39,7 @@ export class MarinePolicyComponent implements OnInit {
         // Remove the deleted item from the list to avoid reloading all data
         this.marinedetails = this.marinedetails.filter(detail => detail.id !== id);
         this.searchMarinePolicy(); // Update search results after deletion
+        this.router.navigate(['viewmarinelist']);  // Quick navigation after deletion
       },
       error: error => {
         console.error('Error deleting marine detail', error);

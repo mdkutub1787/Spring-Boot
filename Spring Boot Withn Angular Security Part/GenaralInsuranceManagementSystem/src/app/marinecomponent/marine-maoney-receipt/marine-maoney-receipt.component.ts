@@ -52,7 +52,7 @@ export class MarineMaoneyReceiptComponent implements OnInit{
         next: res => {
           console.log(res);
           this.loadMarineMoneyReceipts(); // Reload after delete
-          this.router.navigate(['/viewmarinemoneyreceipt']);
+          this.router.navigate(['viewmarinemoneyreceipt']);
         },
         error: error => {
           console.error('Error deleting Marine Money Receipt:', error);

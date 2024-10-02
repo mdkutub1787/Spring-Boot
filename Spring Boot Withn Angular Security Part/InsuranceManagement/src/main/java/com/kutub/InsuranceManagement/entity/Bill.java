@@ -41,5 +41,9 @@ public class Bill {
 
 
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "bill", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<MoneyReceipt> moneyReceipts;
+
 
 }

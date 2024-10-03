@@ -80,7 +80,7 @@ export class CreateMarinePolicyComponent implements OnInit{
     }
   }
 
-  createOrUpdateMarinePolicy() {
+  createOrUpdateMarineList() {
     // Convert the sum insured from USD to BDT if necessary
     if (!this.isEditMode || this.marineinsurancedetails.sumInsuredUsd) {
       this.updateSumInsuredInBdt();

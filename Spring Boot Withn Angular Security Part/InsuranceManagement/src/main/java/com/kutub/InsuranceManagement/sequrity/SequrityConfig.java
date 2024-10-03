@@ -41,15 +41,15 @@ public class SequrityConfig {
                         .authorizeHttpRequests(
 
                                 req ->
-                                        req.requestMatchers("/login", "/register", "/register/admin", "/activate/**",
-                                                        "api/**"
+                                        req.requestMatchers("/login", "/register", "/register/admin", "/activate/**"
+//                                                        , "api/**"
                                                 )
                                                 .permitAll()
                                                 .requestMatchers("api/policy/save", "api/bill/save")
                                                 .hasAuthority("ADMIN")
                                                 .requestMatchers("api/bill/{id}", "api/bill/all/**", "api/bill/")
                                                 .hasAnyAuthority("ADMIN", "USER")
-                                                .requestMatchers("api/user/**")
+                                                .requestMatchers("api/marinepolicy/","api/marinepolicy/{id}","api/marinepolicy/save","api/marinepolicy/update/{id}","api/marinepolicy/delete/{id}")
                                                 .hasAuthority("USER")
                                                 .requestMatchers("/images/**").permitAll()
 
